@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { auth } from '../helpers/auth'
+import { login, resetPassword } from '../helpers/auth'
+import Button from 'muicss/lib/react/button';
+import { Link } from 'react-router-dom'
 
 function setErrorMsg(error) {
   return {
@@ -19,13 +22,13 @@ export default class Register extends Component {
       <div className="col-sm-6 col-sm-offset-3">
         <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
+          <div className="mui-textfield ">
+            <input type="text" ref={(email) => this.email = email} />
             <label>Email</label>
-            <input className="form-control" ref={(email) => this.email = email} placeholder="Email"/>
           </div>
-          <div className="form-group">
+          <div className="mui-textfield ">
+            <input type="password"  ref={(pw) => this.pw = pw} />
             <label>Password</label>
-            <input type="password" className="form-control" placeholder="Password" ref={(pw) => this.pw = pw} />
           </div>
           {
             this.state.registerError &&
@@ -35,7 +38,8 @@ export default class Register extends Component {
               &nbsp;{this.state.registerError}
             </div>
           }
-          <button type="submit" className="btn btn-primary">Register</button>
+          <Button type="submit" variant="raised" color="primary">Register</Button>
+          <Button variant="raised"><Link to="/login" style={{color: "black"}} >Login</Link></Button>
         </form>
       </div>
     )
