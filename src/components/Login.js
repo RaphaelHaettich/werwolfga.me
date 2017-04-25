@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { login, resetPassword } from '../helpers/auth'
 import Button from 'muicss/lib/react/button';
-import Input from 'muicss/lib/react/input';
 import { Link } from 'react-router-dom'
 
 function setErrorMsg(error) {
@@ -30,12 +29,12 @@ export default class Login extends Component {
         <h1> Login </h1>
         <form onSubmit={this.handleSubmit}>
           <div className="mui-textfield ">
-            <input type="text" ref={(email) => this.email = email} />
-            <label>Email</label>
+              <input type="text" ref={(email) => this.email = email} />
+              <label>Email</label>
           </div>
           <div className="mui-textfield ">
-            <input type="password"  ref={(pw) => this.pw = pw} />
-            <label>Password</label>
+              <input type="password"  ref={(pw) => this.pw = pw} />
+              <label>Password</label>
           </div>
           {
             this.state.loginMessage &&

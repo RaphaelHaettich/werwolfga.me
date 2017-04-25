@@ -4,7 +4,9 @@ import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
 import Login from './Login'
 import Register from './Register'
 import Home from './Home'
-import game from './protected/Game'
+import Main from './protected/Main'
+import Create from './protected/Create'
+import Join from './protected/Join'
 import { logout } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 import Appbar from 'muicss/lib/react/appbar';
@@ -26,7 +28,7 @@ function PublicRoute ({component: Component, authed, ...rest}) {
       {...rest}
       render={(props) => authed === false
         ? <Component {...props} />
-        : <Redirect to='/game' />}
+        : <Redirect to='/main' />}
     />
   )
 }
@@ -89,7 +91,9 @@ export default class App extends Component {
                 <Route path='/' exact component={Home} />
                 <PublicRoute authed={this.state.authed} path='/login' component={Login} />
                 <PublicRoute authed={this.state.authed} path='/register' component={Register} />
-                <PrivateRoute authed={this.state.authed} path='/game' component={game} />
+                <PrivateRoute authed={this.state.authed} path='/main' component={Main} />
+                <PrivateRoute authed={this.state.authed} path='/create' component={Create} />
+                <PrivateRoute authed={this.state.authed} path='/join' component={Join} />
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { auth } from '../helpers/auth'
-import { login, resetPassword } from '../helpers/auth'
 import Button from 'muicss/lib/react/button';
 import { Link } from 'react-router-dom'
 
