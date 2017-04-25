@@ -1,46 +1,52 @@
-import React, { Component } from 'react'
-import { base } from '../../config/constants'
+import React, {Component} from 'react'
+import {base} from '../../config/constants'
 import Cards from './Cards'
+import Button from 'muicss/lib/react/button';
+import Joinedcount from './Joinedcount'
 
 console.log(base)
 
 class create extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       list: [],
       loading: true
     }
   }
-  componentDidMount(){
+  componentDidMount() {
     this.ref = base.syncState('cards', {
       context: this,
       state: 'list',
       asArray: true,
-      then(){
+      then() {
         this.setState({loading: false})
       }
     });
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     base.removeBinding(this.ref);
   }
-  handleAddItem(newItem){
+  handleAddItem(newItem) {
     this.setState({
-      list: this.state.list.concat([newItem])
+      list: this
+        .state
+        .list
+        .concat([newItem])
     });
   }
-  render () {
+  render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-sm-6 col-md-offset-3">
-            <div className="col-sm-12">
-              <h3 className="text-center"> Available Cards </h3>
-              {this.state.loading === true ? <h3> LOADING... </h3> : <Cards items={this.state.list}/>}
-            </div>
-          </div>
-        </div>
+      <div>
+        <h3>
+          Available Cards
+        </h3>
+        {this.state.loading === true
+          ? <h3>
+              LOADING...
+            </h3>
+          : <Cards items={this.state.list}/>}
+        <Joinedcount />
       </div>
     )
   }
