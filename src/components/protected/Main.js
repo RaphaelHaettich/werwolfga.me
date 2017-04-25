@@ -7,8 +7,8 @@ export default class main extends Component {
     return (
       <div>
         Main. This is a protected route. You can only see this if you're authed.
-        <Button variant="raised" color="primary"><Link to="/create" style={{color: "white"}}>Create</Link></Button>
-        <Button variant="raised" color="primary"><Link to="/join" style={{color: "white"}}>Join</Link></Button>
+        <Link to="/create"><Button variant="raised" color="primary">Create</Button></Link>
+        <Link to="/join"><Button variant="raised" color="primary">Join</Button></Link>
       </div>
     )
   }

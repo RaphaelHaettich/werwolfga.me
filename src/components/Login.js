@@ -45,7 +45,7 @@ export default class Login extends Component {
             </div>
           }
           <Button type="submit" variant="raised" color="primary">Login</Button>
-          <Button variant="raised"><Link to="/register" style={{color: "black"}} >Register</Link></Button>
+          <Link to="/register"><Button variant="raised">Register</Button></Link>
         </form>
       </div>
     )
