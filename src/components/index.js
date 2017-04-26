@@ -1,15 +1,14 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 //import 'bootstrap/dist/css/bootstrap.css'
-import {Route, BrowserRouter, Link, Redirect, Switch} from 'react-router-dom'
+import { Route, BrowserRouter, Redirect, Switch } from 'react-router-dom'
 import Login from './Login'
 import Register from './Register'
 import Home from './Home'
 import Main from './protected/Main'
 import Create from './protected/Create'
 import Join from './protected/Join'
-import {logout} from '../helpers/auth'
-import {firebaseAuth} from '../config/constants'
-import Appbar from 'muicss/lib/react/appbar';
+import { firebaseAuth } from '../config/constants'
+import Navbar from './Navbar'
 
 function PrivateRoute({
   component: Component,
@@ -20,14 +19,14 @@ function PrivateRoute({
     <Route
       {...rest}
       render={(props) => authed === true
-      ? <Component {...props}/>
-      : <Redirect
-        to={{
-        pathname: '/login',
-        state: {
-          from: props.location
-        }
-      }}/>}/>
+        ? <Component {...props} />
+        : <Redirect
+          to={{
+            pathname: '/login',
+            state: {
+              from: props.location
+            }
+          }} />} />
   )
 }
 
@@ -40,8 +39,8 @@ function PublicRoute({
     <Route
       {...rest}
       render={(props) => authed === false
-      ? <Component {...props}/>
-      : <Redirect to='/main'/>}/>
+        ? <Component {...props} />
+        : <Redirect to='/main' />} />
   )
 }
 
@@ -53,9 +52,9 @@ export default class App extends Component {
   componentDidMount() {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
-        this.setState({authed: true, loading: false})
+        this.setState({ authed: true, loading: false })
       } else {
-        this.setState({authed: false, loading: false})
+        this.setState({ authed: false, loading: false })
       }
     })
   }
@@ -68,56 +67,17 @@ export default class App extends Component {
       : (
         <BrowserRouter>
           <div>
-
-            <Appbar>
-              <table width="100%">
-                <tbody>
-                  <tr style={{
-                    verticalAlign: 'middle'
-                  }}>
-                    <td className="mui--appbar-height">Werwolf</td>
-                    <td
-                      className="mui--appbar-height"
-                      style={{
-                      textAlign: "right"
-                    }}>
-                      {this.state.authed
-                        ? <a
-                            style={{
-                            color: "white"
-                          }}
-                            onClick={() => {
-                            logout()
-                          }}
-                            className="navbar-brand">Logout</a>
-                        : <span>
-                          <Link
-                            style={{
-                            color: "white"
-                          }}
-                            to="/login">Login</Link>
-                          <Link
-                            style={{
-                            color: "white"
-                          }}
-                            to="/register">Register</Link>
-                        </span>}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </Appbar>
-
+            <Navbar authed={this.state.authed} />
             <div className="container">
               <div className="row">
                 <Switch>
-                  <PublicRoute path='/' exact component={Home}/>
-                  <PublicRoute authed={this.state.authed} path='/login' component={Login}/>
-                  <PublicRoute authed={this.state.authed} path='/register' component={Register}/>
-                  <PrivateRoute authed={this.state.authed} path='/main' component={Main}/>
-                  <PrivateRoute authed={this.state.authed} path='/create' component={Create}/>
-                  <PrivateRoute authed={this.state.authed} path='/join' component={Join}/>
-                  <Route render={() => <h3>No Match</h3>}/>
+                  <PublicRoute path='/' exact component={Home} />
+                  <PublicRoute authed={this.state.authed} path='/login' component={Login} />
+                  <PublicRoute authed={this.state.authed} path='/register' component={Register} />
+                  <PrivateRoute authed={this.state.authed} path='/main' component={Main} />
+                  <PrivateRoute authed={this.state.authed} path='/create' component={Create} />
+                  <PrivateRoute authed={this.state.authed} path='/join' component={Join} />
+                  <Route render={() => <h3>No Match</h3>} />
                 </Switch>
               </div>
             </div>

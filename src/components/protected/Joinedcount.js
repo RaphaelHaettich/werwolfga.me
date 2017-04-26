@@ -19,9 +19,8 @@ export default class countbutton extends Component {
   render() {
     var counter = this.state.count;
     if (counter !== undefined) {
-      var counter = counter.length
+      counter = counter.length
     }
-    console.log(counter)
     return (
       <div>
         <h3>
