@@ -5,8 +5,26 @@ import Container from 'muicss/lib/react/container';
 import Row from 'muicss/lib/react/row';
 import Col from 'muicss/lib/react/col';
 import CountButton from './Countbutton';
+import {base} from '../../config/constants'
 
 class cards extends Component {
+    constructor(props) {
+    super(props);
+    this.state = {
+      list: [],
+      loading: true
+    }
+  }
+  componentDidMount() {
+    this.ref = base.syncState('cards', {
+      context: this,
+      state: 'list',
+      asArray: true,
+      then() {
+        this.setState({loading: false})
+      }
+    });
+  }
   render() {
     var styles = {
       listGroup: {
@@ -28,8 +46,8 @@ class cards extends Component {
       }
     };
     var listItems = this
-      .props
-      .items
+      .state
+      .list
       .map((item, index) => {
         return (
           <Container key={index} className="list-group-item" style={styles.listGroup}>
@@ -54,8 +72,16 @@ class cards extends Component {
       });
     return (
       <div>
-        {listItems}
-      </div>
+        {this.state.loading === true
+            ? <h3>
+                LOADING...
+              </h3>
+            :
+          <div>
+            {listItems}
+          </div>
+        }
+      </div>     
     )
   }
 }
