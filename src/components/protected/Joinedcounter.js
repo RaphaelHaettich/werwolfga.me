@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import Button from 'muicss/lib/react/button'
 import {base} from '../../config/constants'
 
 export default class countbutton extends Component {
@@ -30,7 +29,6 @@ export default class countbutton extends Component {
           Joined People:
           <label>{counter}</label>
         </h3>
-        <Button color="primary">Start</Button>
       </div>
     )
   }
