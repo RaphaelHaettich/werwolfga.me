@@ -1,12 +1,13 @@
-import React, { Component } from 'react'
-import { Route, BrowserRouter, Redirect, Switch } from 'react-router-dom'
+import React, {Component} from 'react'
+import {Route, BrowserRouter, Redirect, Switch} from 'react-router-dom'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Login from './Login'
 import Register from './Register'
 import Home from './Home'
 import Main from './protected/Main'
 import Create from './protected/Create'
 import Join from './protected/Join'
-import { firebaseAuth } from '../config/constants'
+import {firebaseAuth} from '../config/constants'
 import Navbar from './Navbar'
 
 function PrivateRoute({
@@ -18,14 +19,14 @@ function PrivateRoute({
     <Route
       {...rest}
       render={(props) => authed === true
-        ? <Component {...props} />
-        : <Redirect
-          to={{
-            pathname: '/login',
-            state: {
-              from: props.location
-            }
-          }} />} />
+      ? <Component {...props}/>
+      : <Redirect
+        to={{
+        pathname: '/login',
+        state: {
+          from: props.location
+        }
+      }}/>}/>
   )
 }
 
@@ -38,8 +39,8 @@ function PublicRoute({
     <Route
       {...rest}
       render={(props) => authed === false
-        ? <Component {...props} />
-        : <Redirect to='/main' />} />
+      ? <Component {...props}/>
+      : <Redirect to='/main'/>}/>
   )
 }
 
@@ -51,9 +52,9 @@ export default class App extends Component {
   componentDidMount() {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
-        this.setState({ authed: true, loading: false })
+        this.setState({authed: true, loading: false})
       } else {
-        this.setState({ authed: false, loading: false })
+        this.setState({authed: false, loading: false})
       }
     })
   }
@@ -64,24 +65,26 @@ export default class App extends Component {
     return this.state.loading === true
       ? <h1>Loading</h1>
       : (
-        <BrowserRouter>
-          <div>
-            <Navbar authed={this.state.authed} />
-            <div className="container">
-              <div className="row">
-                <Switch>
-                  <PublicRoute path='/' exact component={Home} />
-                  <PublicRoute authed={this.state.authed} path='/login' component={Login} />
-                  <PublicRoute authed={this.state.authed} path='/register' component={Register} />
-                  <PrivateRoute authed={this.state.authed} path='/main' component={Main} />
-                  <PrivateRoute authed={this.state.authed} path='/create' component={Create} />
-                  <PrivateRoute authed={this.state.authed} path='/join' component={Join} />
-                  <Route render={() => <h3>No Match</h3>} />
-                </Switch>
+        <MuiThemeProvider>
+          <BrowserRouter>
+            <div>
+              <Navbar authed={this.state.authed}/>
+              <div className="container">
+                <div className="row">
+                  <Switch>
+                    <PublicRoute path='/' exact component={Home}/>
+                    <PublicRoute authed={this.state.authed} path='/login' component={Login}/>
+                    <PublicRoute authed={this.state.authed} path='/register' component={Register}/>
+                    <PrivateRoute authed={this.state.authed} path='/main' component={Main}/>
+                    <PrivateRoute authed={this.state.authed} path='/create' component={Create}/>
+                    <PrivateRoute authed={this.state.authed} path='/join' component={Join}/>
+                    <Route render={() => <h3>No Match</h3>}/>
+                  </Switch>
+                </div>
               </div>
             </div>
-          </div>
-        </BrowserRouter>
+          </BrowserRouter>
+        </MuiThemeProvider>
       );
   }
 }
