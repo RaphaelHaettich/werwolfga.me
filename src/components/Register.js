@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { auth } from '../helpers/auth'
-import Button from 'muicss/lib/react/button';
+import RaisedButton from 'material-ui/RaisedButton'
 import { Link } from 'react-router-dom'
 
 function setErrorMsg(error) {
@@ -37,8 +37,10 @@ export default class Register extends Component {
               &nbsp;{this.state.registerError}
             </div>
           }
-          <Button type="submit" variant="raised" color="primary">Register</Button>
-          <Link to="/login"><Button variant="raised">Login</Button></Link>
+          <RaisedButton type="submit" label="Register" primary={true} />
+          <Link to="/login">
+            <RaisedButton label="Login" />
+          </Link>
         </form>
       </div>
     )

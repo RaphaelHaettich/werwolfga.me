@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {login, resetPassword} from '../helpers/auth'
-import Button from 'muicss/lib/react/button';
+import RaisedButton from 'material-ui/RaisedButton'
 import {Link} from 'react-router-dom'
 
 function setErrorMsg(error) {
@@ -42,9 +42,9 @@ export default class Login extends Component {
             <a href="#" onClick={this.resetPassword} className="alert-link">Forgot Password?</a>
           </div>
           }
-          <Button type="submit" variant="raised" color="primary">Login</Button>
+          <RaisedButton type="submit" label="Login" primary={true} />
           <Link to="/register">
-            <Button variant="raised">Register</Button>
+            <RaisedButton type="submit" label="Register" />
           </Link>
         </form>
       </div>
