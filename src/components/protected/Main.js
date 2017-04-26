@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import Button from 'muicss/lib/react/button';
+import Button from 'muicss/lib/react/button'
 
 export default class main extends Component {
   render () {
