@@ -9,6 +9,11 @@ export default class join extends Component {
     loading: true
   }
   render() {
+    var styles = {
+      white: {
+        color: "white"
+      }
+    };
     return (
       <Appbar>
         <table width="100%">
@@ -17,15 +22,11 @@ export default class join extends Component {
               verticalAlign: 'middle'
             }}>
               <td className="mui--appbar-height"><Link
-                style={{
-                  color: "white"
-                }}
+                style={styles.white}>
                 to="/">Werewolf</Link></td>
               <td
                 className="mui--appbar-height"
-                style={{
-                  textAlign: "right"
-                }}>
+                style={styles.white}>
                 {this.props.authed
                   ? <a
                     style={{
