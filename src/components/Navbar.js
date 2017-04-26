@@ -22,7 +22,7 @@ export default class join extends Component {
               verticalAlign: 'middle'
             }}>
               <td className="mui--appbar-height"><Link
-                style={styles.white}>
+                style={styles.white}
                 to="/">Werewolf</Link></td>
               <td
                 className="mui--appbar-height"
