@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import Button from 'muicss/lib/react/button';
+import RaisedButton from 'material-ui/RaisedButton'
 
 export default class Home extends Component {
   render() {
@@ -9,10 +9,10 @@ export default class Home extends Component {
         Home. Not Protected. Anyone can see this.
         <br/>
         <Link to="/login">
-          <Button variant="raised" color="primary">Login</Button>
+          <RaisedButton label="Login" primary={true}/>
         </Link>
         <Link to="/register">
-          <Button variant="raised" color="primary">Register</Button>
+          <RaisedButton label="Registration" primary={true} />
         </Link>
       </div>
     )
