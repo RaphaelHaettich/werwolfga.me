@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Button from 'muicss/lib/react/button';
+import FlatButton from 'material-ui/FlatButton'
 
 export default class countbutton extends Component {
 
@@ -28,25 +28,33 @@ export default class countbutton extends Component {
         marginRight: "5px",
         marginLeft: "5px"
       },
-      button: {
-        fontSize: 25
+      buttonLabelStyle: {
+        fontSize: 25,
+        fontWeight: "bold"
+      },
+      buttonStyle: {
+        minWidth: "25px"
       }
     };
     return (
       <div>
-        <Button
-          onClick={this
-          .up
-          .bind(this)}
-          style={styles.button}
-          color="primary">+</Button>
-        <label style={styles.counter}>{this.state.count}</label>
-        <Button
+        <FlatButton
+          style={styles.buttonStyle}
+          labelStyle={styles.buttonLabelStyle}
           onClick={this
           .down
           .bind(this)}
-          style={styles.button}
-          color="primary">-</Button>
+          label="−"
+          primary={true} />
+        <label style={styles.counter}>{this.state.count}</label>
+        <FlatButton
+          style={styles.buttonStyle}
+          labelStyle={styles.buttonLabelStyle}
+          onClick={this
+          .up
+          .bind(this)}
+          label="+"
+          primary={true} />
       </div>
     )
   }

@@ -1,52 +1,50 @@
-import React, { Component } from 'react'
-import Panel from 'muicss/lib/react/panel'
-import Divider from 'muicss/lib/react/divider'
-import Container from 'muicss/lib/react/container'
-import Row from 'muicss/lib/react/row'
-import Col from 'muicss/lib/react/col'
+import React, {Component} from 'react'
 import CountButton from './Countbutton'
+import Divider from 'material-ui/Divider'
+
+import {
+  Card,
+  CardActions,
+  CardHeader,
+  CardText,
+  CardMedia,
+  CardTitle
+} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 
 class card extends Component {
   render() {
     var styles = {
-      listGroup: {
-        margin: '5px 0'
+      cardImage: {
+        maxHeight: "200px", 
+        display: "block", 
+        marginLeft: "auto", 
+        marginRight: "auto", 
+        width: "auto",
+        minWidth: "0%"  
       },
       card: {
-        paddingRight: 20,
-        fontSize: 17
-      },
-      cardTitle: {
-        fontSize: 20,
-        textDecoration: "underline"
-      },
-      panel: {
-        marginBottom: 0
-      },
-      image: {
-        maxHeight: "50px"
+        marginBottom: "15px"
       }
     };
     let item = this.props.item
     return (
-      <Container style={styles.listGroup}>
-        <Panel style={styles.panel}>
-          <Row>
-            <Col xs="2" md="4">
-              <img alt="cardimage" style={styles.image} src={item.picturefront} />
-            </Col>
-            <Col xs="10" md="8">
-              <span style={styles.card}>
-                <label style={styles.cardTitle}>{item.name}</label>
-                <br /> {item.description}
-                <br />
-                <CountButton />
-              </span>
-            </Col>
-          </Row>
-        </Panel>
+      <div style={styles.card}>
         <Divider />
-      </Container>
+        <Card>
+          <CardMedia
+            overlay={< CardTitle title = {item.name} />}>
+            <img style={styles.cardImage} src={item.picturefront} />
+          </CardMedia>
+          <CardTitle subtitle="Expand for Description" actAsExpander={true} showExpandableButton={true}/>
+          <CardText expandable={true}>
+            {item.description}
+          </CardText>
+          <CardActions>
+            <CountButton />
+          </CardActions>
+        </Card>
+      </div>
     )
   }
 }
