@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import Button from 'muicss/lib/react/button'
 import RaisedButton from 'material-ui/RaisedButton'
 
 export default class main extends Component {
