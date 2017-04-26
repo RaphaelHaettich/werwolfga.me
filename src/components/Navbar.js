@@ -1,14 +1,8 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
-import { withRouter } from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import {logout} from '../helpers/auth'
 import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
-
-
-
 
 class navbar extends Component {
 
@@ -20,23 +14,25 @@ class navbar extends Component {
     };
   }
   goHome() {
-    this.props.history.push('/main')
+    this
+      .props
+      .history
+      .push('/')
   }
   goLogin() {
     logout()
-    this.props.history.push('/login')
+    this
+      .props
+      .history
+      .push('/login')
   }
   render() {
     return (
       <AppBar
-        title={ <span> Werwolves </span>}
-
+        title={< span > Werwolves </span>}
         iconElementRight={this.props.authed
-        ? 
-        <FlatButton label="Logout"/>
-        : 
-        <FlatButton label="Login"/>
-        }
+        ? <FlatButton label="Logout"/>
+        : <FlatButton rippleColor="white" label="Login"/>}
         onTitleTouchTap={this
         .goHome
         .bind(this)}
