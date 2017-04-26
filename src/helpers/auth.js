@@ -10,7 +10,7 @@ export function logout () {
 }
 
 export function login (email, pw) {
-  console.log(email)
+  (email)
   return firebaseAuth().signInWithEmailAndPassword(email, pw)
 }
 

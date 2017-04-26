@@ -9,7 +9,6 @@ export default class countbutton extends Component {
     }
   }
   componentDidMount() {
-    console.log(this.props.lobbyKey)
     base.bindToState('activegame/'+this.props.lobbyKey+'/memberarray/', {
       context: this,
       state: 'count',
@@ -19,7 +18,6 @@ export default class countbutton extends Component {
   
   render() {
     var counter = this.state.count;
-    console.log(counter)
     if (counter !== undefined) {
       counter = counter.length
     }

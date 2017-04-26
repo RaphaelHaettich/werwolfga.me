@@ -9,7 +9,6 @@ class cancelbutton extends Component {
     base
       .remove('activegame/' + this.props.lobbyKey)
       .then(() => {
-        console.log(this.props)
         this.props.history.push('/main')
       })
       .catch(error => {
