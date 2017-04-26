@@ -72,7 +72,7 @@ export default class App extends Component {
               <div className="container">
                 <div className="row">
                   <Switch>
-                    <PublicRoute path='/' exact component={Home}/>
+                    <Route path='/' exact component={Home}/>
                     <PublicRoute authed={this.state.authed} path='/login' component={Login}/>
                     <PublicRoute authed={this.state.authed} path='/register' component={Register}/>
                     <PrivateRoute authed={this.state.authed} path='/main' component={Main}/>
