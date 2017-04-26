@@ -26,26 +26,22 @@ export default class join extends Component {
                 to="/">Werewolf</Link></td>
               <td
                 className="mui--appbar-height"
-                style={styles.white}>
+                style={{ 
+                  textAlign: "right"
+                }}>
                 {this.props.authed
                   ? <a
-                    style={{
-                      color: "white"
-                    }}
+                    style={styles.white}
                     onClick={() => {
                       logout()
                     } }
                     className="navbar-brand">Logout</a>
                   : <span>
                     <Link
-                      style={{
-                        color: "white"
-                      }}
+                      style={styles.white}
                       to="/login">Login</Link>
                     <Link
-                      style={{
-                        color: "white"
-                      }}
+                      style={styles.white}
                       to="/register">Register</Link>
                   </span>}
               </td>
