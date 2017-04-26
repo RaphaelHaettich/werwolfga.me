@@ -3,21 +3,24 @@ import Button from 'muicss/lib/react/button'
 import {base} from '../../config/constants'
 
 export default class countbutton extends Component {
-  componentDidMount() {
-    base.bindToState('todoList', {
-      context: this,
-      state: 'count',
-      asArray: true
-    });
-  }
   constructor(props) {
     super(props);
     this.state = {
       count: 0
     }
   }
+  componentDidMount() {
+    console.log(this.props.lobbyKey)
+    base.bindToState('activegame/'+this.props.lobbyKey+'/memberarray/', {
+      context: this,
+      state: 'count',
+      asArray: true
+    });
+  }
+  
   render() {
     var counter = this.state.count;
+    console.log(counter)
     if (counter !== undefined) {
       counter = counter.length
     }
@@ -33,20 +36,3 @@ export default class countbutton extends Component {
   }
 }
 
-
-// database.ref("activegame/"+ snapshot.key +"/memberarray/").on('child_added', function(snapshot) {
-//             console.log("new item added")
-//             var currentplayercount = Number(document.getElementById("pcount").innerHTML)
-//             document.getElementById("pcount").innerHTML = currentplayercount + 1
-//         });
-
-//         componentDidMount(){
-//           this.ref = base.syncState('activegame', {
-//             context: this,
-//             state: 'list',
-//             asArray: true,
-//             then(){
-//               this.setState({loading: false})
-//             }
-//           });
-//         }

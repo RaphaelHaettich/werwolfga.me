@@ -1,13 +1,12 @@
-import React, {Component} from 'react'
-import {base} from '../../config/constants'
+import React, { Component } from 'react'
+import { base } from '../../config/constants'
 import Card from './Card'
 
 class cards extends Component {
-    constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
-      list: [],
-      loading: true
+      list: []
     }
   }
   componentDidMount() {
@@ -16,7 +15,7 @@ class cards extends Component {
       state: 'list',
       asArray: true,
       then() {
-        this.setState({loading: false})
+        this.setState({ loading: false })
       }
     });
   }
@@ -26,21 +25,13 @@ class cards extends Component {
       .list
       .map((item, index) => {
         return (
-          <Card key={index} item={item}/>
+          <Card key={index} item={item} />
         )
       });
     return (
       <div>
-        {this.state.loading === true
-            ? <h3>
-                LOADING...
-              </h3>
-            :
-          <div>
-            {listItems}
-          </div>
-        }
-      </div>     
+        {listItems}
+      </div>
     )
   }
 }
