@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {login, resetPassword} from '../helpers/auth'
-import RaisedButton from 'material-ui/RaisedButton'
 import {Link} from 'react-router-dom'
+import RaisedButton from 'material-ui/RaisedButton'
+
 
 function setErrorMsg(error) {
   return {loginMessage: error}
