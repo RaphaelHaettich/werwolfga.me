@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {base} from '../../config/constants'
 import Cards from './Cards'
-import Button from 'muicss/lib/react/button';
 import Joinedcount from './Joinedcount'
 
 console.log(base)
