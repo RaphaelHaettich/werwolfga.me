@@ -1,4 +1,4 @@
-# Werewolfgame Project WIP
+# Werewolvesgame Project WIP
 
 *Using React 15.4.0, React Router 4, and Firebase 3.6.1*
 
