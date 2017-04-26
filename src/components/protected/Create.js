@@ -1,11 +1,13 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Cards from './Cards'
 import Joinedcounter from './Joinedcounter'
-import { post } from '../../helpers/dbcalls'
-import { base } from '../../config/constants'
-
+import {post} from '../../helpers/dbcalls'
+import {base} from '../../config/constants'
+import Button from 'muicss/lib/react/button'
+import Cancelbutton from './Cancelbutton'
 
 class create extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
@@ -18,21 +20,21 @@ class create extends Component {
     var self = this;
 
     let inviteCode = Math.floor(Math.random() * 900000) + 100000
-    const userId = base.app().INTERNAL.getUid()
+    const userId = base
+      .app()
+      .INTERNAL
+      .getUid()
     let collection = 'activegame'
 
     let createLobby = new Promise((resolve, reject) => {
       post(resolve, reject, inviteCode, userId, collection);
     })
     createLobby.then((key) => {
-      self.setState({
-        lobbyId: inviteCode,
-        lobbyKey: key,
-        loading: false
+      self.setState({lobbyId: inviteCode, lobbyKey: key, loading: false});
+    })
+      .catch(function (error) {
+        alert("Error: " + error);
       });
-    }).catch(function (error) {
-      alert("Error: " + error);
-    });
   }
 
   render() {
@@ -40,18 +42,19 @@ class create extends Component {
       <div>
         {this.state.loading === true
           ? <h3>
-            LOADING...
+              LOADING...
             </h3>
-          :
-          <div>
+          : <div>
             <h3>
               Available Cards
-        </h3>
-            <Cards />
+            </h3>
+            <Cards/>
             <h3>Lobby ID: {this.state.lobbyId}</h3>
             <Joinedcounter lobbyKey={this.state.lobbyKey}/>
+            <Button variant="raised" color="primary">Start</Button>
+            <Cancelbutton lobbyKey={this.state.lobbyKey}/>
           </div>
-        }
+}
       </div>
     )
   }
