@@ -44,7 +44,7 @@ export default class Login extends Component {
           }
           <RaisedButton type="submit" label="Login" primary={true} />
           <Link to="/register">
-            <RaisedButton type="submit" label="Register" />
+            <RaisedButton label="Register" />
           </Link>
         </form>
       </div>
