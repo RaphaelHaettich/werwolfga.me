@@ -3,7 +3,7 @@ import Cards from './Cards'
 import Joinedcounter from './Joinedcounter'
 import {post} from '../../helpers/dbcalls'
 import {base} from '../../config/constants'
-import Button from 'muicss/lib/react/button'
+import RaisedButton from 'material-ui/RaisedButton'
 import Cancelbutton from './Cancelbutton'
 
 class create extends Component {
@@ -51,7 +51,7 @@ class create extends Component {
             <Cards/>
             <h3>Lobby ID: {this.state.lobbyId}</h3>
             <Joinedcounter lobbyKey={this.state.lobbyKey}/>
-            <Button variant="raised" color="primary">Start</Button>
+            <RaisedButton label="Start" primary={true} />
             <Cancelbutton lobbyKey={this.state.lobbyKey}/>
           </div>
 }
