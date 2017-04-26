@@ -1,54 +1,51 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import Appbar from 'muicss/lib/react/appbar';
-import { logout } from '../helpers/auth'
+import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import {logout} from '../helpers/auth'
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+import FlatButton from 'material-ui/FlatButton';
+import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
-export default class join extends Component {
-  state = {
-    authed: false,
-    loading: true
+
+
+
+class navbar extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      authed: false,
+      loading: true
+    };
+  }
+  goHome() {
+    this.props.history.push('/main')
+  }
+  goLogin() {
+    logout()
+    this.props.history.push('/login')
   }
   render() {
-    var styles = {
-      white: {
-        color: "white"
-      }
-    };
     return (
-      <Appbar>
-        <table width="100%">
-          <tbody>
-            <tr style={{
-              verticalAlign: 'middle'
-            }}>
-              <td className="mui--appbar-height"><Link
-                style={styles.white}
-                to="/">Werewolf</Link></td>
-              <td
-                className="mui--appbar-height"
-                style={{ 
-                  textAlign: "right"
-                }}>
-                {this.props.authed
-                  ? <a
-                    style={styles.white}
-                    onClick={() => {
-                      logout()
-                    } }
-                    className="navbar-brand">Logout</a>
-                  : <span>
-                    <Link
-                      style={styles.white}
-                      to="/login">Login</Link>
-                    <Link
-                      style={styles.white}
-                      to="/register">Register</Link>
-                  </span>}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </Appbar>
+      <AppBar
+        title={ <span> Werwolves </span>}
+
+        iconElementRight={this.props.authed
+        ? 
+        <FlatButton label="Logout"/>
+        : 
+        <FlatButton label="Login"/>
+        }
+        onTitleTouchTap={this
+        .goHome
+        .bind(this)}
+        onRightIconButtonTouchTap={this
+        .goLogin
+        .bind(this)}
+        showMenuIconButton={false}/>
     )
   }
 }
+
+export default withRouter(navbar)
