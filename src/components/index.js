@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-//import 'bootstrap/dist/css/bootstrap.css'
 import { Route, BrowserRouter, Redirect, Switch } from 'react-router-dom'
 import Login from './Login'
 import Register from './Register'
