@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import CountButton from '../../components/Countbutton'
+import CountButton from '../../Countbutton'
 import Divider from 'material-ui/Divider'
 
 import {
