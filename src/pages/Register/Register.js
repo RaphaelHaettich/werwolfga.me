@@ -19,7 +19,7 @@ export default class Register extends Component {
   }
   render () {
     return (
-      <div className="col-sm-6 col-sm-offset-3">
+      <div >
         <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
           <TextField
@@ -28,7 +28,6 @@ export default class Register extends Component {
             floatingLabelText="Email"
           />
           <TextField
-            name="Password"
             type="password"
             ref={(pw) => this.pw = pw}
             floatingLabelText="Password"
