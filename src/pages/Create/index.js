@@ -3,7 +3,7 @@ import Cards from '../../components/Cards'
 import {post} from '../../helpers/dbcalls'
 import {base} from '../../config/constants'
 import RaisedButton from 'material-ui/RaisedButton'
-import Cancelbutton from '../../components/Cancelbutton'
+import Deleteandroutebutton from '../../components/Deleteandroutebutton'
 import Counterlabel from '../../components/Counterlabel'
 
 class create extends Component {
@@ -52,7 +52,7 @@ class create extends Component {
             <h3>Lobby ID: {this.state.lobbyId}</h3>
             <Counterlabel labelText={"Joined People: "} dbReference={'activegame/'+this.state.lobbyKey+'/memberarray/'}/>
             <RaisedButton label="Start" primary={true} />
-            <Cancelbutton lobbyKey={this.state.lobbyKey}/>
+            <Deleteandroutebutton route={"/main"} labelText={"Cancel"} dbReference={'activegame/' + this.state.lobbyKey}/>
           </div>
 }
       </div>

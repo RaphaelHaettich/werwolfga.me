@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import CountButton from '../../Countbutton'
+import Inputcounter from '../../Inputcounter'
 import Divider from 'material-ui/Divider'
 
 import {
@@ -43,7 +43,7 @@ class card extends Component {
             {item.description}
           </CardText>
           <CardActions>
-            <CountButton/>
+            <Inputcounter/>
           </CardActions>
         </Card>
       </div>
