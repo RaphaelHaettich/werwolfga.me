@@ -1,9 +1,9 @@
 import { base } from '../config/constants'
 
 
-export var post = (resolve, reject, inviteCode, userId, collection) => {
+export var post = (resolve, reject, data, collection) => {
     base.push(collection, {
-        data: {code: inviteCode, host: userId, state: 'draft'}
+        data: data
     }).then(snapshot => {
         resolve(snapshot.key)
     }).catch(err => {
@@ -11,6 +11,8 @@ export var post = (resolve, reject, inviteCode, userId, collection) => {
         alert("post failed "+ err)
     });
 }
+
+
 
 
 
