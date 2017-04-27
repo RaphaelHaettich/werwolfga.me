@@ -1,3 +1,9 @@
+/*
+*   Required Props:
+*   key: string,
+*   item: object
+*/
+
 import React, {Component} from 'react'
 import Inputcounter from '../../Inputcounter'
 import Divider from 'material-ui/Divider'
