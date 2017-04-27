@@ -68,11 +68,18 @@ export default class App extends Component {
         <MuiThemeProvider>
           <BrowserRouter>
             <div>
-              <Navbar authed={this.state.authed}/>
+              <Navbar 
+                title="Werwolf"
+                routeTitle="/"
+                routeRight="/login"
+                labelRightAuthed="Logout"
+                labelRightNotAuthed="Login"
+                authed={this.state.authed}
+              />
               <div className="container">
                 <div className="row">
                   <Switch>
-                    <Route path='/' exact component={Home}/>
+                    <PublicRoute path='/' exact component={Home}/>
                     <PublicRoute authed={this.state.authed} path='/login' component={Login}/>
                     <PublicRoute authed={this.state.authed} path='/register' component={Register}/>
                     <PrivateRoute authed={this.state.authed} path='/main' component={Main}/>

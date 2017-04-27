@@ -1,3 +1,13 @@
+/*
+*   Required Props:
+*   title: string,
+*   routeTitle: string,
+*   routeRight: string,
+*   labelRightAuthed: string,
+*   labelRightNotAuthed: string
+*   authed: boolean
+*   
+*/
 import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import {logout} from '../../helpers/auth'
@@ -13,31 +23,31 @@ class navbar extends Component {
       loading: true
     };
   }
-  goHome() {
+  titleAction() {
     this
       .props
       .history
-      .push('/')
+      .push(this.props.routeTitle)
   }
-  goLogin() {
+  rightLabelAction() {
     logout()
     this
       .props
       .history
-      .push('/login')
+      .push(this.props.routeRight)
   }
   render() {
     return (
       <AppBar
-        title={< span > Werwolves </span>}
+        title={< span > {this.props.title} </span>}
         iconElementRight={this.props.authed
-        ? <FlatButton label="Logout"/>
-        : <FlatButton rippleColor="white" label="Login"/>}
+        ? <FlatButton label={this.props.labelRightAuthed}/>
+        : <FlatButton rippleColor="white" label={this.props.labelRightNotAuthed} />}
         onTitleTouchTap={this
-        .goHome
+        .titleAction
         .bind(this)}
         onRightIconButtonTouchTap={this
-        .goLogin
+        .rightLabelAction
         .bind(this)}
         showMenuIconButton={false}/>
     )
