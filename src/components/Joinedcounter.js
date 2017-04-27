@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {base} from '../../config/constants'
+import {base} from '../config/constants'
 
 export default class countbutton extends Component {
   constructor(props) {

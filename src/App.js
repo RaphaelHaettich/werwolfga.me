@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
 import {Route, BrowserRouter, Redirect, Switch} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import Login from './Login'
-import Register from './Register'
-import Home from './Home'
-import Main from './protected/Main'
-import Create from './protected/Create'
-import Join from './protected/Join'
-import {firebaseAuth} from '../config/constants'
-import Navbar from './Navbar'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Home from './pages/Home'
+import Main from './pages/Main'
+import Create from './pages/Create'
+import Join from './pages/Join'
+import {firebaseAuth} from './config/constants'
+import Navbar from './components/Navbar'
 
 function PrivateRoute({
   component: Component,

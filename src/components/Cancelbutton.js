@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Button from 'muicss/lib/react/button'
-import {base} from '../../config/constants'
+import {base} from '../config/constants'
 import { withRouter } from 'react-router-dom'
 
 class cancelbutton extends Component {

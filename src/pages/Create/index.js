@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
-import Cards from './Cards'
-import Joinedcounter from './Joinedcounter'
+import Cards from '../../components/Cards'
+import Joinedcounter from '../../components/Joinedcounter'
 import {post} from '../../helpers/dbcalls'
 import {base} from '../../config/constants'
 import RaisedButton from 'material-ui/RaisedButton'
-import Cancelbutton from './Cancelbutton'
+import Cancelbutton from '../../components/Cancelbutton'
 
 class create extends Component {
 
