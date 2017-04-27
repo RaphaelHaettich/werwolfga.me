@@ -23,11 +23,13 @@ export default class Register extends Component {
         <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
           <TextField
+            fullWidth={true}
             type="email"
             ref={(email) => this.email = email}
             floatingLabelText="Email"
           />
           <TextField
+            fullWidth={true}
             type="password"
             ref={(pw) => this.pw = pw}
             floatingLabelText="Password"

@@ -32,11 +32,12 @@ export default class Login extends Component {
         <form onSubmit={this.handleSubmit}>
           <TextField
             type="email"
+            fullWidth={true}
             ref={(email) => this.email = email}
             floatingLabelText="Email"
           />
           <TextField
-            name="Password"
+            fullWidth={true}
             type="password"
             ref={(pw) => this.pw = pw}
             floatingLabelText="Password"
