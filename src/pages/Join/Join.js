@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Card, CardActions, CardTitle} from 'material-ui/Card'
-import {post} from '../../helpers/dbcalls'
+import {update} from '../../helpers/dbcalls'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 import { base } from '../../config/constants'
@@ -23,7 +23,6 @@ export default class join extends Component {
           equalTo: Number(number)
         }
       }).then(data => {
-        console.log(data)
         resolve(data);
       }).catch(error => {
         //handle error
@@ -38,7 +37,7 @@ export default class join extends Component {
         const collection = "activegame/"+ data[0].key + "/memberarray/"+ userId
         let object = {card: "null"} 
         let addUser = new Promise((resolve, reject) => {
-          post(resolve, reject, object, collection);
+          update(resolve, reject, object, collection);
         })
         addUser.then((data) => {
           //Do what ever
