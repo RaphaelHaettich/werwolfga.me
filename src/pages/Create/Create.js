@@ -25,9 +25,13 @@ class create extends Component {
       .INTERNAL
       .getUid()
     let collection = 'activegame'
-
+    let data = {
+      code: inviteCode,
+      host: userId,
+      state: 'draft'
+    }
     let createLobby = new Promise((resolve, reject) => {
-      post(resolve, reject, inviteCode, userId, collection);
+      post(resolve, reject, data, collection);
     })
     createLobby.then((key) => {
       self.setState({lobbyId: inviteCode, lobbyKey: key, loading: false});
@@ -50,9 +54,14 @@ class create extends Component {
             </h3>
             <Cards dbReference={'/cards'}/>
             <h3>Lobby ID: {this.state.lobbyId}</h3>
-            <Counterlabel labelText={"Joined People: "} dbReference={'activegame/'+this.state.lobbyKey+'/memberarray/'}/>
-            <RaisedButton label="Start" primary={true} />
-            <Deleteandroutebutton route={"/main"} labelText={"Cancel"} dbReference={'activegame/' + this.state.lobbyKey}/>
+            <Counterlabel
+              labelText={"Joined People: "}
+              dbReference={'activegame/' + this.state.lobbyKey + '/memberarray/'}/>
+            <RaisedButton label="Start" primary={true}/>
+            <Deleteandroutebutton
+              route={"/main"}
+              labelText={"Cancel"}
+              dbReference={'activegame/' + this.state.lobbyKey}/>
           </div>
 }
       </div>
