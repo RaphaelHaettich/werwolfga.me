@@ -5,7 +5,7 @@
 
 import React, { Component } from 'react'
 import { base } from '../../config/constants'
-import Card from './Card'
+import Card from './Card/Card'
 
 class cards extends Component {
   constructor(props) {

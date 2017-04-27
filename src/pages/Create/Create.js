@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
-import Cards from '../../components/Cards'
+import Cards from '../../components/Cards/Cards'
 import {post} from '../../helpers/dbcalls'
 import {base} from '../../config/constants'
 import RaisedButton from 'material-ui/RaisedButton'
-import Deleteandroutebutton from '../../components/Deleteandroutebutton'
-import Counterlabel from '../../components/Counterlabel'
+import Deleteandroutebutton from '../../components/Deleteandroutebutton/Deleteandroutebutton'
+import Counterlabel from '../../components/Counterlabel/Counterlabel'
 
 class create extends Component {
 

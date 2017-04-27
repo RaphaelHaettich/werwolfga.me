@@ -5,7 +5,7 @@
 */
 
 import React, {Component} from 'react'
-import Inputcounter from '../../Inputcounter'
+import Inputcounter from '../../Inputcounter/Inputcounter'
 import Divider from 'material-ui/Divider'
 
 import {
