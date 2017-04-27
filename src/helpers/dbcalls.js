@@ -12,6 +12,17 @@ export var post = (resolve, reject, data, collection) => {
     });
 }
 
+export var update = (resolve, reject, data, collection) => {
+    base.update(collection, {
+        data: data
+    }).then(snapshot => {
+        resolve(snapshot)
+    }).catch(err => {
+        //handle error
+        console.log(err)
+    });
+}
+
 
 
 
