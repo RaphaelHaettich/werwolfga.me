@@ -42,7 +42,7 @@ class navbar extends Component {
         title={< span > {this.props.title} </span>}
         iconElementRight={this.props.authed
         ? <FlatButton label={this.props.labelRightAuthed}/>
-        : <FlatButton rippleColor="white" label={this.props.labelRightNotAuthed} />}
+        : <FlatButton label={this.props.labelRightNotAuthed} />}
         onTitleTouchTap={this
         .titleAction
         .bind(this)}
