@@ -48,7 +48,7 @@ class create extends Component {
             <h3>
               Available Cards
             </h3>
-            <Cards/>
+            <Cards dbReference={'/cards'}/>
             <h3>Lobby ID: {this.state.lobbyId}</h3>
             <Counterlabel labelText={"Joined People: "} dbReference={'activegame/'+this.state.lobbyKey+'/memberarray/'}/>
             <RaisedButton label="Start" primary={true} />
