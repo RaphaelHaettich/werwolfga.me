@@ -1,3 +1,8 @@
+/*
+*   Required Props:
+*   dbReference: string
+*/
+
 import React, { Component } from 'react'
 import { base } from '../../config/constants'
 import Card from './Card'
@@ -10,7 +15,7 @@ class cards extends Component {
     }
   }
   componentDidMount() {
-    this.ref = base.syncState('cards', {
+    this.ref = base.syncState(this.props.dbReference, {
       context: this,
       state: 'list',
       asArray: true,
