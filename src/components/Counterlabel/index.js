@@ -1,7 +1,12 @@
+/*
+*   Required Props:
+*   dbReference: string,
+*   labelText: String
+*/
 import React, {Component} from 'react'
-import {base} from '../config/constants'
+import {base} from '../../config/constants'
 
-export default class countbutton extends Component {
+export default class counterlabel extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -9,7 +14,7 @@ export default class countbutton extends Component {
     }
   }
   componentDidMount() {
-    base.bindToState('activegame/'+this.props.lobbyKey+'/memberarray/', {
+    base.bindToState(this.props.dbReference, {
       context: this,
       state: 'count',
       asArray: true
@@ -24,7 +29,7 @@ export default class countbutton extends Component {
     return (
       <div>
         <h3>
-          Joined People:
+          {this.props.labelText}
           <label>{counter}</label>
         </h3>
       </div>

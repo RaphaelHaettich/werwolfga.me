@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import Cards from '../../components/Cards'
-import Joinedcounter from '../../components/Joinedcounter'
 import {post} from '../../helpers/dbcalls'
 import {base} from '../../config/constants'
 import RaisedButton from 'material-ui/RaisedButton'
 import Cancelbutton from '../../components/Cancelbutton'
+import Counterlabel from '../../components/Counterlabel'
 
 class create extends Component {
 
@@ -50,7 +50,7 @@ class create extends Component {
             </h3>
             <Cards/>
             <h3>Lobby ID: {this.state.lobbyId}</h3>
-            <Joinedcounter lobbyKey={this.state.lobbyKey}/>
+            <Counterlabel labelText={"Joined People: "} dbReference={'activegame/'+this.state.lobbyKey+'/memberarray/'}/>
             <RaisedButton label="Start" primary={true} />
             <Cancelbutton lobbyKey={this.state.lobbyKey}/>
           </div>
