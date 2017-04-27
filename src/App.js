@@ -65,39 +65,36 @@ export default class App extends Component {
     this.removeListener()
   }
   render() {
-    const style = {
-      height: "100vh"
-    };
     return this.state.loading === true
       ? <h1>Loading</h1>
       : (
-        <MuiThemeProvider muiTheme={getMuiTheme(wolvestheme)}>
-        <Paper style={style}>
-          <BrowserRouter>
-            <div>
-              <Navbar 
-                title="Werwolf"
-                routeTitle="/"
-                routeRight="/login"
-                labelRightAuthed="Logout"
-                labelRightNotAuthed="Login"
-                authed={this.state.authed}
-              />
-              <div className="container">
-                <div className="row">
-                  <Switch>
-                    <PublicRoute path='/' exact component={Home}/>
-                    <PublicRoute authed={this.state.authed} path='/login' component={Login}/>
-                    <PublicRoute authed={this.state.authed} path='/register' component={Register}/>
-                    <PrivateRoute authed={this.state.authed} path='/main' component={Main}/>
-                    <PrivateRoute authed={this.state.authed} path='/create' component={Create}/>
-                    <PrivateRoute authed={this.state.authed} path='/join' component={Join}/>
-                    <Route render={() => <h3>No Match</h3>}/>
-                  </Switch>
+        <MuiThemeProvider style={{height:"100%"}} muiTheme={getMuiTheme(wolvestheme)}>
+          <Paper>
+            <BrowserRouter>
+              <div>
+                <Navbar 
+                  title="Werwolf"
+                  routeTitle="/"
+                  routeRight="/login"
+                  labelRightAuthed="Logout"
+                  labelRightNotAuthed="Login"
+                  authed={this.state.authed}
+                />
+                <div className="container">
+                  <div className="row">
+                    <Switch>
+                      <PublicRoute path='/' exact component={Home}/>
+                      <PublicRoute authed={this.state.authed} path='/login' component={Login}/>
+                      <PublicRoute authed={this.state.authed} path='/register' component={Register}/>
+                      <PrivateRoute authed={this.state.authed} path='/main' component={Main}/>
+                      <PrivateRoute authed={this.state.authed} path='/create' component={Create}/>
+                      <PrivateRoute authed={this.state.authed} path='/join' component={Join}/>
+                      <Route render={() => <h3>No Match</h3>}/>
+                    </Switch>
+                  </div>
                 </div>
               </div>
-            </div>
-          </BrowserRouter>
+            </BrowserRouter>
           </Paper>
         </MuiThemeProvider>
       );
