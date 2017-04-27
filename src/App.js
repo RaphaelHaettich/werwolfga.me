@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Route, BrowserRouter, Redirect, Switch} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import wolvestheme from './themes/wolvestheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
@@ -71,7 +71,7 @@ export default class App extends Component {
     return this.state.loading === true
       ? <h1>Loading</h1>
       : (
-        <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+        <MuiThemeProvider muiTheme={getMuiTheme(wolvestheme)}>
         <Paper style={style}>
           <BrowserRouter>
             <div>
