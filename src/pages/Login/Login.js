@@ -15,7 +15,8 @@ export default class Login extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault()
-    login(this.email.value, this.pw.input.value).catch((error) => {
+    console.log(this.pw.input.value)
+    login(this.email.input.value, this.pw.input.value).catch((error) => {
       this.setState(setErrorMsg('Invalid username/password.'))
     })
   }

@@ -14,7 +14,7 @@ export default class Register extends Component {
   state = { registerError: null }
   handleSubmit = (e) => {
     e.preventDefault()
-    auth(this.email.value, this.pw.input.value.value)
+    auth(this.email.input.value, this.pw.input.value.value)
       .catch(e => this.setState(setErrorMsg(e)))
   }
   render () {
