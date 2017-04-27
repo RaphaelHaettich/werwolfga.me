@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {Route, BrowserRouter, Redirect, Switch} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
 import Home from './pages/Home/Home'
@@ -9,6 +11,7 @@ import Create from './pages/Create/Create'
 import Join from './pages/Join/Join'
 import {firebaseAuth} from './config/constants'
 import Navbar from './components/Navbar/Navbar'
+import Paper from 'material-ui/Paper';
 
 function PrivateRoute({
   component: Component,
@@ -62,10 +65,14 @@ export default class App extends Component {
     this.removeListener()
   }
   render() {
+    const style = {
+      height: "100vh"
+    };
     return this.state.loading === true
       ? <h1>Loading</h1>
       : (
-        <MuiThemeProvider>
+        <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+        <Paper style={style}>
           <BrowserRouter>
             <div>
               <Navbar 
@@ -91,6 +98,7 @@ export default class App extends Component {
               </div>
             </div>
           </BrowserRouter>
+          </Paper>
         </MuiThemeProvider>
       );
   }
