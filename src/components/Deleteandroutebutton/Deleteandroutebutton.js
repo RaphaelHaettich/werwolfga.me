@@ -7,8 +7,9 @@
 
 import React, {Component} from 'react'
 import { withRouter } from 'react-router-dom'
-import Button from 'muicss/lib/react/button'
 import {base} from '../../config/constants'
+import RaisedButton from 'material-ui/RaisedButton'
+
 
 class deleteAndRouteButton extends Component {
 
@@ -25,11 +26,12 @@ class deleteAndRouteButton extends Component {
   
   render() {
     return (
-      <Button onClick={this
+      <RaisedButton 
+        onClick={this
         .delete
-        .bind(this)} variant="raised">
-        {this.props.labelText}
-      </Button>
+        .bind(this)}
+        label={this.props.labelText}
+      />    
     )
   }
 }
