@@ -13,8 +13,13 @@ import {
 export default class join extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
-    const number = this.number.input.value 
+    const userId = base
+      .app()
+      .INTERNAL
+      .getUid()
+
     let getUUID = new Promise((resolve, reject) => {
+      const number = this.number.input.value 
       base.fetch('activegame/', {
         context: this,
         asArray: true,
@@ -30,23 +35,24 @@ export default class join extends Component {
     })
     getUUID.then((data) => {
       if(data[0].state === "draft"){
-        const userId = base
-        .app()
-        .INTERNAL
-        .getUid()
-        const collection = "activegame/"+ data[0].key + "/memberarray/"+ userId
-        let object = {card: "null"} 
-        let addUser = new Promise((resolve, reject) => {
-          update(resolve, reject, object, collection);
-        })
-        addUser.then((data) => {
-          //Do what ever
-        }).catch(function (error) {
-          alert("Error: " + error);
-        });
-
+        addUser(data[0].key)
       }
     })
+         
+    let addUser = (key) => {
+      let promise = new Promise((resolve, reject) => {
+        const collection = "activegame/"+ key + "/memberarray/"+ userId
+        let object = {card: "null"}
+        update(resolve, reject, object, collection);
+      })
+      promise.then((data) => {
+        //Do what ever
+      }).catch(function (error) {
+        alert("Error: " + error);
+      });
+    }
+
+
   }
   render() {
     return (
