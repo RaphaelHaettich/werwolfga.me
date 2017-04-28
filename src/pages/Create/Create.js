@@ -18,27 +18,54 @@ class create extends Component {
   }
   componentDidMount() {
     var self = this;
-
-    let inviteCode = Math.floor(Math.random() * 900000) + 100000
     const userId = base
       .app()
       .INTERNAL
       .getUid()
-    let collection = 'activegame'
-    let data = {
-      code: inviteCode,
-      host: userId,
-      state: 'draft'
-    }
-    let createLobby = new Promise((resolve, reject) => {
-      post(resolve, reject, data, collection);
-    })
-    createLobby.then((key) => {
-      self.setState({lobbyId: inviteCode, lobbyKey: key, loading: false});
-    })
-      .catch(function (error) {
-        alert("Error: " + error);
+    //functions to call
+    let createLobby = () => {
+      const inviteCode = Math.floor(Math.random() * 900000) + 100000
+      let promise = new Promise((resolve, reject) => {
+        let collection = 'activegame'
+        let data = {
+          code: inviteCode,
+          host: userId,
+          state: 'draft'
+        }
+        post(resolve, reject, data, collection);
+      })
+      promise.then((data) => {
+        self.setState({lobbyId: inviteCode, lobbyKey: data.key, loading: false});
+      }).catch(function (error) {
+          console.log(error);
       });
+    }
+
+    //functions to execute at start
+    let hostExists = new Promise((resolve, reject) => {
+      base
+        .fetch('activegame/', {
+        context: this,
+        asArray: true,
+        queries: {
+          orderByChild: 'host',
+          equalTo: userId
+        }
+      })
+        .then(data => {
+          resolve(data);
+        })
+        .catch(error => {
+          //handle error
+        })
+    })
+    hostExists.then((data) => {
+      if (data.length > 0) {
+        this.setState({lobbyId: data[0].code, lobbyKey: data[0].key, loading: false});
+      } else {
+        createLobby();
+      }
+    })
   }
 
   render() {
