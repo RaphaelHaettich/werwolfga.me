@@ -2,10 +2,12 @@ import React, {Component} from 'react'
 import Cards from '../../components/Cards/Cards'
 import {post} from '../../helpers/dbcalls'
 import {base} from '../../config/constants'
-import RaisedButton from 'material-ui/RaisedButton'
 import Deleteandroutebutton from '../../components/Deleteandroutebutton/Deleteandroutebutton'
+import Writeandroutebutton from '../../components/Writeandroutebutton/Writeandroutebutton'
 import Counterlabel from '../../components/Counterlabel/Counterlabel'
 import Styles from './Create.css.js'
+import SimpleState from 'react-simple-state'
+const simpleState = new SimpleState()
 
 class create extends Component {
 
@@ -16,6 +18,9 @@ class create extends Component {
       lobbyKey: "",
       loading: true
     };
+    simpleState.addListener('count', {
+        count: 0
+    });
   }
   componentDidMount() {
     var self = this;
@@ -85,13 +90,19 @@ class create extends Component {
               <h3>Lobby ID: {this.state.lobbyId}</h3>
               <Counterlabel
                 labelText={"Joined People: "}
-                dbReference={'activegame/' + this.state.lobbyKey + '/memberarray/'}/>
-              
-              <RaisedButton style={Styles.buttonPaddingRight} label="Start" primary={true}/>
+                dbReference={'activegame/' + this.state.lobbyKey + '/memberarray/'}
+                state={'count'}/>
+
+              <Writeandroutebutton
+                route={"/main"}
+                labelText={"Start"}
+                dbReference={'activegame/' + this.state.lobbyKey}
+                removeState={'count'}/>
               <Deleteandroutebutton
                 route={"/main"}
                 labelText={"Cancel"}
-                dbReference={'activegame/' + this.state.lobbyKey}/>
+                dbReference={'activegame/' + this.state.lobbyKey}
+                removeState={'count'}/>
             </div>
           </div>
 }
