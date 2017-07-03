@@ -3,12 +3,17 @@
 *   dbReference: string,
 *   labelText: string,
 *   route: string
+*
+*   Optional Props:
+*   removeState: string
 */
 
 import React, {Component} from 'react'
 import { withRouter } from 'react-router-dom'
 import {base} from '../../config/constants'
 import RaisedButton from 'material-ui/RaisedButton'
+import SimpleState from 'react-simple-state'
+
 
 
 class deleteAndRouteButton extends Component {
@@ -17,6 +22,10 @@ class deleteAndRouteButton extends Component {
     base
       .remove(this.props.dbReference)
       .then(() => {
+        if(this.props.removeState){
+          const simpleState = new SimpleState()
+          simpleState.removeListener(this.props.removeState);
+        }
         this.props.history.push(this.props.route)
       })
       .catch(error => {
