@@ -33,12 +33,7 @@ export default class join extends Component {
         //handle error
       })
     })
-    getUUID.then((data) => {
-      if(data[0].state === "draft"){
-        addUser(data[0].key)
-      }
-    })
-         
+
     let addUser = (key) => {
       let promise = new Promise((resolve, reject) => {
         const collection = "activegame/"+ key + "/memberarray/"+ userId
@@ -52,7 +47,11 @@ export default class join extends Component {
       });
     }
 
-
+    getUUID.then((data) => {
+      if(data[0].state === "draft"){
+        addUser(data[0].key)
+      }
+    })
   }
   render() {
     return (
