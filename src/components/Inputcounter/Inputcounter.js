@@ -5,6 +5,7 @@
 
 import React, {Component} from 'react'
 import FlatButton from 'material-ui/FlatButton'
+import Styles from './Inputcounter.css.js'
 
 export default class countbutton extends Component {
 
@@ -28,33 +29,20 @@ export default class countbutton extends Component {
     }
   }
   render() {
-    var styles = {
-      counter: {
-        marginRight: "5px",
-        marginLeft: "5px"
-      },
-      buttonLabelStyle: {
-        fontSize: 25,
-        fontWeight: "bold"
-      },
-      buttonStyle: {
-        minWidth: "25px"
-      }
-    };
     return (
       <div>
         <FlatButton
-          style={styles.buttonStyle}
-          labelStyle={styles.buttonLabelStyle}
+          style={Styles.buttonStyle}
+          labelStyle={Styles.buttonLabelStyle}
           onClick={this
           .down
           .bind(this)}
           label="−"
           primary={true} />
-        <label style={styles.counter}>{this.state.count}</label>
+        <label style={Styles.counter}>{this.state.count}</label>
         <FlatButton
-          style={styles.buttonStyle}
-          labelStyle={styles.buttonLabelStyle}
+          style={Styles.buttonStyle}
+          labelStyle={Styles.buttonLabelStyle}
           onClick={this
           .up
           .bind(this)}
