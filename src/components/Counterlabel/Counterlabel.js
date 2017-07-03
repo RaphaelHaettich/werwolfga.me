@@ -14,10 +14,8 @@ const simpleState = new SimpleState()
 export default class counterlabel extends Component {
   constructor(props) {
     super(props);
-    const count = simpleState.getState(this.props.state);
-
     this.state = {
-      count: count
+      count: 0
     }
     
   }
@@ -31,12 +29,14 @@ export default class counterlabel extends Component {
   
   render() {
     var counter = this.state.count;
-    if (counter !== undefined) {
-      counter = counter.length
-    }
     simpleState.evoke(this.props.state, {
       count: counter
     });
+    console.log(simpleState.getState(this.props.state))
+    if (counter !== undefined) {
+      counter = counter.length
+    }
+    
     return (
       <div>
         <h3>
