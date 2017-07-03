@@ -7,6 +7,7 @@
 import React, {Component} from 'react'
 import Inputcounter from '../../Inputcounter/Inputcounter'
 import Divider from 'material-ui/Divider'
+import Styles from './Card.css.js'
 
 import {
   Card,
@@ -18,28 +19,15 @@ import {
 
 class card extends Component {
   render() {
-    var styles = {
-      cardImage: {
-        maxHeight: "200px",
-        display: "block",
-        marginLeft: "auto",
-        marginRight: "auto",
-        width: "auto",
-        minWidth: "0%"
-      },
-      card: {
-        marginBottom: "15px"
-      }
-    };
     let item = this.props.item
     return (
-      <div style={styles.card}>
+      <div style={Styles.card}>
         <Divider/>
         <Card>
           <CardMedia overlay={< CardTitle title={
             item.name
           } />}>
-            <img style={styles.cardImage} src={item.picturefront} alt="cardimage"/>
+            <img style={Styles.cardImage} src={item.picturefront} alt="cardimage"/>
           </CardMedia>
           <CardTitle
             subtitle="Expand for Description"
