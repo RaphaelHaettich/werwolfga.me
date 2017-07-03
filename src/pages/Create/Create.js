@@ -5,6 +5,7 @@ import {base} from '../../config/constants'
 import RaisedButton from 'material-ui/RaisedButton'
 import Deleteandroutebutton from '../../components/Deleteandroutebutton/Deleteandroutebutton'
 import Counterlabel from '../../components/Counterlabel/Counterlabel'
+import Styles from './Create.css.js'
 
 class create extends Component {
 
@@ -80,15 +81,18 @@ class create extends Component {
               Available Cards
             </h3>
             <Cards dbReference={'/cards'}/>
-            <h3>Lobby ID: {this.state.lobbyId}</h3>
-            <Counterlabel
-              labelText={"Joined People: "}
-              dbReference={'activegame/' + this.state.lobbyKey + '/memberarray/'}/>
-            <RaisedButton label="Start" primary={true}/>
-            <Deleteandroutebutton
-              route={"/main"}
-              labelText={"Cancel"}
-              dbReference={'activegame/' + this.state.lobbyKey}/>
+            <div style={Styles.centered}>
+              <h3>Lobby ID: {this.state.lobbyId}</h3>
+              <Counterlabel
+                labelText={"Joined People: "}
+                dbReference={'activegame/' + this.state.lobbyKey + '/memberarray/'}/>
+              
+              <RaisedButton style={Styles.buttonPaddingRight} label="Start" primary={true}/>
+              <Deleteandroutebutton
+                route={"/main"}
+                labelText={"Cancel"}
+                dbReference={'activegame/' + this.state.lobbyKey}/>
+            </div>
           </div>
 }
       </div>
