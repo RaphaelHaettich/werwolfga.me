@@ -17,10 +17,9 @@ class cards extends Component {
         list: []
     });
 
-    this.state =  simpleState.getState('cards')
-
-    console.log(simpleState.getState('cards'))
-    console.log(this.state)
+    this.state = {
+      list: []
+    }
   }
   componentDidMount() {
     this.ref = base.syncState(this.props.dbReference, {
@@ -28,24 +27,20 @@ class cards extends Component {
       state: 'list',
       asArray: true,
       then() {
-        this.setState({ loading: false })
+        this.setState({ loading: false})
       }
     });
   }
   render() {
-    //console.log(simpleState.getState('cards'))
     var listItems = this
       .state
       .list
       .map((item, index) => {
         return (
-          <Card key={index} item={item} />
+          <Card key={index} item={item}/>
         )
       });
-      simpleState.evoke('cards', {
-        cards: this.state
-      });
-      console.log(simpleState.getState('cards'))
+
     return (
       <div>
         {listItems}
