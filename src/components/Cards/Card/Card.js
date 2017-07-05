@@ -15,7 +15,7 @@ import {
   CardText,
   CardMedia,
   CardTitle
-} from 'material-ui/Card'
+} from 'material-ui/Card';
 
 class card extends Component {
   render() {
@@ -37,7 +37,7 @@ class card extends Component {
             {item.description}
           </CardText>
           <CardActions>
-            <Inputcounter/>
+            <Inputcounter key={item.key}/>
           </CardActions>
         </Card>
       </div>
