@@ -19,6 +19,7 @@ class create extends Component {
       loading: true
     };
     simpleState.addListener('count', {count: 0});
+    simpleState.addListener('cards', {list: []});
   }
   componentDidMount() {
     var self = this;
@@ -94,7 +95,8 @@ class create extends Component {
                 route={"/main"}
                 labelText={"Start"}
                 dbReference={'activegame/' + this.state.lobbyKey}
-                removeState={'count'}/>
+                dialog={this.refs}
+                />
               <Deleteandroutebutton
                 route={"/main"}
                 labelText={"Cancel"}
