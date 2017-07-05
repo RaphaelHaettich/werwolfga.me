@@ -15,7 +15,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import SimpleState from 'react-simple-state'
 import Warningwindow from '../Warningwindow/Warningwindow'
 import shuffle from '../../helpers/shuffle'
-import {update} from '../../helpers/dbcalls'
+import {post} from '../../helpers/dbcalls'
 const simpleState = new SimpleState()
 
 class writeAndRouteButton extends Component {
@@ -32,7 +32,7 @@ class writeAndRouteButton extends Component {
       .reduce((a, b) => a + b, 0);
     const userCount = usersObj.count.length
     console.log(cardsCount)
-    if (cardsCount === userCount) {
+    if ((cardsCount === userCount)&& userCount > 0) {
       console.log("start")
       let cards = []
       for (let i = 0; i < cardsObj.list.length; i++) { 
@@ -43,17 +43,16 @@ class writeAndRouteButton extends Component {
         }
       }
       shuffle(cards)
-      console.log(cards)
-      //TODO: make client side
-      let promise = new Promise((resolve, reject) => {
-        for (let i = 0; i < usersObj.count.length; i++) { 
-           
-          const collection = this.props.dbReference + "/memberarray/" + usersObj.count[i].key
-          let object = {card: cards[i]}
-          update(resolve, reject, object, collection);
-        }
-        
-        
+      let memberarray = [];
+      for (let i = 0; i < usersObj.count.length; i++) {
+        const key = usersObj.count[i].key 
+        memberarray[key] =  {
+            "card" : cards[i]
+          }
+      }
+      let promise = new Promise((resolve, reject) => {  
+          const collection = this.props.dbReference + "/memberarray/"
+          post(resolve, reject, memberarray, collection);
       })
       promise.then((data) => {
         //Do what ever
@@ -69,7 +68,7 @@ class writeAndRouteButton extends Component {
   render() {
     return (
       <div>
-        <Warningwindow message={"You need as many players as selected cards. Please delete or add some cards or players."}
+        <Warningwindow message={"You need as many players as selected cards. Please delete or add some cards or players. "}
         ref={(dialog) => {this.dialog = dialog}}/>
         <RaisedButton
           primary={true}
