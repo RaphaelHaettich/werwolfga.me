@@ -8,7 +8,7 @@ export var push = (resolve, reject, data, collection) => {
         resolve(snapshot)
     }).catch(err => {
         //handle error
-        alert("post failed "+ err)
+        console.log(err)
     });
 }
 
