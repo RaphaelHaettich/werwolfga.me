@@ -6,8 +6,6 @@ import Deleteandroutebutton from '../../components/Deleteandroutebutton/Deletean
 import Writeandroutebutton from '../../components/Writeandroutebutton/Writeandroutebutton'
 import Counterlabel from '../../components/Counterlabel/Counterlabel'
 import Styles from './Create.css.js'
-import SimpleState from 'react-simple-state'
-const simpleState = new SimpleState()
 
 class create extends Component {
 
@@ -18,8 +16,6 @@ class create extends Component {
       lobbyKey: "",
       loading: true
     };
-    simpleState.addListener('count', {count: 0});
-    simpleState.addListener('cards', {list: []});
   }
   componentDidMount() {
     var self = this;

@@ -12,6 +12,8 @@ import Join from './pages/Join/Join'
 import {firebaseAuth} from './config/constants'
 import Navbar from './components/Navbar/Navbar'
 import Paper from 'material-ui/Paper';
+import SimpleState from 'react-simple-state'
+const simpleState = new SimpleState()
 
 function PrivateRoute({
   component: Component,
@@ -48,10 +50,16 @@ function PublicRoute({
 }
 
 export default class App extends Component {
-  state = {
-    authed: false,
-    loading: true
+  constructor(props) {
+    super(props)
+    this.state = {
+      authed: false,
+      loading: true
+    }
+    simpleState.addListener('count', {count: 0});
+    simpleState.addListener('cards', {list: []});
   }
+      
   componentDidMount() {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
