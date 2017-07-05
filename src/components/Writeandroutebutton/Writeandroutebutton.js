@@ -15,10 +15,17 @@ import RaisedButton from 'material-ui/RaisedButton'
 import SimpleState from 'react-simple-state'
 import Warningwindow from '../Warningwindow/Warningwindow'
 import shuffle from '../../helpers/shuffle'
-import {post} from '../../helpers/dbcalls'
+import {post, update} from '../../helpers/dbcalls'
 const simpleState = new SimpleState()
 
 class writeAndRouteButton extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      alertMsg: ""
+    };
+  }
 
   startGame() {
     const usersObj = simpleState.getState('count')
@@ -50,17 +57,36 @@ class writeAndRouteButton extends Component {
             "card" : cards[i]
           }
       }
-      let promise = new Promise((resolve, reject) => {  
+      let updateMembers = new Promise((resolve, reject) => {  
           const collection = this.props.dbReference + "/memberarray/"
           post(resolve, reject, memberarray, collection);
       })
-      promise.then((data) => {
-        //Do what ever
+      updateMembers.then((data) => {
+        let setGameReady = new Promise((resolve, reject) => {  
+            const collection = this.props.dbReference
+            const object = {state: "ready"}
+            update(resolve, reject, object, collection);
+        })
+        setGameReady.then((data) => {
+          console.log("to route")
+        }).catch( function (error) {
+            alert("Error: " + error);
+            this.setState({
+              alertMsg: "Error: "+ error
+            })
+            this.dialog.handleOpen()
+        });
       }).catch(function (error) {
-        alert("Error: " + error);
+        this.setState({
+          alertMsg: "Error: "+ error
+        })
+        this.dialog.handleOpen()
       });
     } else {
       console.log("stop")
+      this.setState({
+        alertMsg: "You need as many players as selected cards. Please delete or add some cards or players. "
+      })
       this.dialog.handleOpen()
     }
   }
@@ -68,7 +94,7 @@ class writeAndRouteButton extends Component {
   render() {
     return (
       <div>
-        <Warningwindow message={"You need as many players as selected cards. Please delete or add some cards or players. "}
+        <Warningwindow message={this.state.alertMsg}
         ref={(dialog) => {this.dialog = dialog}}/>
         <RaisedButton
           primary={true}
