@@ -15,6 +15,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import SimpleState from 'react-simple-state'
 import Warningwindow from '../Warningwindow/Warningwindow'
 import shuffle from '../../helpers/shuffle'
+import {update} from '../../helpers/dbcalls'
 const simpleState = new SimpleState()
 
 class writeAndRouteButton extends Component {
@@ -38,11 +39,27 @@ class writeAndRouteButton extends Component {
           console.log(cardsObj.list[i].count)
         for (let p = 0; p < cardsObj.list[i].count; p++) { 
           console.log(cardsObj.list[i].count)
-            cards.push(cardsObj.list[i].key)
+          cards.push(cardsObj.list[i].key)
         }
       }
       shuffle(cards)
       console.log(cards)
+      //TODO: make client side
+      let promise = new Promise((resolve, reject) => {
+        for (let i = 0; i < usersObj.count.length; i++) { 
+           
+          const collection = this.props.dbReference + "/memberarray/" + usersObj.count[i].key
+          let object = {card: cards[i]}
+          update(resolve, reject, object, collection);
+        }
+        
+        
+      })
+      promise.then((data) => {
+        //Do what ever
+      }).catch(function (error) {
+        alert("Error: " + error);
+      });
     } else {
       console.log("stop")
       this.dialog.handleOpen()
