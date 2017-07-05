@@ -26,13 +26,12 @@ export default class counterlabel extends Component {
       asArray: true
     });
   }
-  
+
   render() {
     var counter = this.state.count;
     simpleState.evoke(this.props.state, {
       count: counter
     });
-    console.log(simpleState.getState(this.props.state))
     if (counter !== undefined) {
       counter = counter.length
     }
