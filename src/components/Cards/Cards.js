@@ -21,6 +21,7 @@ class cards extends Component {
       list: []
     }
   }
+
   componentDidMount() {
     this.ref = base.syncState(this.props.dbReference, {
       context: this,
@@ -31,6 +32,7 @@ class cards extends Component {
       }
     });
   }
+  
   render() {
     var listItems = this
       .state
