@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Cards from '../../components/Cards/Cards'
-import {post} from '../../helpers/dbcalls'
+import {push} from '../../helpers/dbcalls'
 import {base} from '../../config/constants'
 import Deleteandroutebutton from '../../components/Deleteandroutebutton/Deleteandroutebutton'
 import Writeandroutebutton from '../../components/Writeandroutebutton/Writeandroutebutton'
@@ -37,7 +37,7 @@ class create extends Component {
           host: userId,
           state: 'draft'
         }
-        post(resolve, reject, data, collection);
+        push(resolve, reject, data, collection);
       })
       promise.then((data) => {
         self.setState({lobbyId: inviteCode, lobbyKey: data.key, loading: false});
