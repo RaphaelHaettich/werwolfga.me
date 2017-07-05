@@ -24,9 +24,9 @@ class writeAndRouteButton extends Component {
     return (
       <RaisedButton 
         primary={true}
-        onClick={this
-        .delete
-        .bind(this)}
+        // onClick={this
+        // .delete
+        // .bind(this)}
         label={this.props.labelText}
       />    
     )
