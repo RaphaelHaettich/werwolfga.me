@@ -5,7 +5,7 @@
 */
 
 import React, {Component} from 'react'
-import Inputcounter from '../../Inputcounter/Inputcounter'
+import Inputcounter from './Inputcounter/Inputcounter'
 import Divider from 'material-ui/Divider'
 import Styles from './Card.css.js'
 
@@ -18,8 +18,31 @@ import {
 } from 'material-ui/Card';
 
 class card extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    }
+  }
+
+
+  up(e) {
+    this.setState({
+      count: this.state.count + 1
+    });
+  }
+  down(e) {
+    if (this.state.count > 0) {
+      this.setState({
+        count: this.state.count - 1
+      });
+    }
+  }
+
   render() {
     let item = this.props.item
+    console.log(this.state.count)
     return (
       <div style={Styles.card}>
         <Divider/>
@@ -37,7 +60,7 @@ class card extends Component {
             {item.description}
           </CardText>
           <CardActions>
-            <Inputcounter key={item.key}/>
+            <Inputcounter count={this.state.count} up={this.up.bind(this)} down={this.down.bind(this)}/>
           </CardActions>
         </Card>
       </div>

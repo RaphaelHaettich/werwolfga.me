@@ -1,0 +1,35 @@
+/*
+*   Required Props:
+*   up: function()
+*   down: function()
+*   count: number
+*/
+
+import React from 'react'
+import FlatButton from 'material-ui/FlatButton'
+import Styles from './Inputcounter.css.js'
+
+
+const inputCounter = ({up, down, count}) => {
+
+  console.log(count)
+  return (
+    <div>
+      <FlatButton
+        style={Styles.buttonStyle}
+        labelStyle={Styles.buttonLabelStyle}
+        onClick={() => {down()}}
+        label="−"
+        primary={true}/>
+      <label style={Styles.counter}>{count}</label>
+      <FlatButton
+        style={Styles.buttonStyle}
+        labelStyle={Styles.buttonLabelStyle}
+        onClick={() => {up()}}
+        label="+"
+        primary={true}/>
+    </div>
+  );
+}
+
+export default inputCounter
