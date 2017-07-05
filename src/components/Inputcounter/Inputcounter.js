@@ -2,7 +2,7 @@
 *   Required Props:
 *   up: function()
 *   down: function()
-*   count: number
+*   count: number/string
 */
 
 import React from 'react'
@@ -32,4 +32,4 @@ const inputCounter = ({up, down, count}) => {
   );
 }
 
-export default inputCounter
+export default inputCounter;
