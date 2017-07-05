@@ -25,6 +25,8 @@ class deleteAndRouteButton extends Component {
         if(this.props.removeState){
           const simpleState = new SimpleState()
           simpleState.removeListener(this.props.removeState);
+          //TODO: make modular
+          simpleState.removeListener("cards");
         }
         this.props.history.push(this.props.route)
       })
