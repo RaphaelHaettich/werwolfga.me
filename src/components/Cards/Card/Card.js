@@ -20,7 +20,6 @@ import {
 } from 'material-ui/Card';
 
 class card extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
