@@ -18,20 +18,7 @@ import SimpleState from 'react-simple-state'
 
 class writeAndRouteButton extends Component {
 
-  delete() {
-    base
-      .remove(this.props.dbReference)
-      .then(() => {
-        if(this.props.removeState){
-          const simpleState = new SimpleState()
-          simpleState.removeListener(this.props.removeState);
-        }
-        this.props.history.push(this.props.route)
-      })
-      .catch(error => {
-        //handle error
-      });
-  }
+
   
   render() {
     return (
