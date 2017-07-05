@@ -5,9 +5,11 @@
 */
 
 import React, {Component} from 'react'
-import Inputcounter from './Inputcounter/Inputcounter'
+import Inputcounter from '../../Inputcounter/Inputcounter'
 import Divider from 'material-ui/Divider'
 import Styles from './Card.css.js'
+import SimpleState from 'react-simple-state'
+const simpleState = new SimpleState()
 
 import {
   Card,
@@ -38,6 +40,20 @@ class card extends Component {
         count: this.state.count - 1
       });
     }
+  }
+
+  componentDidUpdate() {
+    let cardState = simpleState.getState("cards")
+    const index = cardState.list.map(function(e) { return e.key; }).indexOf(this.props.item.key);
+    if(index !== -1){
+      cardState.list[index]= {key: this.props.item.key,count: this.state.count}
+    }else{
+      cardState.list.push({key: this.props.item.key,count: this.state.count})
+    }
+    console.log(cardState)
+    simpleState.evoke("cards", {
+      list: cardState.list
+    });
   }
 
   render() {
