@@ -6,17 +6,10 @@
 import React, { Component } from 'react'
 import { base } from '../../config/constants'
 import Card from './Card/Card'
-import SimpleState from 'react-simple-state'
-const simpleState = new SimpleState()
 
 class cards extends Component {
   constructor(props) {
     super(props);
-
-    simpleState.addListener('cards', {
-        list: []
-    });
-
     this.state = {
       list: []
     }
