@@ -18,9 +18,7 @@ class create extends Component {
       lobbyKey: "",
       loading: true
     };
-    simpleState.addListener('count', {
-        count: 0
-    });
+    simpleState.addListener('count', {count: 0});
   }
   componentDidMount() {
     var self = this;
@@ -43,7 +41,7 @@ class create extends Component {
       promise.then((data) => {
         self.setState({lobbyId: inviteCode, lobbyKey: data.key, loading: false});
       }).catch(function (error) {
-          console.log(error);
+        console.log(error);
       });
     }
 
@@ -92,7 +90,6 @@ class create extends Component {
                 labelText={"Joined People: "}
                 dbReference={'activegame/' + this.state.lobbyKey + '/memberarray/'}
                 state={'count'}/>
-
               <Writeandroutebutton
                 route={"/main"}
                 labelText={"Start"}
