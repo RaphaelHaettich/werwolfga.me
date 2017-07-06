@@ -15,6 +15,7 @@ import {firebaseAuth} from './config/constants'
 import Navbar from './components/Navbar/Navbar'
 import Paper from 'material-ui/Paper';
 import SimpleState from 'react-simple-state'
+import CircularProgress from 'material-ui/CircularProgress';
 const simpleState = new SimpleState()
 
 function PrivateRoute({
@@ -64,6 +65,7 @@ export default class App extends Component {
     simpleState.addListener('cards', {list: []});
     simpleState.addListener('state', {state: "draft"});
     simpleState.addListener('gameId', {id: ""});
+    simpleState.addListener('loader', {state: true});
   }
       
   componentDidMount() {
@@ -81,10 +83,11 @@ export default class App extends Component {
     simpleState.removeListener("cards");
     simpleState.removeListener("state");
     simpleState.removeListener("gameId");
+    simpleState.removeListener('loader');
   }
   render() {
     return this.state.loading === true
-      ? <h1>Loading</h1>
+      ? <CircularProgress />
       : (
         <MuiThemeProvider style={{height:"100%"}} muiTheme={getMuiTheme(wolvestheme)}>
           <Paper>
