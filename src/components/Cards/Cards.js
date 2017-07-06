@@ -20,9 +20,6 @@ class cards extends Component {
       context: this,
       state: 'list',
       asArray: true,
-      then() {
-        this.setState({ loading: false})
-      }
     });
   }
   
@@ -38,6 +35,7 @@ class cards extends Component {
 
     return (
       <div>
+
         {listItems}
       </div>
     )
