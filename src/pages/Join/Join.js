@@ -32,7 +32,6 @@ export default class join extends Component {
 
       const number = this.number.input.value
       if (isNaN(number) !== true) {
-        cookies.set('lobbyNumber', number, { path: '/' });
         base
           .fetch('activegame/', {
           context: this,
@@ -66,6 +65,7 @@ export default class join extends Component {
       })
       promise.then((data) => {
         console.log("addUser done")
+        cookies.set('lobbyNumber', key, { path: '/' });
         simpleState.evoke("gameId", {id: key})
         simpleState.evoke("loader", true)
         this.setState({alertMsg: "Game found! Now waiting until creator starts game"})
@@ -81,6 +81,7 @@ export default class join extends Component {
             console.log(data)
             if (data[3] === "ready") {
               console.log("game starts")
+              simpleState.evoke("loader", true)
               this
                 .props
                 .history
@@ -103,7 +104,8 @@ export default class join extends Component {
           addUser(data[0].key)
         } else {
           const userIdArr = Object.keys(data[0].memberarray);
-          if (userIdArr.indexOf(userId) === 0 && data[0].state === "ready") {
+          if (userIdArr.indexOf(userId) > -1 && data[0].state === "ready") {
+            cookies.set('lobbyNumber', data[0].key, { path: '/' });
             simpleState.evoke("gameId", {id: data[0].key})
             simpleState.evoke("loader", true)
             this

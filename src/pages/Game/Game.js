@@ -21,16 +21,24 @@ export default class Gameadmin extends Component {
       .app()
       .INTERNAL
       .getUid()
-    console.log(simpleState.getState("gameId"))
-    console.log(cookies.get('lobbyNumber'))
+      
+    console.log(userId)
 
-    if(simpleState.getState("gameId").id === ""){
+    if(simpleState.getState("gameId").id === "" && cookies.get('lobbyNumber') === undefined){
       this.props.history.push("join")
     }else{
-
+      let gameId = "";
+      if(simpleState.getState("gameId").id !== ""){
+        gameId = simpleState.getState("gameId").id;
+      }else if(cookies.get('lobbyNumber') !== undefined){
+        console.log("in cookies")
+        console.log(cookies.get('lobbyNumber'))
+        gameId = cookies.get('lobbyNumber')
+      }
       let getCurrentCard = new Promise((resolve, reject) => {
-        console.log(simpleState.getState("gameId").id)
-        const collection = 'activegame/' + simpleState.getState("gameId").id + "/memberarray/" + userId
+        console.log(gameId)
+        const collection = 'activegame/' + gameId + "/memberarray/" + userId
+        console.log(collection)
         fetch(resolve, reject, collection);
       })
       getCurrentCard.then((data) => {
