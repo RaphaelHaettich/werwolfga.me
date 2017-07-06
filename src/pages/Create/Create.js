@@ -9,7 +9,6 @@ import RaisedButton from 'material-ui/RaisedButton'
 import SimpleState from 'react-simple-state'
 import Warningwindow from '../../components/Warningwindow/Warningwindow'
 import shuffle from '../../helpers/shuffle'
-import CircularProgress from 'material-ui/CircularProgress';
 
 const simpleState = new SimpleState()
 
@@ -167,13 +166,9 @@ class create extends Component {
   }
 
   render() {
-    let loader = null;
-    if(simpleState.getState("loader") === true){
-      loader = <div id="swag" style={Styles.hidePage}><CircularProgress style={Styles.centered}/></div>
-    }
+    
     return (
       <div>
-        {loader}
         <div>
           <h3>
             Available Cards
