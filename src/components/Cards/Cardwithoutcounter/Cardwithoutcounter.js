@@ -15,7 +15,6 @@ const simpleState = new SimpleState()
 
 import {
   Card,
-  CardActions,
   CardText,
   CardMedia,
   CardTitle
