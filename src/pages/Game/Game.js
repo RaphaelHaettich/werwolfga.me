@@ -1,10 +1,19 @@
 import React, {Component} from 'react'
 import {fetch} from '../../helpers/dbcalls'
 import {base} from '../../config/constants'
+import Cards from '../../components/Cards/Cards'
 import SimpleState from 'react-simple-state'
 const simpleState = new SimpleState()
 
 export default class Gameadmin extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      cards: []
+    }
+  }
+
   componentDidMount(){
     const userId = base
       .app()
@@ -31,6 +40,12 @@ export default class Gameadmin extends Component {
         getCardInfos.then((data) => {
           console.log("got card")
           console.log(data)
+          let cardObj = [{
+            description: data[0],
+            name: data[1],
+            picturefront: data[2]
+          }]
+          this.setState({cards: cardObj})
           simpleState.evoke("loader", false)
         })
       })
@@ -39,9 +54,11 @@ export default class Gameadmin extends Component {
     
   }
   render() {
+    console.log(this.state.cards)
     return (
       <div className="col-sm-6 col-sm-offset-3">
-        Game
+      Your Card:
+        <Cards counter={false} data={this.state.cards}/>
       </div>
     )
   }
