@@ -9,6 +9,9 @@ export default class main extends Component {
   componentDidMount(){
     simpleState.evoke("loader", false)
   }
+  componentWillUnmount(){
+    simpleState.evoke("loader", true)
+  }
   render () {
     return (
       <div style={Styles.centered}>

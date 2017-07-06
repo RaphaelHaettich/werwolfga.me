@@ -141,6 +141,7 @@ class create extends Component {
         setGameReady.then((data) => {
           console.log("to route")
           simpleState.evoke("gameId", {id: this.state.lobbyKey})
+          simpleState.evoke("loader", true)
           this
             .props
             .history
