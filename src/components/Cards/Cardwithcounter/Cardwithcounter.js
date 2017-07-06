@@ -2,12 +2,15 @@
 *   Required Props:
 *   key: string,
 *   item: object
+*   
+*   Required simpleState:
+*   cards
 */
 
 import React, {Component} from 'react'
 import Inputcounter from '../../Inputcounter/Inputcounter'
 import Divider from 'material-ui/Divider'
-import Styles from './Card.css.js'
+import Styles from './Cardwithcounter.css.js'
 import SimpleState from 'react-simple-state'
 const simpleState = new SimpleState()
 

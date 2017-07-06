@@ -1,11 +1,13 @@
 /*
 *   Required Props:
 *   data: objectarray
+*   counter: boolean
 */
 
 import React, { Component } from 'react'
 import { base } from '../../config/constants'
-import Card from './Card/Card'
+import Cardwithcounter from './Cardwithcounter/Cardwithcounter'
+import Cardwithoutcounter from './Cardwithoutcounter/Cardwithoutcounter'
 
 class cards extends Component {
   constructor(props) {
@@ -16,18 +18,20 @@ class cards extends Component {
   }
   
   render() {
+    console.log(this.props.data)
     var listItems = this
       .props
       .data
       .map((item, index) => {
         return (
-          <Card key={index} item={item}/>
+          this.props.counter === true
+          ? <Cardwithcounter key={index} item={item}/>
+          : <Cardwithoutcounter key={index} item={item}/>
         )
       });
 
     return (
       <div>
-
         {listItems}
       </div>
     )
