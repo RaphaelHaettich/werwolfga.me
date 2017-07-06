@@ -71,6 +71,8 @@ export default class App extends Component {
   }
   componentWillUnmount() {
     this.removeListener()
+    simpleState.removeListener("count");
+    simpleState.removeListener("cards");
   }
   render() {
     return this.state.loading === true
