@@ -64,7 +64,7 @@ export default class App extends Component {
     simpleState.addListener('cards', {list: []});
     simpleState.addListener('state', {state: "draft"});
     simpleState.addListener('gameId', {id: ""});
-    simpleState.addListener('loader', {state: true});
+    simpleState.addListener('loader', true);
   }
       
   componentDidMount() {
