@@ -5,7 +5,6 @@
 */
 
 import React, { Component } from 'react'
-import { base } from '../../config/constants'
 import Cardwithcounter from './Cardwithcounter/Cardwithcounter'
 import Cardwithoutcounter from './Cardwithoutcounter/Cardwithoutcounter'
 
