@@ -1,6 +1,6 @@
 /*
 *   Required Props:
-*   dbReference: string
+*   data: objectarray
 */
 
 import React, { Component } from 'react'
@@ -15,18 +15,10 @@ class cards extends Component {
     }
   }
   
-  componentDidMount() {
-    this.ref = base.syncState(this.props.dbReference, {
-      context: this,
-      state: 'list',
-      asArray: true,
-    });
-  }
-  
   render() {
     var listItems = this
-      .state
-      .list
+      .props
+      .data
       .map((item, index) => {
         return (
           <Card key={index} item={item}/>

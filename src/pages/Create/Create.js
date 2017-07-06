@@ -19,7 +19,8 @@ class create extends Component {
     this.state = {
       lobbyId: "",
       lobbyKey: "",
-      alertMsg: ""
+      alertMsg: "",
+      list: []
     };
   }
   componentDidMount() {
@@ -93,6 +94,12 @@ class create extends Component {
         createLobby();
       }
     })
+
+    this.ref = base.syncState("/cards", {
+      context: this,
+      state: 'list',
+      asArray: true,
+    });
   }
 
   startGame() {
@@ -174,7 +181,7 @@ class create extends Component {
           <h3>
             Available Cards
           </h3>
-          <Cards dbReference={'/cards'}/>
+          <Cards data={this.state.list}/>
           <div style={Styles.centeredOnlyHorizontal}>
             <h3>Lobby ID: {this.state.lobbyId}</h3>
             <Counterlabel
