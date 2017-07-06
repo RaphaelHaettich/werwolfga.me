@@ -19,8 +19,9 @@ export default class counterlabel extends Component {
     }
     
   }
-  componentDidMount() {
-    base.bindToState(this.props.dbReference, {
+  componentWillReceiveProps(props) {
+    console.log(props)
+    base.bindToState(props.dbReference, {
       context: this,
       state: 'count',
       asArray: true
