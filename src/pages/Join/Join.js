@@ -4,6 +4,7 @@ import {update} from '../../helpers/dbcalls'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 import { base } from '../../config/constants'
+import Warningwindow from '../../components/Warningwindow/Warningwindow'
 import {
   Container,
   Row,
@@ -11,6 +12,13 @@ import {
 } from 'react-grid-system';
 
 export default class join extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      alertMsg: ""
+    };
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
     const userId = base
@@ -30,7 +38,10 @@ export default class join extends Component {
       }).then(data => {
         resolve(data);
       }).catch(error => {
-        //handle error
+        this.setState({
+          alertMsg: "Error: "+ error
+        })
+        this.dialog.handleOpen()
       })
     })
 
@@ -43,7 +54,10 @@ export default class join extends Component {
       promise.then((data) => {
         //Do what ever
       }).catch(function (error) {
-        alert("Error: " + error);
+        this.setState({
+          alertMsg: "Error: "+ error
+        })
+        this.dialog.handleOpen()
       });
     }
 
@@ -80,6 +94,8 @@ export default class join extends Component {
             </Container>
           </form>
         </CardActions>
+        <Warningwindow message={this.state.alertMsg}
+        ref={(dialog) => {this.dialog = dialog}}/>
       </Card>
     )
   }

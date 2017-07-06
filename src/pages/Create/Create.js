@@ -43,7 +43,10 @@ class create extends Component {
       promise.then((data) => {
         self.setState({lobbyId: inviteCode, lobbyKey: data.key, loading: false});
       }).catch(function (error) {
-        console.log(error);
+        this.setState({
+          alertMsg: "Error: "+ error
+        })
+        this.dialog.handleOpen()
       });
     }
 
@@ -62,7 +65,10 @@ class create extends Component {
           resolve(data);
         })
         .catch(error => {
-          //handle error
+          this.setState({
+            alertMsg: "Error: "+ error
+          })
+          this.dialog.handleOpen()
         })
     })
     hostExists.then((data) => {
