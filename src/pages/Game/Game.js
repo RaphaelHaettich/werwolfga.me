@@ -2,8 +2,10 @@ import React, {Component} from 'react'
 import {fetch} from '../../helpers/dbcalls'
 import {base} from '../../config/constants'
 import Flipcard from '../../components/Flipcard/Flipcard'
+import Cookies from 'universal-cookie';
 import SimpleState from 'react-simple-state'
 const simpleState = new SimpleState()
+const cookies = new Cookies();
 
 export default class Gameadmin extends Component {
   
@@ -20,6 +22,8 @@ export default class Gameadmin extends Component {
       .INTERNAL
       .getUid()
     console.log(simpleState.getState("gameId"))
+    console.log(cookies.get('lobbyNumber'))
+
     if(simpleState.getState("gameId").id === ""){
       this.props.history.push("join")
     }else{

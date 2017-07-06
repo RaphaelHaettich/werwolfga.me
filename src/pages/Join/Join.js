@@ -7,8 +7,11 @@ import {base} from '../../config/constants'
 import Warningwindow from '../../components/Warningwindow/Warningwindow'
 import Styles from './Join.css.js'
 import SimpleState from 'react-simple-state'
+import Cookies from 'universal-cookie';
 import {Container, Row, Col} from 'react-grid-system';
+
 const simpleState = new SimpleState()
+const cookies = new Cookies();
 
 export default class join extends Component {
   constructor(props) {
@@ -26,22 +29,31 @@ export default class join extends Component {
       .getUid()
 
     let getUUID = new Promise((resolve, reject) => {
+
       const number = this.number.input.value
-      base
-        .fetch('activegame/', {
-        context: this,
-        asArray: true,
-        queries: {
-          orderByChild: 'code',
-          equalTo: Number(number)
-        }
-      })
-        .then(data => {
-          resolve(data);
+      if (isNaN(number) !== true) {
+        cookies.set('lobbyNumber', number, { path: '/' });
+        base
+          .fetch('activegame/', {
+          context: this,
+          asArray: true,
+          queries: {
+            orderByChild: 'code',
+            equalTo: Number(number)
+          }
         })
-        .catch(error => {
-          console.log(error)
-        })
+          .then(data => {
+            resolve(data);
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      } else {
+        this.setState({alertMsg: "Please insert a number!"})
+        this
+          .dialog
+          .handleOpen()
+      }
     })
 
     let addUser = (key) => {
@@ -65,11 +77,14 @@ export default class join extends Component {
         base.listenTo(collection, {
           context: this,
           asArray: true,
-          then(data){
+          then(data) {
             console.log(data)
-            if(data[3] === "ready"){
+            if (data[3] === "ready") {
               console.log("game starts")
-              this.props.history.push("game")
+              this
+                .props
+                .history
+                .push("game")
             }
           }
         })
