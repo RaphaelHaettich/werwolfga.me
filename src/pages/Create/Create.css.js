@@ -1,13 +1,26 @@
 var styles = {
-      centered: {
+      centeredOnlyHorizontal: {
         left: "50%",
         transform: "translate(-50%, -50%)",
         marginTop: "50px",
         marginBottom: "10%",
         position: "absolute"
       },
+      centered: {
+        position: "fixed", 
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)"
+      },
       buttonPaddingRight: {
         paddingRight: "5px"
+      },
+      hidePage: {
+        height: "100%",
+        width: "100%",
+        position: "fixed",
+        backgroundColor: "#303030",
+        zIndex: 99
       }
     };
 

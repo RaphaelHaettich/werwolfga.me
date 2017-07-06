@@ -40,7 +40,10 @@ class card extends Component {
       });
     }
   }
-
+  componentDidMount() {
+    simpleState.evoke("loader", false)
+    console.log(simpleState.getState("loader"))
+  }
   componentDidUpdate() {
     let cardState = simpleState.getState("cards")
     const index = cardState.list.map(function(e) { return e.key; }).indexOf(this.props.item.key);
@@ -57,7 +60,7 @@ class card extends Component {
 
   render() {
     let item = this.props.item
-    console.log(this.state.count)
+
     return (
       <div style={Styles.card}>
         <Divider/>
