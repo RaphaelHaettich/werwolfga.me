@@ -14,6 +14,8 @@ import Game from './pages/Game/Game'
 import {firebaseAuth} from './config/constants'
 import Navbar from './components/Navbar/Navbar'
 import Paper from 'material-ui/Paper';
+import Styles from './App.css.js'
+import CircularProgress from 'material-ui/CircularProgress';
 import SimpleState from 'react-simple-state'
 const simpleState = new SimpleState()
 
@@ -56,7 +58,8 @@ export default class App extends Component {
     super(props)
     this.state = {
       authed: false,
-      loading: true
+      loading: true,
+      loader: true
     }
   }
   componentWillMount() {
@@ -65,12 +68,19 @@ export default class App extends Component {
     simpleState.addListener('state', {state: "draft"});
     simpleState.addListener('gameId', {id: ""});
     simpleState.addListener('loader', true);
+
+    simpleState.subscribe('loader', this, (nextState) => {
+      console.log("cahngedstate")
+        this.setState({
+            loader: false
+        });
+    });
   }
       
   componentDidMount() {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
-        this.setState({authed: true, loading: false})
+      this.setState({authed: true, loading: false})
       } else {
         this.setState({authed: false, loading: false})
       }
@@ -85,6 +95,10 @@ export default class App extends Component {
     simpleState.removeListener('loader');
   }
   render() {
+    let loader = null;
+    if(this.state.loader === true){
+      loader = <div id="swag" style={Styles.hidePage}><CircularProgress style={Styles.centered}/></div>
+    }
     return this.state.loading === true
       ? <h1>Loading</h1>
       : (
@@ -102,6 +116,7 @@ export default class App extends Component {
                 />
                 <div className="container">
                   <div className="row">
+                  {loader}
                     <Switch>
                       <PublicRoute path='/' exact component={Home}/>
                       <PublicRoute authed={this.state.authed} path='/login' component={Login}/>
