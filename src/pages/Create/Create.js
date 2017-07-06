@@ -103,6 +103,7 @@ class create extends Component {
   }
 
   startGame() {
+    simpleState.evoke("loader", true)
     const usersObj = simpleState.getState('count')
     const cardsObj = simpleState.getState('cards')
     console.log(cardsObj)
@@ -181,7 +182,7 @@ class create extends Component {
           <h3>
             Available Cards
           </h3>
-          <Cards data={this.state.list}/>
+          <Cards counter={true} data={this.state.list}/>
           <div style={Styles.centeredOnlyHorizontal}>
             <h3>Lobby ID: {this.state.lobbyId}</h3>
             <Counterlabel
