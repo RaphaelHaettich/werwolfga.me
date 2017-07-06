@@ -123,26 +123,19 @@ class create extends Component {
       })
       updateMembers.then((data) => {
         let setGameReady = new Promise((resolve, reject) => {  
-            const collection = this.props.dbReference
+            const collection = 'activegame/' + this.state.lobbyKey
+            console.log(this)
             const object = {state: "ready"}
             update(resolve, reject, object, collection);
         })
         setGameReady.then((data) => {
           console.log("to route")
+          simpleState.evoke("gameId", {id: this.state.lobbyKey})
           this.props.history.push("gameadmin")
         }).catch( function (error) {
-            alert("Error: " + error);
-            this.setState({
-              alertMsg: "Error: "+ error
-            })
-            this.dialog.handleOpen()
             console.log(error)
         });
       }).catch(function (error) {
-        this.setState({
-          alertMsg: "Error: "+ error
-        })
-        this.dialog.handleOpen()
         console.log(error)
       });
     } else {
