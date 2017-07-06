@@ -4,6 +4,7 @@
 */
 
 import React, {Component} from 'react'
+import {Card, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import SimpleState from 'react-simple-state'
 const simpleState = new SimpleState()
 
@@ -18,27 +19,21 @@ class card extends Component {
 
 
   render() {
-    let item = this.props.item
+    let item = this.props.data
 
     return (
-      <div style={Styles.card}>
-        <Divider/>
+      <div >
         <Card>
-          <CardMedia overlay={< CardTitle title={
-            item.name
-          } />}>
-            <img style={Styles.cardImage} src={item.picturefront} alt="cardimage"/>
-          </CardMedia>
-          <CardTitle
-            subtitle="Expand for Description"
-            actAsExpander={true}
-            showExpandableButton={true}/>
-          <CardText expandable={true}>
-            {item.description}
-          </CardText>
-          <CardActions>
-            <Inputcounter count={this.state.count} up={this.up.bind(this)} down={this.down.bind(this)}/>
-          </CardActions>
+            <CardMedia>
+            <img src={item.picturefront} alt="" />
+            </CardMedia>
+            <CardTitle title="Card title"/>
+            <CardText>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
+            Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
+            Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+            </CardText>
         </Card>
       </div>
     )
