@@ -53,11 +53,27 @@ export default class join extends Component {
         update(resolve, reject, object, collection);
       })
       promise.then((data) => {
-        //Do what ever
         console.log("addUser done")
         simpleState.evoke("gameId", {id: key})
-        // this   .props   .history   .push("game")
-        console.log("ready with user")
+        simpleState.evoke("loader", true)
+        this.setState({alertMsg: "Game found! Now waiting until creator starts game"})
+        this
+          .dialog
+          .handleOpen()
+        console.log(simpleState.getState("loader"))
+        const collection = "activegame/" + key;
+        base.listenTo(collection, {
+          context: this,
+          asArray: true,
+          then(data){
+            console.log(data)
+            if(data[3] === "ready"){
+              console.log("game starts")
+              this.props.history.push("game")
+            }
+          }
+        })
+
       })
         .catch(function (error) {
           console.log(error)
@@ -74,6 +90,7 @@ export default class join extends Component {
           const userIdArr = Object.keys(data[0].memberarray);
           if (userIdArr.indexOf(userId) === 0 && data[0].state === "ready") {
             simpleState.evoke("gameId", {id: data[0].key})
+            simpleState.evoke("loader", true)
             this
               .props
               .history
@@ -98,7 +115,7 @@ export default class join extends Component {
       }
     })
   }
-  componentDidMount(){
+  componentDidMount() {
     simpleState.evoke("loader", false)
   }
   render() {
