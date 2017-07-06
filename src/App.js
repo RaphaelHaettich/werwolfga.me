@@ -9,6 +9,7 @@ import Home from './pages/Home/Home'
 import Main from './pages/Main/Main'
 import Create from './pages/Create/Create'
 import Join from './pages/Join/Join'
+import Gameadmin from './pages/Gameadmin/Gameadmin'
 import {firebaseAuth} from './config/constants'
 import Navbar from './components/Navbar/Navbar'
 import Paper from 'material-ui/Paper';
@@ -58,6 +59,7 @@ export default class App extends Component {
     }
     simpleState.addListener('count', {count: 0});
     simpleState.addListener('cards', {list: []});
+    simpleState.addListener('state', {state: "draft"});
   }
       
   componentDidMount() {
@@ -73,6 +75,7 @@ export default class App extends Component {
     this.removeListener()
     simpleState.removeListener("count");
     simpleState.removeListener("cards");
+    simpleState.removeListener("state");
   }
   render() {
     return this.state.loading === true
@@ -99,6 +102,7 @@ export default class App extends Component {
                       <PrivateRoute authed={this.state.authed} path='/main' component={Main}/>
                       <PrivateRoute authed={this.state.authed} path='/create' component={Create}/>
                       <PrivateRoute authed={this.state.authed} path='/join' component={Join}/>
+                      <PrivateRoute authed={this.state.authed} path='/gameadmin' component={Gameadmin}/>
                       <Route render={() => <h3>No Match</h3>}/>
                     </Switch>
                   </div>
