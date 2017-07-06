@@ -69,6 +69,7 @@ class writeAndRouteButton extends Component {
         })
         setGameReady.then((data) => {
           console.log("to route")
+          this.props.history.push("gameadmin")
         }).catch( function (error) {
             alert("Error: " + error);
             this.setState({
