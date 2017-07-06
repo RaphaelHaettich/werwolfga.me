@@ -15,7 +15,6 @@ import {firebaseAuth} from './config/constants'
 import Navbar from './components/Navbar/Navbar'
 import Paper from 'material-ui/Paper';
 import SimpleState from 'react-simple-state'
-import CircularProgress from 'material-ui/CircularProgress';
 const simpleState = new SimpleState()
 
 function PrivateRoute({
@@ -87,7 +86,7 @@ export default class App extends Component {
   }
   render() {
     return this.state.loading === true
-      ? <CircularProgress />
+      ? <h1>Loading</h1>
       : (
         <MuiThemeProvider style={{height:"100%"}} muiTheme={getMuiTheme(wolvestheme)}>
           <Paper>
