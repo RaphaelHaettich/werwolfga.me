@@ -62,7 +62,12 @@ class create extends Component {
     })
     hostExists.then((data) => {
       if (data.length > 0) {
-        this.setState({lobbyId: data[0].code, lobbyKey: data[0].key, loading: false});
+        console.log(data[0])
+        if(data[0].state === "ready"){
+          this.props.history.push("gameadmin")
+        }else{
+          this.setState({lobbyId: data[0].code, lobbyKey: data[0].key, loading: false});
+        }
       } else {
         createLobby();
       }
