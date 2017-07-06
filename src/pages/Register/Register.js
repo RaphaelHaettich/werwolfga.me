@@ -3,6 +3,8 @@ import { auth } from '../../helpers/auth'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Link } from 'react-router-dom'
 import TextField from 'material-ui/TextField'
+import SimpleState from 'react-simple-state'
+const simpleState = new SimpleState()
 
 function setErrorMsg(error) {
   return {
@@ -16,6 +18,9 @@ export default class Register extends Component {
     e.preventDefault()
     auth(this.email.input.value, this.pw.input.value)
       .catch(e => this.setState(setErrorMsg(e)))
+  }
+  componentDidMount(){
+    simpleState.evoke("loader", false)
   }
   render () {
     return (

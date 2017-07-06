@@ -3,6 +3,8 @@ import {login, resetPassword} from '../../helpers/auth'
 import {Link} from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
+import SimpleState from 'react-simple-state'
+const simpleState = new SimpleState()
 
 
 function setErrorMsg(error) {
@@ -21,6 +23,9 @@ export default class Login extends Component {
   }
   resetPassword = () => {
     resetPassword(this.email.value).then(() => this.setState(setErrorMsg(`Password reset email sent to ${this.email.value}.`))).catch((error) => this.setState(setErrorMsg(`Email address not found.`)))
+  }
+  componentDidMount(){
+    simpleState.evoke("loader", false)
   }
   render() {
     return (

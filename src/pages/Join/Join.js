@@ -98,6 +98,9 @@ export default class join extends Component {
       }
     })
   }
+  componentDidMount(){
+    simpleState.evoke("loader", false)
+  }
   render() {
     return (
       <Card>
