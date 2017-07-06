@@ -72,7 +72,7 @@ export default class App extends Component {
     simpleState.subscribe('loader', this, (nextState) => {
       console.log("cahngedstate")
         this.setState({
-            loader: false
+            loader: nextState
         });
     });
   }
@@ -80,7 +80,7 @@ export default class App extends Component {
   componentDidMount() {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
-      this.setState({authed: true, loading: false})
+        this.setState({authed: true, loading: false})
       } else {
         this.setState({authed: false, loading: false})
       }
