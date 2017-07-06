@@ -34,8 +34,17 @@ export var post = (resolve, reject, data, collection) => {
     });
 }
 
-
-
+export var fetch = (resolve, reject, collection) => {
+    base.fetch(collection, {
+    context: {},
+    asArray: true
+    }).then(snapshot => {
+        resolve(snapshot);
+    }).catch(err => {
+        //handle error
+        console.log(err)
+    });
+}
 
 
 
