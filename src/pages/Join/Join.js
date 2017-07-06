@@ -42,6 +42,7 @@ export default class join extends Component {
           alertMsg: "Error: "+ error
         })
         this.dialog.handleOpen()
+        console.log(error)
       })
     })
 
@@ -58,6 +59,7 @@ export default class join extends Component {
           alertMsg: "Error: "+ error
         })
         this.dialog.handleOpen()
+        console.log(error)
       });
     }
 

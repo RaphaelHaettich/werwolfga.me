@@ -47,6 +47,7 @@ class create extends Component {
           alertMsg: "Error: "+ error
         })
         this.dialog.handleOpen()
+        console.log(error)
       });
     }
 
@@ -69,6 +70,7 @@ class create extends Component {
             alertMsg: "Error: "+ error
           })
           this.dialog.handleOpen()
+          console.log(error)
         })
     })
     hostExists.then((data) => {
@@ -134,12 +136,14 @@ class create extends Component {
               alertMsg: "Error: "+ error
             })
             this.dialog.handleOpen()
+            console.log(error)
         });
       }).catch(function (error) {
         this.setState({
           alertMsg: "Error: "+ error
         })
         this.dialog.handleOpen()
+        console.log(error)
       });
     } else {
       console.log("stop")
