@@ -42,6 +42,8 @@ export default class Gameadmin extends Component {
           console.log(activeData.length)
           for(var i = 0; i < activeData.length; i++){
             console.log(activeData[i])
+            
+
           }
           // let cardObj = {
           //   description: data[0],
