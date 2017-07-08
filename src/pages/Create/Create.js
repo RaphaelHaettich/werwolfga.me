@@ -9,8 +9,10 @@ import RaisedButton from 'material-ui/RaisedButton'
 import SimpleState from 'react-simple-state'
 import Warningwindow from '../../components/Warningwindow/Warningwindow'
 import shuffle from '../../helpers/shuffle'
+import Cookies from 'universal-cookie';
 
 const simpleState = new SimpleState()
+const cookies = new Cookies();
 
 class create extends Component {
 
@@ -103,7 +105,6 @@ class create extends Component {
   }
 
   startGame() {
-    simpleState.evoke("loader", true)
     const usersObj = simpleState.getState('count')
     const cardsObj = simpleState.getState('cards')
     console.log(cardsObj)
@@ -116,6 +117,7 @@ class create extends Component {
     const userCount = usersObj.count.length
     console.log(cardsCount)
     if ((cardsCount === userCount) && userCount > 0) {
+      simpleState.evoke("loader", true)
       console.log("start")
       let cards = []
       for (let i = 0; i < cardsObj.list.length; i++) {
@@ -149,6 +151,7 @@ class create extends Component {
         setGameReady.then((data) => {
           console.log("to route")
           simpleState.evoke("gameId", {id: this.state.lobbyKey})
+          cookies.set('lobbyNumber', this.state.lobbyKey, { path: '/' });
           simpleState.evoke("loader", true)
           this
             .props
