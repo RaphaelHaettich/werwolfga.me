@@ -4,8 +4,8 @@ import {Link} from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 import SimpleState from 'react-simple-state'
+import Warningwindow from '../../components/Warningwindow/Warningwindow'
 const simpleState = new SimpleState()
-
 
 function setErrorMsg(error) {
   return {loginMessage: error}
@@ -17,14 +17,19 @@ export default class Login extends Component {
   }
   handleSubmit = (e) => {
     e.preventDefault()
-    login(this.email.input.value, this.pw.input.value).catch((error) => {
-      this.setState(setErrorMsg('Invalid username/password.'))
+    login(this.email.input.value, this.pw.input.value).catch((e) => {
+      console.log(e)
+      this.setState(setErrorMsg(e.message));
+      this
+        .dialog
+        .handleOpen()
     })
   }
+
   resetPassword = () => {
     resetPassword(this.email.value).then(() => this.setState(setErrorMsg(`Password reset email sent to ${this.email.value}.`))).catch((error) => this.setState(setErrorMsg(`Email address not found.`)))
   }
-  componentDidMount(){
+  componentDidMount() {
     simpleState.evoke("loader", false)
   }
   render() {
@@ -38,27 +43,26 @@ export default class Login extends Component {
             type="email"
             fullWidth={true}
             ref={(email) => this.email = email}
-            floatingLabelText="Email"
-          />
+            floatingLabelText="Email"/>
           <TextField
             fullWidth={true}
             type="password"
             ref={(pw) => this.pw = pw}
-            floatingLabelText="Password"
-          />
-          {this.state.loginMessage && <div className="alert alert-danger" role="alert">
-            <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span className="sr-only">Error:</span>
-            &nbsp;{this.state.loginMessage}
-            <a href="#" onClick={this.resetPassword} className="alert-link">Forgot Password?</a>
-          </div>
-          }
-          <br />
-          <RaisedButton type="submit" label="Login" primary={true} />
+            floatingLabelText="Password"/>
+          <br/>
+          <RaisedButton type="submit" label="Login" primary={true}/>
           <Link to="/register">
-            <RaisedButton label="Register" />
+            <RaisedButton label="Register"/>
           </Link>
+          <br />
+          <br/>
+          <RaisedButton onClick={this.resetPassword} label="Forgot password" backgroundColor="#E53935"/>
         </form>
+        <Warningwindow
+          message={this.state.loginMessage}
+          ref={(dialog) => {
+          this.dialog = dialog
+        }}/>
       </div>
     )
   }
