@@ -20,7 +20,6 @@ export function resetPassword (email) {
 }
 
 export function saveUser (user, displayName) {
-  console.log(user)
   return ref.child(`users/${user.uid}/info`)
     .set({
       email: user.email,
