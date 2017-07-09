@@ -70,7 +70,7 @@ export default class Gameadmin extends Component {
     console.log(this.state.cards)
     return (
       <div className="col-sm-6 col-sm-offset-3">
-      Your Card:
+      <h2>Your Card:</h2>
         <Flipcard data={this.state.cards}/>
       </div>
     )
