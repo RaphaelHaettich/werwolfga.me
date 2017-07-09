@@ -1,28 +1,40 @@
-import React, { Component } from 'react'
-import { auth } from '../../helpers/auth'
+import React, {Component} from 'react'
+import {auth} from '../../helpers/auth'
 import RaisedButton from 'material-ui/RaisedButton'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import TextField from 'material-ui/TextField'
 import SimpleState from 'react-simple-state'
+import Warningwindow from '../../components/Warningwindow/Warningwindow'
 const simpleState = new SimpleState()
 
 function setErrorMsg(error) {
-  return {
-    registerError: error.message
-  }
+  return {registerError: error.message}
 }
 
 export default class Register extends Component {
-  state = { registerError: null }
+  state = {
+    registerError: null
+  }
   handleSubmit = (e) => {
     e.preventDefault()
-    auth(this.email.input.value, this.pw.input.value)
-      .catch(e => this.setState(setErrorMsg(e)))
+    if (this.displayName.input.value === "") {
+      this.setState({registerError: "You forgot the Username"})
+      this
+        .dialog
+        .handleOpen()
+    } else {
+      auth(this.email.input.value, this.pw.input.value, this.displayName.input.value).catch((e) => {
+        this.setState(setErrorMsg(e));
+        this
+          .dialog
+          .handleOpen()
+      })
+    }
   }
-  componentDidMount(){
+  componentDidMount() {
     simpleState.evoke("loader", false)
   }
-  render () {
+  render() {
     return (
       <div >
         <h1>Register</h1>
@@ -31,28 +43,28 @@ export default class Register extends Component {
             fullWidth={true}
             type="email"
             ref={(email) => this.email = email}
-            floatingLabelText="Email"
-          />
+            floatingLabelText="Email"/>
+          <TextField
+            fullWidth={true}
+            type="text"
+            ref={(displayName) => this.displayName = displayName}
+            floatingLabelText="Username"/>
           <TextField
             fullWidth={true}
             type="password"
             ref={(pw) => this.pw = pw}
-            floatingLabelText="Password"
-          />
-          {
-            this.state.registerError &&
-            <div className="alert alert-danger" role="alert">
-              <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-              <span className="sr-only">Error:</span>
-              &nbsp;{this.state.registerError}
-            </div>
-          }
-          <br />
-          <RaisedButton type="submit" label="Register" primary={true} />
+            floatingLabelText="Password"/>
+          <br/>
+          <RaisedButton type="submit" label="Register" primary={true}/>
           <Link to="/login">
-            <RaisedButton label="Login" />
+            <RaisedButton label="Login"/>
           </Link>
         </form>
+        <Warningwindow
+          message={this.state.registerError}
+          ref={(dialog) => {
+          this.dialog = dialog
+        }}/>
       </div>
     )
   }
