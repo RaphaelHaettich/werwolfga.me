@@ -2,10 +2,19 @@ import React, {Component} from 'react'
 import Cookies from 'universal-cookie';
 import {fetch} from '../../helpers/dbcalls'
 import SimpleState from 'react-simple-state'
+import Cards from '../../components/Cards/Cards'
 const simpleState = new SimpleState()
 const cookies = new Cookies();
 
 export default class Gameadmin extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      list: []
+    };
+    this.componentDidMount = this.componentDidMount.bind(this);
+  }
+
   componentDidMount(){
     simpleState.evoke("loader", false)
     if(simpleState.getState("gameId").id === "" && cookies.get('lobbyNumber') === undefined){
@@ -41,18 +50,13 @@ export default class Gameadmin extends Component {
           console.log(data)
           console.log(activeData.length)
           for(var i = 0; i < activeData.length; i++){
-            console.log(activeData[i])
-            
-
+            const cardId = activeData[i].card
+            const index = data.findIndex(i => i.key === cardId);
+            const owner = activeData[i].key
+            activeData[i] = data[index]
+            activeData[i].owner = owner;
           }
-          // let cardObj = {
-          //   description: data[0],
-          //   name: data[1],
-          //   pictureback: data[2],
-          //   picturefront: data[3]
-          // }
-          // this.seteState({cards: cardObj})
-          // simpleState.evoke("loader", false)
+          this.setState({list: activeData})
         })
       })
     }
@@ -60,7 +64,8 @@ export default class Gameadmin extends Component {
   render() {
     return (
       <div className="col-sm-6 col-sm-offset-3">
-        Gameadmin
+        <h2>Cards in game:</h2>
+        <Cards counter={false} data={this.state.list}/>
       </div>
     )
   }
