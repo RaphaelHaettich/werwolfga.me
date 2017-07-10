@@ -16,7 +16,6 @@ export default class Gameadmin extends Component {
   }
 
   componentDidMount(){
-    simpleState.evoke("loader", false)
     if(simpleState.getState("gameId").id === "" && cookies.get('lobbyNumber') === undefined){
       this.props.history.push("main")
     }else{
@@ -57,6 +56,7 @@ export default class Gameadmin extends Component {
             activeData[i].owner = owner;
           }
           this.setState({list: activeData})
+          simpleState.evoke("loader", false)
         })
       })
     }
