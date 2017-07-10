@@ -23,37 +23,29 @@ export default class Gameadmin extends Component {
       if(simpleState.getState("gameId").id !== ""){
         gameId = simpleState.getState("gameId").id;
       }else if(cookies.get('lobbyNumber') !== undefined){
-        console.log("in cookies")
-        console.log(cookies.get('lobbyNumber'))
         gameId = cookies.get('lobbyNumber')
       }
       let getActiveCards = new Promise((resolve, reject) => {
-        console.log(gameId)
         const collection = 'activegame/' + gameId + "/memberarray/"
-        console.log(collection)
         fetch(resolve, reject, collection);
       })
       getActiveCards.then((data) => {
-        console.log("derp")
-        console.log(data)
         const activeData = data;
 
 
         let getCardInfos = new Promise((resolve, reject) => {
-          console.log(simpleState.getState("gameId").id)
           const collection = 'cards/'
           fetch(resolve, reject, collection);
         })
         getCardInfos.then((data) => {
-          console.log("got card")
-          console.log(data)
-          console.log(activeData.length)
           for(var i = 0; i < activeData.length; i++){
             const cardId = activeData[i].card
             const index = data.findIndex(i => i.key === cardId);
-            const owner = activeData[i].key
+            const ownerKey = activeData[i].key
+            const ownerDisplayName = activeData[i].displayName
             activeData[i] = data[index]
-            activeData[i].owner = owner;
+            activeData[i].userKey = ownerKey;
+            activeData[i].displayName = ownerDisplayName;
           }
           this.setState({list: activeData})
           simpleState.evoke("loader", false)
