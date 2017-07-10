@@ -34,10 +34,12 @@ export var post = (resolve, reject, data, collection) => {
     });
 }
 
-export var fetch = (resolve, reject, collection) => {
+export var fetch = (resolve, reject, collection, query) => {
+    query = query || {}
     base.fetch(collection, {
     context: {},
-    asArray: true
+    asArray: true,
+    queries: query
     }).then(snapshot => {
         resolve(snapshot);
     }).catch(err => {
