@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Card, CardActions, CardTitle} from 'material-ui/Card'
-import {update} from '../../helpers/dbcalls'
+import {update, fetch} from '../../helpers/dbcalls'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 import {base} from '../../config/constants'
@@ -32,21 +32,12 @@ export default class join extends Component {
 
       const number = this.number.input.value
       if (isNaN(number) !== true) {
-        base
-          .fetch('activegame/', {
-          context: this,
-          asArray: true,
-          queries: {
+          const query = {
             orderByChild: 'code',
             equalTo: Number(number)
-          }
-        })
-          .then(data => {
-            resolve(data);
-          })
-          .catch(error => {
-            console.log(error)
-          })
+          } 
+          const collection = 'activegame/'
+          fetch(resolve, reject, collection, query);
       } else {
         this.setState({alertMsg: "Please insert a number!"})
         this
@@ -56,44 +47,55 @@ export default class join extends Component {
     })
 
     let addUser = (key) => {
-      let promise = new Promise((resolve, reject) => {
-        const collection = "activegame/" + key + "/memberarray/" + userId
-        let object = {
-          card: "null"
-        }
-        update(resolve, reject, object, collection);
+      simpleState.evoke("loader", true)
+      let getDisplayName = new Promise((resolve, reject) => {
+        const collection = "users/" + userId //+ "/info/displayName"
+        console.log(collection)
+        fetch(resolve, reject, collection);
       })
-      promise.then((data) => {
-        console.log("addUser done")
-        cookies.set('lobbyNumber', key, { path: '/' });
-        simpleState.evoke("gameId", {id: key})
-        simpleState.evoke("loader", true)
-        this.setState({alertMsg: "Game found! Now waiting until creator starts game"})
-        this
-          .dialog
-          .handleOpen()
-        console.log(simpleState.getState("loader"))
-        const collection = "activegame/" + key;
-        base.listenTo(collection, {
-          context: this,
-          asArray: true,
-          then(data) {
-            console.log(data)
-            if (data[3] === "ready") {
-              console.log("game starts")
-              simpleState.evoke("loader", true)
-              this
-                .props
-                .history
-                .push("game")
-            }
+      getDisplayName.then((data) => {
+        console.log(data[0].displayName)
+        let addUser = new Promise((resolve, reject) => {
+          const collection = "activegame/" + key + "/memberarray/" + userId
+          let object = {
+            card: "null",
+            displayName: data[0].displayName
           }
+          update(resolve, reject, object, collection);
         })
+        addUser.then((data) => {
+          console.log("addUser done")
+          cookies.set('lobbyNumber', key, { path: '/' });
+          simpleState.evoke("gameId", {id: key})
+          this.setState({alertMsg: "Game found! Now waiting until creator starts game"})
+          this
+            .dialog
+            .handleOpen()
+          console.log(simpleState.getState("loader"))
+          const collection = "activegame/" + key;
+          base.listenTo(collection, {
+            context: this,
+            asArray: true,
+            then(data) {
+              console.log(data)
+              if (data[3] === "ready") {
+                console.log("game starts")
+                this
+                  .props
+                  .history
+                  .push("game")
+              }
+            }
+          })
 
-      })
-        .catch(function (error) {
+        }).catch(function (error) {
           console.log(error)
         });
+
+      }).catch(function (error) {
+        console.log(error)
+      });
+
     }
 
     getUUID.then((data) => {
