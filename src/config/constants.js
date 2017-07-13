@@ -2,9 +2,9 @@ import Rebase from 're-base';
 
 
 var connection = Rebase.createClass({
-    apiKey: "AIzaSyDU4OL6YUTBjiPjP8WM8nLaQkisykix9OE",
-    authDomain: "testproject-7dd30.firebaseapp.com",
-    databaseURL: "https://testproject-7dd30.firebaseio.com"
+    apiKey: "AIzaSyDGuR3v6NOyBa5Om_3u5lYVCesKuaMMBQ8",
+    authDomain: "werewolvegame.firebaseapp.com",
+    databaseURL: "https://werewolvegame.firebaseio.com"
 });
 
 
