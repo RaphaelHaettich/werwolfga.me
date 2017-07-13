@@ -13,12 +13,18 @@ function setErrorMsg(error) {
 
 export default class Login extends Component {
   state = {
-    loginMessage: null
+    loginMessage: null,
+    secondActionLabel: null,
+    secondActionShow: false
   }
   handleSubmit = (e) => {
     e.preventDefault()
     login(this.email.input.value, this.pw.input.value).catch((e) => {
       console.log(e)
+      if(e.code === "auth/wrong-password"){
+        this.setState({secondActionLabel: "Forgot Password"})
+        this.setState({secondActionShow: true})
+      }
       this.setState(setErrorMsg(e.message));
       this
         .dialog
@@ -27,7 +33,12 @@ export default class Login extends Component {
   }
 
   resetPassword = () => {
-    resetPassword(this.email.value).then(() => this.setState(setErrorMsg(`Password reset email sent to ${this.email.value}.`))).catch((error) => this.setState(setErrorMsg(`Email address not found.`)))
+    this
+        .dialog
+        .handleClose()
+    this.setState({secondActionShow: false})
+    console.log(this)
+    resetPassword(this.email.input.value).then(() => this.setState(setErrorMsg(`Password reset email sent to ${this.email.input.value}.`))).catch((error) => this.setState(setErrorMsg(`Email address not found.`)), this.dialog.handleOpen())
   }
   componentDidMount() {
     simpleState.evoke("loader", false)
@@ -55,11 +66,12 @@ export default class Login extends Component {
             <RaisedButton label="Register"/>
           </Link>
           <br />
-          <br/>
-          <RaisedButton onClick={this.resetPassword} label="Forgot password" backgroundColor="#E53935"/>
         </form>
         <Warningwindow
           message={this.state.loginMessage}
+          secondAction={this.resetPassword}
+          secondActionShow={this.state.secondActionShow}
+          secondActionLabel={this.state.secondActionLabel}
           ref={(dialog) => {
           this.dialog = dialog
         }}/>
