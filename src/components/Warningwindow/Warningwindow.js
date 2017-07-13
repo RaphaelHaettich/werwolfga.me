@@ -1,9 +1,11 @@
 /*
 *   Required Props:
 *   message: string
-*   secondActionShow: boolean /optional
-*   secondAction: function /optional
-*   secondActionLabel: String /optional
+*
+*   Optional Props:
+*   secondActionShow: boolean 
+*   secondAction: function 
+*   secondActionLabel: String 
 *
 */
 
