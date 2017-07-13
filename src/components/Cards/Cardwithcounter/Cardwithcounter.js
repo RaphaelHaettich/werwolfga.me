@@ -45,7 +45,6 @@ class card extends Component {
   }
   componentDidMount() {
     simpleState.evoke("loader", false)
-    console.log(simpleState.getState("loader"))
   }
   componentDidUpdate() {
     let cardState = simpleState.getState("cards")
@@ -55,7 +54,6 @@ class card extends Component {
     }else{
       cardState.list.push({key: this.props.item.key,count: this.state.count})
     }
-    console.log(cardState)
     simpleState.evoke("cards", {
       list: cardState.list
     });

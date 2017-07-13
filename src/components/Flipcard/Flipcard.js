@@ -14,7 +14,6 @@ class card extends Component {
 
     componentDidMount() {
         simpleState.evoke("loader", false)
-        console.log(simpleState.getState("loader"))
     }
     constructor(props) {
         super(props);

@@ -20,7 +20,6 @@ export default class counterlabel extends Component {
     
   }
   componentWillReceiveProps(props) {
-    console.log(props)
     base.bindToState(props.dbReference, {
       context: this,
       state: 'count',

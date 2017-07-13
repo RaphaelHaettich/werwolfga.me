@@ -17,7 +17,6 @@ class cards extends Component {
   }
   
   render() {
-    console.log(this.props.data)
     var listItems = this
       .props
       .data

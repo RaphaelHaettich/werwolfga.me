@@ -11,8 +11,6 @@ import Styles from './Inputcounter.css.js'
 
 
 const inputCounter = ({up, down, count}) => {
-
-  console.log(count)
   return (
     <div>
       <FlatButton

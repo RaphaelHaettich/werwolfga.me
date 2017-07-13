@@ -81,8 +81,6 @@ class create extends Component {
     })
     hostExists.then((data) => {
       if (data.length > 0) {
-        console.log(data[0])
-        console.log(this.props)
         if (data[0].state === "ready") {
           sessionStorage.lobbyNumber = data[0].key
           this.props.history.push("gameadmin")
@@ -104,7 +102,6 @@ class create extends Component {
   startGame() {
     const usersObj = simpleState.getState('count')
     const cardsObj = simpleState.getState('cards')
-    console.log(cardsObj)
     const cardsCount = cardsObj
       .list
       .map(function (a) {
@@ -112,15 +109,11 @@ class create extends Component {
       })
       .reduce((a, b) => a + b, 0);
     const userCount = usersObj.count.length
-    console.log(cardsCount)
     if ((cardsCount === userCount) && userCount > 0) {
       simpleState.evoke("loader", true)
-      console.log("start")
       let cards = []
       for (let i = 0; i < cardsObj.list.length; i++) {
-        console.log(cardsObj.list[i].count)
         for (let p = 0; p < cardsObj.list[i].count; p++) {
-          console.log(cardsObj.list[i].count)
           cards.push(cardsObj.list[i].key)
         }
       }
@@ -139,14 +132,12 @@ class create extends Component {
       updateMembers.then((data) => {
         let setGameReady = new Promise((resolve, reject) => {
           const collection = 'activegame/' + this.state.lobbyKey
-          console.log(this)
           const object = {
             state: "ready"
           }
           update(resolve, reject, object, collection);
         })
         setGameReady.then((data) => {
-          console.log("to route")
           simpleState.evoke("gameId", {id: this.state.lobbyKey})
           sessionStorage.lobbyNumber = this.state.lobbyKey;
           simpleState.evoke("loader", true)
@@ -163,7 +154,6 @@ class create extends Component {
           console.log(error)
         });
     } else {
-      console.log("stop")
       this.setState({
         alertMsg: "You need as many players as selected cards. Please delete or add some cards or p" +
             "layers. "

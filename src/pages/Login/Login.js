@@ -20,7 +20,6 @@ export default class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     login(this.email.input.value, this.pw.input.value).catch((e) => {
-      console.log(e)
       if(e.code === "auth/wrong-password"){
         this.setState({secondActionLabel: "Forgot Password"})
         this.setState({secondActionShow: true})
@@ -37,7 +36,6 @@ export default class Login extends Component {
         .dialog
         .handleClose()
     this.setState({secondActionShow: false})
-    console.log(this)
     resetPassword(this.email.input.value).then(() => this.setState(setErrorMsg(`Password reset email sent to ${this.email.input.value}.`))).catch((error) => this.setState(setErrorMsg(`Email address not found.`)), this.dialog.handleOpen())
   }
   componentDidMount() {

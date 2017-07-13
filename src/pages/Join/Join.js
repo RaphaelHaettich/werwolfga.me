@@ -47,12 +47,10 @@ export default class join extends Component {
     let addUser = (key) => {
       simpleState.evoke("loader", true)
       let getDisplayName = new Promise((resolve, reject) => {
-        const collection = "users/" + userId //+ "/info/displayName"
-        console.log(collection)
+        const collection = "users/" + userId
         fetch(resolve, reject, collection);
       })
       getDisplayName.then((data) => {
-        console.log(data[0].displayName)
         let addUser = new Promise((resolve, reject) => {
           const collection = "activegame/" + key + "/memberarray/" + userId
           let object = {
@@ -62,22 +60,18 @@ export default class join extends Component {
           update(resolve, reject, object, collection);
         })
         addUser.then((data) => {
-          console.log("addUser done")
           sessionStorage.lobbyNumber = key;
           simpleState.evoke("gameId", {id: key})
           this.setState({alertMsg: "Game found! Now waiting until creator starts game"})
           this
             .dialog
             .handleOpen()
-          console.log(simpleState.getState("loader"))
           const collection = "activegame/" + key;
           base.listenTo(collection, {
             context: this,
             asArray: true,
             then(data) {
-              console.log(data)
               if (data[3] === "ready") {
-                console.log("game starts")
                 this
                   .props
                   .history
@@ -97,9 +91,7 @@ export default class join extends Component {
     }
 
     getUUID.then((data) => {
-      console.log(data)
       if (data.length > 0) {
-        console.log(data[0].memberarray)
         if (data[0].memberarray === undefined) {
           addUser(data[0].key)
         } else {
@@ -124,7 +116,7 @@ export default class join extends Component {
           }
         }
       } else {
-        console.log("not found")
+        ("not found")
         this.setState({alertMsg: "There is no game with this ID"})
         this
           .dialog
