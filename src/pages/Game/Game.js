@@ -30,7 +30,7 @@ export default class Gameadmin extends Component {
         gameId = simpleState.getState("gameId").id;
       }else if(sessionStorage.lobbyNumber !== undefined){
         console.log("in session")
-        gameId = csessionStorage.lobbyNumber
+        gameId = sessionStorage.lobbyNumber
       }
       let getCurrentCard = new Promise((resolve, reject) => {
         console.log(gameId)
