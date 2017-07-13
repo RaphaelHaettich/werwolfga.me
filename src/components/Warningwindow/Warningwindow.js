@@ -1,6 +1,9 @@
 /*
 *   Required Props:
 *   message: string
+*   secondActionShow: boolean /optional
+*   secondAction: function /optional
+*   secondActionLabel: String /optional
 *
 */
 
@@ -25,12 +28,28 @@ export default class DialogAlert extends React.Component {
   };
 
   render() {
+    //let secondAction = this.props.secondAction || null
+    console.log(this.props)
     const actions = [
+      this.props.secondActionShow === true ?
+      <div>
+        <FlatButton 
+          onClick={this.props.secondAction}
+          label={this.props.secondActionLabel || "placeholder"}
+        />
+        <FlatButton
+          label="Discard"
+          primary={true}
+          onTouchTap={this.handleClose}
+        />
+      </div>
+      : 
       <FlatButton
         label="Discard"
         primary={true}
         onTouchTap={this.handleClose}
       />
+      
     ];
 
     return (
