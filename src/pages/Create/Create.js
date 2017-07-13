@@ -9,10 +9,8 @@ import RaisedButton from 'material-ui/RaisedButton'
 import SimpleState from 'react-simple-state'
 import Warningwindow from '../../components/Warningwindow/Warningwindow'
 import shuffle from '../../helpers/shuffle'
-import Cookies from 'universal-cookie';
 
 const simpleState = new SimpleState()
-const cookies = new Cookies();
 
 class create extends Component {
 
@@ -151,7 +149,7 @@ class create extends Component {
         setGameReady.then((data) => {
           console.log("to route")
           simpleState.evoke("gameId", {id: this.state.lobbyKey})
-          cookies.set('lobbyNumber', this.state.lobbyKey, { path: '/' });
+          sessionStorage.lobbyNumber = this.state.lobbyKey;
           simpleState.evoke("loader", true)
           this
             .props

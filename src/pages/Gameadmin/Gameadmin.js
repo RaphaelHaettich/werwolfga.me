@@ -1,10 +1,8 @@
 import React, {Component} from 'react'
-import Cookies from 'universal-cookie';
 import {fetch} from '../../helpers/dbcalls'
 import SimpleState from 'react-simple-state'
 import Cards from '../../components/Cards/Cards'
 const simpleState = new SimpleState()
-const cookies = new Cookies();
 
 export default class Gameadmin extends Component {
   constructor(props) {
@@ -16,14 +14,14 @@ export default class Gameadmin extends Component {
   }
 
   componentDidMount(){
-    if(simpleState.getState("gameId").id === "" && cookies.get('lobbyNumber') === undefined){
+    if(simpleState.getState("gameId").id === "" && sessionStorage.lobbyNumber === undefined){
       this.props.history.push("main")
     }else{
       let gameId = "";
       if(simpleState.getState("gameId").id !== ""){
         gameId = simpleState.getState("gameId").id;
-      }else if(cookies.get('lobbyNumber') !== undefined){
-        gameId = cookies.get('lobbyNumber')
+      }else if(sessionStorage.lobbyNumber !== undefined){
+        gameId = sessionStorage.lobbyNumber
       }
       let getActiveCards = new Promise((resolve, reject) => {
         const collection = 'activegame/' + gameId + "/memberarray/"

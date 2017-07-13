@@ -7,11 +7,9 @@ import {base} from '../../config/constants'
 import Warningwindow from '../../components/Warningwindow/Warningwindow'
 import Styles from './Join.css.js'
 import SimpleState from 'react-simple-state'
-import Cookies from 'universal-cookie';
 import {Container, Row, Col} from 'react-grid-system';
 
 const simpleState = new SimpleState()
-const cookies = new Cookies();
 
 export default class join extends Component {
   constructor(props) {
@@ -65,7 +63,7 @@ export default class join extends Component {
         })
         addUser.then((data) => {
           console.log("addUser done")
-          cookies.set('lobbyNumber', key, { path: '/' });
+          sessionStorage.lobbyNumber = key;
           simpleState.evoke("gameId", {id: key})
           this.setState({alertMsg: "Game found! Now waiting until creator starts game"})
           this
@@ -107,7 +105,7 @@ export default class join extends Component {
         } else {
           const userIdArr = Object.keys(data[0].memberarray);
           if (userIdArr.indexOf(userId) > -1 && data[0].state === "ready") {
-            cookies.set('lobbyNumber', data[0].key, { path: '/' });
+            sessionStorage.lobbyNumber = data[0].key;
             simpleState.evoke("gameId", {id: data[0].key})
             simpleState.evoke("loader", true)
             this

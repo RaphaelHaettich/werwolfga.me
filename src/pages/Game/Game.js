@@ -2,10 +2,8 @@ import React, {Component} from 'react'
 import {fetch} from '../../helpers/dbcalls'
 import {base} from '../../config/constants'
 import Flipcard from '../../components/Flipcard/Flipcard'
-import Cookies from 'universal-cookie';
 import SimpleState from 'react-simple-state'
 const simpleState = new SimpleState()
-const cookies = new Cookies();
 
 export default class Gameadmin extends Component {
   
@@ -24,16 +22,15 @@ export default class Gameadmin extends Component {
       
     console.log(userId)
 
-    if(simpleState.getState("gameId").id === "" && cookies.get('lobbyNumber') === undefined){
+    if(simpleState.getState("gameId").id === "" && sessionStorage.lobbyNumber === undefined){
       this.props.history.push("join")
     }else{
       let gameId = "";
       if(simpleState.getState("gameId").id !== ""){
         gameId = simpleState.getState("gameId").id;
-      }else if(cookies.get('lobbyNumber') !== undefined){
-        console.log("in cookies")
-        console.log(cookies.get('lobbyNumber'))
-        gameId = cookies.get('lobbyNumber')
+      }else if(sessionStorage.lobbyNumber !== undefined){
+        console.log("in session")
+        gameId = csessionStorage.lobbyNumber
       }
       let getCurrentCard = new Promise((resolve, reject) => {
         console.log(gameId)
