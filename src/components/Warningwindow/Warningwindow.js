@@ -28,10 +28,9 @@ export default class DialogAlert extends React.Component {
   };
 
   render() {
-    //let secondAction = this.props.secondAction || null
-    console.log(this.props)
+    let showActions = this.props.secondActionShow || false;
     const actions = [
-      this.props.secondActionShow === true ?
+      showActions === true ?
       <div>
         <FlatButton 
           onClick={this.props.secondAction}
