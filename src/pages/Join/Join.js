@@ -116,7 +116,6 @@ export default class join extends Component {
           }
         }
       } else {
-        ("not found")
         this.setState({alertMsg: "There is no game with this ID"})
         this
           .dialog
