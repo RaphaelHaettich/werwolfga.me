@@ -70,7 +70,7 @@ export default class App extends Component {
     simpleState.addListener('loader', true);
 
     simpleState.subscribe('loader', this, (nextState) => {
-      console.log("cahngedstate")
+      console.log("changed laoder state")
         this.setState({
             loader: nextState
         });
