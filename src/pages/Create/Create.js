@@ -82,8 +82,8 @@ class create extends Component {
         })
     })
     hostExists.then((data) => {
-      this.setState({users: data[0].memberarray});
       if (data.length > 0) {
+        this.setState({users: data[0].memberarray});
         if (data[0].state === "ready") {
           sessionStorage.lobbyNumber = data[0].key
           this.props.history.push("gameadmin")
