@@ -20,9 +20,11 @@ class create extends Component {
       lobbyId: "",
       lobbyKey: "",
       alertMsg: "",
-      list: []
+      list: [],
+      users: []
     };
   }
+  
   componentDidMount() {
     var self = this;
     const userId = base
@@ -80,6 +82,7 @@ class create extends Component {
         })
     })
     hostExists.then((data) => {
+      this.setState({users: data[0].memberarray});
       if (data.length > 0) {
         if (data[0].state === "ready") {
           sessionStorage.lobbyNumber = data[0].key
@@ -122,7 +125,8 @@ class create extends Component {
       for (let i = 0; i < usersObj.count.length; i++) {
         const key = usersObj.count[i].key
         memberarray[key] = {
-          "card": cards[i]
+          "card": cards[i],
+          "displayName": this.state.users[key].displayName
         }
       }
       let updateMembers = new Promise((resolve, reject) => {
@@ -146,9 +150,9 @@ class create extends Component {
             .history
             .push("gameadmin")
         })
-          .catch(function (error) {
-            console.log(error)
-          });
+        .catch(function (error) {
+          console.log(error)
+        });
       })
         .catch(function (error) {
           console.log(error)
