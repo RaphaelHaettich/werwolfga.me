@@ -11,14 +11,14 @@ import React, {Component} from 'react'
 import Divider from 'material-ui/Divider'
 import Styles from './Cardwithoutcounter.css.js'
 import SimpleState from 'react-simple-state'
-const simpleState = new SimpleState()
-
 import {
   Card,
   CardText,
   CardMedia,
   CardTitle
 } from 'material-ui/Card';
+
+const simpleState = new SimpleState()
 
 class card extends Component {
   constructor(props) {

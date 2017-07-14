@@ -12,8 +12,6 @@ import Inputcounter from '../../Inputcounter/Inputcounter'
 import Divider from 'material-ui/Divider'
 import Styles from './Cardwithcounter.css.js'
 import SimpleState from 'react-simple-state'
-const simpleState = new SimpleState()
-
 import {
   Card,
   CardActions,
@@ -21,6 +19,8 @@ import {
   CardMedia,
   CardTitle
 } from 'material-ui/Card';
+
+const simpleState = new SimpleState()
 
 class card extends Component {
   constructor(props) {
