@@ -43,7 +43,7 @@ export default class Gameadmin extends Component {
             const ownerDisplayName = activeData[i].displayName
             activeData[i] = data[index]
             activeData[i].userKey = ownerKey;
-            activeData[i].displayName = ownerDisplayName;
+            activeData[i].name = ownerDisplayName + ": " + activeData[i].name;
           }
           this.setState({list: activeData})
           simpleState.evoke("loader", false)
