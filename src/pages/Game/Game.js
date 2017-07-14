@@ -5,6 +5,7 @@ import Flipcard from '../../components/Flipcard/Flipcard'
 import SimpleState from 'react-simple-state'
 const simpleState = new SimpleState()
 
+
 export default class Gameadmin extends Component {
   
   constructor(props) {
@@ -20,7 +21,7 @@ export default class Gameadmin extends Component {
       .app()
       .INTERNAL
       .getUid()
-
+    simpleState.evoke("loader", true)
     if(simpleState.getState("gameId").id === "" && sessionStorage.lobbyNumber === undefined){
       this.props.history.push("join")
     }else{
