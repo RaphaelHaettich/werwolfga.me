@@ -4,6 +4,10 @@
     ".write": "auth != null",
     "activegame":{
       ".indexOn": "host"
+    },
+    "cards": {
+      ".read": "auth != null",
+      ".write": false
     }
   }
 }
