@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {fetch} from '../../helpers/dbcalls'
 import SimpleState from 'react-simple-state'
 import Cards from '../../components/Cards/Cards'
+import Styles from './Gameadmin.css.js'
+import Deleteandroutebutton from '../../components/Deleteandroutebutton/Deleteandroutebutton'
 const simpleState = new SimpleState()
 
 export default class Gameadmin extends Component {
@@ -20,6 +22,7 @@ export default class Gameadmin extends Component {
       let gameId = "";
       if(simpleState.getState("gameId").id !== ""){
         gameId = simpleState.getState("gameId").id;
+        sessionStorage.lobbyNumber = gameId
       }else if(sessionStorage.lobbyNumber !== undefined){
         gameId = sessionStorage.lobbyNumber
       }
@@ -56,6 +59,13 @@ export default class Gameadmin extends Component {
       <div className="col-sm-6 col-sm-offset-3">
         <h2>Cards in game:</h2>
         <Cards counter={false} data={this.state.list}/>
+        <div style={Styles.centeredOnlyHorizontal}>
+          <Deleteandroutebutton
+              route={"/main"}
+              labelText={"Game finished"}
+              dbReference={'activegame/' + sessionStorage.lobbyNumber}
+              primary={true}/>
+        </div>
       </div>
     )
   }
