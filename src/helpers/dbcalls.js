@@ -47,6 +47,3 @@ export var fetch = (resolve, reject, collection, query) => {
         console.log(err)
     });
 }
-
-
-
