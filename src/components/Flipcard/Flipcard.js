@@ -8,6 +8,11 @@ import Paper from 'material-ui/Paper';
 import Styles from './Flipcard.css.js'
 import ReactCardFlip from 'react-card-flip';
 import SimpleState from 'react-simple-state'
+import {
+    Card,
+  CardText,
+  CardTitle
+} from 'material-ui/Card';
 const simpleState = new SimpleState()
 
 class card extends Component {
@@ -33,18 +38,33 @@ class card extends Component {
 
     render() {
         let item = this.props.data
-
         return (
             <div >
                 {this.state.isFlipped === false ?
-                <Paper zDepth={2}>
-                    <h1>{item.name}</h1>
-                    <h3>{item.description}</h3> 
+                <Paper style={Styles.paper} zDepth={2}>
+                    <Card>
+                        <CardTitle
+                            title={item.name}
+                            subtitle="Expand for Description"
+                            actAsExpander={true}
+                            showExpandableButton={true}/>
+                        <CardText expandable={true}>
+                            {item.description}
+                        </CardText>
+                    </Card>
                 </Paper>
                 :
-                <Paper zDepth={2}>
-                    <h1>Hidden</h1>
-                    <h3>Hidden</h3> 
+                <Paper style={Styles.paper} zDepth={2}>
+                    <Card>
+                        <CardTitle
+                            title="Hidden"
+                            subtitle="Expand for Description"
+                            actAsExpander={true}
+                            showExpandableButton={true}/>
+                        <CardText expandable={true}>
+                            Hidden
+                        </CardText>
+                    </Card>
                 </Paper>
                     }
                 <ReactCardFlip isFlipped={this.state.isFlipped}>
