@@ -11,13 +11,6 @@ class Votelist extends Component {
         };
     }
     
-
-    componentWillReceiveProps(data){
-        console.log(data)
-        this.setState({dataArray: this.props.voteData})
-    }
-
-
     render() {
         console.log(this.state.dataArray)
         var listItems = 
