@@ -34,11 +34,14 @@ export var post = (resolve, reject, data, collection) => {
     });
 }
 
-export var fetch = (resolve, reject, collection, query) => {
-    query = query || {}
+export var fetch = (resolve, reject, collection, query, asArray) => {
+    if(asArray === undefined){
+        asArray = true
+    }
+    query = query || {};
     base.fetch(collection, {
     context: {},
-    asArray: true,
+    asArray: asArray,
     queries: query
     }).then(snapshot => {
         resolve(snapshot);
