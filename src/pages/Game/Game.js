@@ -59,12 +59,12 @@ export default class Gameadmin extends Component {
             }
             this.setState({cards: cardObj})
             simpleState.evoke("loader", false)
-            base.listenTo('activegame/' + gameId + '/state', {
+            base.listenTo('activegame/' + gameId + "/memberarray/" + userId, {
               context: this,
               asArray: false,
               then(data){
                 console.log(data)
-                if(data !== "ready"){
+                if(data.card === undefined){
                   this
                   .dialog
                   .handleOpen()  
