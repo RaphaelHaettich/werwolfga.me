@@ -84,6 +84,7 @@ class create extends Component {
     hostExists.then((data) => {
       if (data.length > 0) {
         this.setState({users: data[0].memberarray});
+        console.log(data)
         if (data[0].state === "ready") {
           sessionStorage.lobbyNumber = data[0].key
           this.props.history.push("gameadmin")
@@ -122,11 +123,15 @@ class create extends Component {
       }
       shuffle(cards)
       let memberarray = [];
+      console.log(usersObj)
       for (let i = 0; i < usersObj.count.length; i++) {
+        console.log(usersObj.count[i])
+        console.log(i)
+        console.log(this.state)
         const key = usersObj.count[i].key
         memberarray[key] = {
           "card": cards[i],
-          "displayName": this.state.users[key].displayName
+          "displayName": usersObj.count[i].displayName
         }
       }
       let updateMembers = new Promise((resolve, reject) => {
