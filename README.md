@@ -1,6 +1,6 @@
 # Werewolvesgame Project WIP
 
-*Using React 15.4.0, React Router 4, and Firebase 3.6.1*
+*Using React, React Router, Firebase, and many more things*
 
 #### Instructions:
 * Swap out the firebase config in ```config/constants``` with your own
