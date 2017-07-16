@@ -196,7 +196,7 @@ class create extends Component {
               label={"Start"}/>
             <Deleteandroutebutton
               route={"/main"}
-              labelText={"Cancel"}
+              labelText={"Cancel (delete game)"}
               dbReference={'activegame/' + this.state.lobbyKey}
               removeState={'count'}/>
           </div>
