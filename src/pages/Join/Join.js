@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Card, CardActions, CardTitle} from 'material-ui/Card'
 import {update, fetch} from '../../helpers/dbcalls'
 import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 import {base} from '../../config/constants'
 import Warningwindow from '../../components/Warningwindow/Warningwindow'
@@ -15,7 +16,8 @@ export default class join extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      alertMsg: ""
+      alertMsg: "",
+      activeSession: false
     };
   }
 
@@ -30,12 +32,12 @@ export default class join extends Component {
 
       const number = this.number.input.value
       if (isNaN(number) !== true) {
-          const query = {
-            orderByChild: 'code',
-            equalTo: Number(number)
-          } 
-          const collection = 'activegame/'
-          fetch(resolve, reject, collection, query);
+        const query = {
+          orderByChild: 'code',
+          equalTo: Number(number)
+        }
+        const collection = 'activegame/'
+        fetch(resolve, reject, collection, query);
       } else {
         this.setState({alertMsg: "Please insert a number!"})
         this
@@ -80,13 +82,15 @@ export default class join extends Component {
             }
           })
 
-        }).catch(function (error) {
+        })
+          .catch(function (error) {
+            console.log(error)
+          });
+
+      })
+        .catch(function (error) {
           console.log(error)
         });
-
-      }).catch(function (error) {
-        console.log(error)
-      });
 
     }
 
@@ -123,7 +127,28 @@ export default class join extends Component {
       }
     })
   }
+
+  joinLastGame = (e) => {
+    simpleState.evoke("loader", true)
+    this
+      .props
+      .history
+      .push("game")
+  }
+
   componentDidMount() {
+    let lobbyCode = sessionStorage.lobbyNumber;
+    if (lobbyCode) {
+      let getGame = new Promise((resolve, reject) => {
+        const collection = 'activegame/' + lobbyCode
+        fetch(resolve, reject, collection);
+      })
+      getGame.then((data) => {
+        if(data.length > 0){
+          this.setState({activeSession: true})
+        }
+      })
+    }
     simpleState.evoke("loader", false)
   }
   render() {
@@ -132,9 +157,7 @@ export default class join extends Component {
         <CardTitle title="Join Game"/>
         <CardActions>
           <form onSubmit={this.handleSubmit}>
-            <Container style={{
-              marginLeft: "8px"
-            }}>
+            <Container style={Styles.marginLeft}>
               <Row>
                 <Col xs={8}>
                   <TextField
@@ -151,6 +174,15 @@ export default class join extends Component {
               </Row>
             </Container>
           </form>
+          {this.state.activeSession === true
+            ? <RaisedButton
+                label="Rejoin game"
+                primary={true}
+                style={Styles.centeredOnlyHorizontal}
+                onClick={this.joinLastGame}
+                />
+            : <div/>
+          }
         </CardActions>
         <Warningwindow
           message={this.state.alertMsg}
