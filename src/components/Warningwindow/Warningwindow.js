@@ -13,9 +13,6 @@ import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
-/**
- * Alerts are urgent interruptions, requiring acknowledgement, that inform the user about a situation.
- */
 export default class DialogAlert extends React.Component {
   state = {
     open: false,
