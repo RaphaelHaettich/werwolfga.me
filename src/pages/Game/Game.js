@@ -44,7 +44,6 @@ export default class Gameadmin extends Component {
         fetch(resolve, reject, collection);
       })
       getCurrentCard.then((data) => {
-        console.log(data)
         if(data.length > 0){
           this.setState({displayName: data[1]})
           let getCardInfos = new Promise((resolve, reject) => {
