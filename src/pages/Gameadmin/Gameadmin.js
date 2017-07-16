@@ -1,8 +1,13 @@
 import React, {Component} from 'react'
-import {fetch} from '../../helpers/dbcalls'
+import {fetch, post} from '../../helpers/dbcalls'
 import SimpleState from 'react-simple-state'
 import Cards from '../../components/Cards/Cards'
+import {base} from '../../config/constants'
+import Votelist from '../../components/Votelist/Votelist'
 import Styles from './Gameadmin.css.js'
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import Gavel from 'material-ui/svg-icons/action/gavel';
+import Viewlist from 'material-ui/svg-icons/action/view-list';
 import Deleteandroutebutton from '../../components/Deleteandroutebutton/Deleteandroutebutton'
 const simpleState = new SimpleState()
 
@@ -11,9 +16,44 @@ export default class Gameadmin extends Component {
     super(props)
     this.state = {
       list: [],
-      gameCode: null
+      gameCode: null,
+      voting: false,
+      votes: []
     };
     this.componentDidMount = this.componentDidMount.bind(this);
+  }
+
+  initVote = () => {
+    this.setState({voting: true})
+    const data = this.state.list
+    console.log(data)
+    let votingData = []
+    for(let i = 0; i < data.length; i++){
+      votingData[data[i].userKey] = {
+        displayName: data[i].displayName,
+        votes: []
+      }
+    }
+    console.log(votingData)
+    const gameId = sessionStorage.lobbyNumber
+    let postVotingData = new Promise((resolve, reject) => {
+      const collection = 'activegame/' + gameId + "/voting"
+      post(resolve, reject, votingData, collection);
+    })
+    postVotingData.then((data) => {
+      base.listenTo('activegame/' + gameId + "/voting", {
+        context: this,
+        asArray: true,
+        then(votesData){
+          console.log(votesData)
+          this.setState({votes: votesData})
+        }
+      })
+    })
+  }
+
+  initList = () => {
+    this.setState({voting: false})
   }
 
   componentDidMount(){
@@ -58,6 +98,7 @@ export default class Gameadmin extends Component {
             activeData[i].userKey = ownerKey;
             activeData[i].gameCode = gameCode;
             activeData[i].name = ownerDisplayName + ": " + activeData[i].name;
+            activeData[i].displayName = ownerDisplayName
           }
           this.setState({list: activeData})
           simpleState.evoke("loader", false)
@@ -69,15 +110,34 @@ export default class Gameadmin extends Component {
     return (
       <div className="col-sm-6 col-sm-offset-3">
         <h3>Lobbynumber: {this.state.gameCode}</h3>
-        <h2>Cards in game:</h2>
-        <Cards counter={false} data={this.state.list}/>
-        <div style={Styles.centeredOnlyHorizontal}>
+        {this.state.voting === false ? 
+        <div>
+          <h2>Cards in game:</h2>
+          <Cards counter={false} data={this.state.list}/>
+          <div style={Styles.centeredOnlyHorizontal}>
           <Deleteandroutebutton
               route={"/main"}
               labelText={"Game finished"}
               dbReference={'activegame/' + sessionStorage.lobbyNumber}
-              primary={true}/>
+              primary={true}/>            
         </div>
+        <FloatingActionButton style={Styles.fab}
+          onTouchTap={this.initVote}>
+          <Gavel />
+        </FloatingActionButton>
+        </div>
+        : 
+        <div>
+          <Votelist
+          disabled={true}
+          voteData={this.state.votes}
+          />
+          <FloatingActionButton style={Styles.fab}
+          onTouchTap={this.initList}>
+          <Viewlist />
+          </FloatingActionButton>
+        </div>
+        }
       </div>
     )
   }
