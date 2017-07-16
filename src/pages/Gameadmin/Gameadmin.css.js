@@ -5,6 +5,14 @@ var styles = {
         marginTop: "50px",
         marginBottom: "10%",
         position: "absolute"
+      },
+      fab: {
+        margin: 0,
+        top: 'auto',
+        right: 20,
+        bottom: 20,
+        left: 'auto',
+        position: 'fixed',
       }
     };
 
