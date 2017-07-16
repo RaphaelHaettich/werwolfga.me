@@ -10,7 +10,8 @@ export default class Gameadmin extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      list: []
+      list: [],
+      gameCode: null
     };
     this.componentDidMount = this.componentDidMount.bind(this);
   }
@@ -26,26 +27,36 @@ export default class Gameadmin extends Component {
       }else if(sessionStorage.lobbyNumber !== undefined){
         gameId = sessionStorage.lobbyNumber
       }
+      let getGameCode = new Promise((resolve, reject) => {
+        const collection = 'activegame/' + gameId + "/code/"
+        const arrayBoolean = false;
+        fetch(resolve, reject, collection, {}, arrayBoolean);
+      })
+      getGameCode.then((data) => {
+        this.setState({gameCode: data})
+      })
+
       let getActiveCards = new Promise((resolve, reject) => {
         const collection = 'activegame/' + gameId + "/memberarray/"
         fetch(resolve, reject, collection);
       })
       getActiveCards.then((data) => {
         const activeData = data;
-
-
         let getCardInfos = new Promise((resolve, reject) => {
           const collection = 'cards/'
           fetch(resolve, reject, collection);
         })
         getCardInfos.then((data) => {
+          
           for(var i = 0; i < activeData.length; i++){
             const cardId = activeData[i].card
             const index = data.findIndex(i => i.key === cardId);
             const ownerKey = activeData[i].key
+            const gameCode = activeData[i].code
             const ownerDisplayName = activeData[i].displayName
             activeData[i] = data[index]
             activeData[i].userKey = ownerKey;
+            activeData[i].gameCode = gameCode;
             activeData[i].name = ownerDisplayName + ": " + activeData[i].name;
           }
           this.setState({list: activeData})
@@ -57,6 +68,7 @@ export default class Gameadmin extends Component {
   render() {
     return (
       <div className="col-sm-6 col-sm-offset-3">
+        <h3>Lobbynumber: {this.state.gameCode}</h3>
         <h2>Cards in game:</h2>
         <Cards counter={false} data={this.state.list}/>
         <div style={Styles.centeredOnlyHorizontal}>
