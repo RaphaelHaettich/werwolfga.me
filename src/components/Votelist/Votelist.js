@@ -12,21 +12,23 @@ class Votelist extends Component {
     }
     
     render() {
-        console.log(this.state.dataArray)
+        console.log(this.props.voteData)
+        //if(this.pops.voteData)
+        console.log(this.pops)
         var listItems = 
             this.props.voteData
             .map((item, index) => {
                 console.log(item)
             return (
-                <ListItem key={index} primaryText={item.displayName} disabled={this.props.disabled} rightAvatar={<div style={Styles.listNumber}>{item.votes}</div>}/>
+                <ListItem key={index} primaryText={item.displayName} secondaryText={item.votedFor} disabled={this.props.disabled} rightAvatar={<div style={Styles.listNumber}>{item.votes}</div>}/>
             )
         });
         console.log(listItems)
         return (
             <Paper zDepth={2}>
-                <List>
+                 <List>
                     {listItems}
-                </List>
+                </List> 
             </Paper>
         )
     }
