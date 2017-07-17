@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {fetch, post} from '../../helpers/dbcalls';
+import {fetch, post, remove} from '../../helpers/dbcalls';
 import SimpleState from 'react-simple-state';
 import Cards from '../../components/Cards/Cards';
 import {base} from '../../config/constants';
 import Votelist from '../../components/Votelist/Votelist';
 import Styles from './Gameadmin.css.js';
+import RaisedButton from 'material-ui/RaisedButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Gavel from 'material-ui/svg-icons/action/gavel';
 import Viewlist from 'material-ui/svg-icons/action/view-list';
@@ -21,6 +22,19 @@ export default class Gameadmin extends Component {
       votes: []
     };
     this.componentDidMount = this.componentDidMount.bind(this);
+  }
+
+  clearVote = () => {
+    const gameId = sessionStorage.lobbyNumber;
+    let removeVoting = new Promise((resolve, reject) => {
+      const collection = 'activegame/' + gameId + "/voting/";
+      remove(resolve, reject, collection);
+    })
+    removeVoting.then((data) => {
+      console.log(data);
+      this.initVote();
+    })
+    
   }
 
   initVote = () => {
@@ -147,6 +161,11 @@ export default class Gameadmin extends Component {
           disabled={true}
           voteData={this.state.votes}
           />
+          <RaisedButton
+              primary={true}
+              label={"Clear vote"}
+              onClick={
+              this.clearVote}/>
           <FloatingActionButton style={Styles.fab}
           onTouchTap={this.initList}>
           <Viewlist />
