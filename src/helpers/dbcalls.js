@@ -50,3 +50,13 @@ export var fetch = (resolve, reject, collection, query, asArray) => {
         console.log(err)
     });
 }
+
+export var remove = (resolve, reject, collection) => {
+    base.remove(collection)
+    .then(() => {
+        resolve("done")
+    }).catch(err => {
+        //handle error
+        console.log(err)
+    });
+}
