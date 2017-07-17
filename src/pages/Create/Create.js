@@ -1,14 +1,14 @@
-import React, {Component} from 'react'
-import Cards from '../../components/Cards/Cards'
-import {push, post, update} from '../../helpers/dbcalls'
-import {base} from '../../config/constants'
-import Deleteandroutebutton from '../../components/Deleteandroutebutton/Deleteandroutebutton'
-import Counterlabel from '../../components/Counterlabel/Counterlabel'
-import Styles from './Create.css.js'
-import RaisedButton from 'material-ui/RaisedButton'
-import SimpleState from 'react-simple-state'
-import Warningwindow from '../../components/Warningwindow/Warningwindow'
-import shuffle from '../../helpers/shuffle'
+import React, {Component} from 'react';
+import Cards from '../../components/Cards/Cards';
+import {push, post, update} from '../../helpers/dbcalls';
+import {base} from '../../config/constants';
+import Deleteandroutebutton from '../../components/Deleteandroutebutton/Deleteandroutebutton';
+import Counterlabel from '../../components/Counterlabel/Counterlabel';
+import Styles from './Create.css.js';
+import RaisedButton from 'material-ui/RaisedButton';
+import SimpleState from 'react-simple-state';
+import Warningwindow from '../../components/Warningwindow/Warningwindow';
+import shuffle from '../../helpers/shuffle';
 
 const simpleState = new SimpleState()
 
