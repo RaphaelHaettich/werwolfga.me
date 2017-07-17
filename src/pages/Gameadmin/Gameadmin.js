@@ -1,15 +1,15 @@
-import React, {Component} from 'react'
-import {fetch, post} from '../../helpers/dbcalls'
-import SimpleState from 'react-simple-state'
-import Cards from '../../components/Cards/Cards'
-import {base} from '../../config/constants'
-import Votelist from '../../components/Votelist/Votelist'
-import Styles from './Gameadmin.css.js'
+import React, {Component} from 'react';
+import {fetch, post} from '../../helpers/dbcalls';
+import SimpleState from 'react-simple-state';
+import Cards from '../../components/Cards/Cards';
+import {base} from '../../config/constants';
+import Votelist from '../../components/Votelist/Votelist';
+import Styles from './Gameadmin.css.js';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Gavel from 'material-ui/svg-icons/action/gavel';
 import Viewlist from 'material-ui/svg-icons/action/view-list';
-import Deleteandroutebutton from '../../components/Deleteandroutebutton/Deleteandroutebutton'
-const simpleState = new SimpleState()
+import Deleteandroutebutton from '../../components/Deleteandroutebutton/Deleteandroutebutton';
+const simpleState = new SimpleState();
 
 export default class Gameadmin extends Component {
   constructor(props) {
@@ -25,33 +25,45 @@ export default class Gameadmin extends Component {
 
   initVote = () => {
     this.setState({voting: true})
-    const gameId = sessionStorage.lobbyNumber
-    let checkVotes = new Promise((resolve, reject) => {
-      const collection = 'activegame/' + gameId + "/voting/voter";
-      console.log(collection)
-      fetch(resolve, reject, collection);
-    })
-    checkVotes.then((data) => {
-      console.log(data)
-      if(data.length === 0){
-        const state  = this.state.list
-        console.log(state)
-        let votingData = {}
-        for(let i = 0; i < state.length; i++){
-          votingData[state[i].userKey] = {
-            displayName: state[i].displayName,
-            votes: []
-          }
-        }
-        console.log(votingData)
-        let postVotingData = new Promise((resolve, reject) => {
-          const collection = 'activegame/' + gameId + "/voting/votes"
-          post(resolve, reject, votingData, collection);
-        })
-        postVotingData.then((data) => {
-          
-        })
+    const data = this.state.list
+    console.log(data)
+    let votingData = []
+    for(let i = 0; i < data.length; i++){
+      votingData[data[i].userKey] = {
+        displayName: data[i].displayName,
+        votes: 0
       }
+    }
+    console.log(votingData);
+    const gameId = sessionStorage.lobbyNumber;
+    let postVotingData = new Promise((resolve, reject) => {
+      const collection = 'activegame/' + gameId + "/voting/data"
+      post(resolve, reject, votingData, collection);
+    })
+    postVotingData.then((data) => {
+      base.listenTo('activegame/' + gameId + "/voting/votes", {
+        context: this,
+        asArray: true,
+        then(votesData){
+          let getVoteData = new Promise((resolve, reject) => {
+            const collection = 'activegame/' + gameId + "/voting/data/";
+            fetch(resolve, reject, collection,{}, false);
+          })
+          getVoteData.then((voteData) =>{
+            for(let i = 0; i < votesData.length; i++){
+              const key = votesData[i].votedForKey;
+              if(voteData[key].votedFor){
+                voteData[key].votedFor = voteData[key].votedFor + ", " + votesData[i].displayName;
+              }else{
+                voteData[key].votedFor = votesData[i].displayName;
+              }
+              voteData[key].votes = voteData[key].votes + 1;
+            }
+            const objectArr = Object.values(voteData)
+            this.setState({votes: objectArr});
+          })
+        }
+      })
     })
   }
 
@@ -92,18 +104,18 @@ export default class Gameadmin extends Component {
         getCardInfos.then((data) => {
           
           for(var i = 0; i < activeData.length; i++){
-            const cardId = activeData[i].card
+            const cardId = activeData[i].card;
             const index = data.findIndex(i => i.key === cardId);
-            const ownerKey = activeData[i].key
-            const gameCode = activeData[i].code
-            const ownerDisplayName = activeData[i].displayName
-            activeData[i] = data[index]
-            activeData[i].userKey = ownerKey;
-            activeData[i].gameCode = gameCode;
-            activeData[i].name = ownerDisplayName + ": " + activeData[i].name;
-            activeData[i].displayName = ownerDisplayName
+            activeData[i].userKey = activeData[i].key;
+            activeData[i].key = data[index].key;
+            activeData[i].pictureback = data[index].pictureback;
+            activeData[i].picturefront = data[index].picturefront;
+            activeData[i].description = data[index].description;
+            activeData[i].name = data[index].name;
+            activeData[i].cardHeader = activeData[i].displayName + ": "+data[index].name;
           }
           this.setState({list: activeData})
+          console.log(activeData)
           simpleState.evoke("loader", false)
         })
       })
@@ -133,6 +145,7 @@ export default class Gameadmin extends Component {
         <div>
           <Votelist
           disabled={true}
+          voteData={this.state.votes}
           />
           <FloatingActionButton style={Styles.fab}
           onTouchTap={this.initList}>
