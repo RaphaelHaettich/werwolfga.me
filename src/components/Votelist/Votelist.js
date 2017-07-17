@@ -13,7 +13,6 @@ class Votelist extends Component {
     
     render() {
         console.log(this.props.voteData)
-        //if(this.pops.voteData)
         console.log(this.pops)
         var listItems = 
             this.props.voteData
