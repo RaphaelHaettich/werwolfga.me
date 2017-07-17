@@ -28,6 +28,34 @@ export default class Gameadmin extends Component {
     }
   }
 
+  listenToVotes = () => {
+    const gameId = sessionStorage.lobbyNumber;
+    base.listenTo('activegame/' + gameId + "/voting/votes", {
+      context: this,
+      asArray: true,
+      then(votesData){
+        let getVoteData = new Promise((resolve, reject) => {
+          const collection = 'activegame/' + gameId + "/voting/data/";
+          fetch(resolve, reject, collection,{}, false);
+        })
+        getVoteData.then((voteData) =>{
+          for(let i = 0; i < votesData.length; i++){
+            const key = votesData[i].votedForKey;
+            if(voteData[key].votedFor){
+              voteData[key].votedFor = voteData[key].votedFor + ", " + votesData[i].displayName;
+            }else{
+              voteData[key].votedFor = votesData[i].displayName;
+            }
+            voteData[key].votes += 1;
+          }
+          const objectArr = Object.values(voteData)
+          this.setState({votes: objectArr});
+        })
+        
+      }
+    })
+  }
+
   gameDone = () => {
     this
       .props
@@ -52,29 +80,7 @@ export default class Gameadmin extends Component {
     })
     postVotingData.then((data) => {
       this.setState({voted: true})
-      base.listenTo('activegame/' + gameId + "/voting/votes", {
-        context: this,
-        asArray: true,
-        then(votesData){
-          let getVoteData = new Promise((resolve, reject) => {
-            const collection = 'activegame/' + gameId + "/voting/data/";
-            fetch(resolve, reject, collection,{}, false);
-          })
-          getVoteData.then((voteData) =>{
-            for(let i = 0; i < votesData.length; i++){
-              const key = votesData[i].votedForKey;
-              if(voteData[key].votedFor){
-                voteData[key].votedFor = voteData[key].votedFor + ", " + votesData[i].displayName;
-              }else{
-                voteData[key].votedFor = votesData[i].displayName;
-              }
-              voteData[key].votes = voteData[key].votes + 1;
-            }
-            const objectArr = Object.values(voteData)
-            this.setState({votes: objectArr});
-          })
-        }
-      })
+      this.listenToVotes();
     })
   }
 
@@ -102,30 +108,7 @@ export default class Gameadmin extends Component {
         })
       }else{
         this.setState({voted: true})
-        base.listenTo('activegame/' + gameId + "/voting/votes", {
-          context: this,
-          asArray: true,
-          then(votesData){
-            let getVoteData = new Promise((resolve, reject) => {
-              const collection = 'activegame/' + gameId + "/voting/data/";
-              fetch(resolve, reject, collection,{}, false);
-            })
-            getVoteData.then((voteData) =>{
-              for(let i = 0; i < votesData.length; i++){
-                const key = votesData[i].votedForKey;
-                if(voteData[key].votedFor){
-                  voteData[key].votedFor = voteData[key].votedFor + ", " + votesData[i].displayName;
-                }else{
-                  voteData[key].votedFor = votesData[i].displayName;
-                }
-                voteData[key].votes = voteData[key].votes + 1;
-              }
-              const objectArr = Object.values(voteData)
-              this.setState({votes: objectArr});
-            })
-            
-          }
-        })
+        this.listenToVotes();
       }
     })
   }
