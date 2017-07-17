@@ -40,7 +40,7 @@ class card extends Component {
         <Divider/>
         <Card>
           <CardMedia overlay={< CardTitle title={
-            item.name
+            item.cardHeader
           } />}>
             <img style={Styles.cardImage} src={item.picturefront} alt="cardimage"/>
           </CardMedia>
