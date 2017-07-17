@@ -57,7 +57,7 @@ export default class Gameadmin extends Component {
               }else{
                 voteData[key].votedFor = votesData[i].displayName;
               }
-              voteData[key].votes = voteData[key].votes + 1;
+              voteData[key].votes += 1;
             }
             const objectArr = Object.values(voteData)
             this.setState({votes: objectArr});
