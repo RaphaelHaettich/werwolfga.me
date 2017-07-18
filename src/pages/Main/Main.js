@@ -27,8 +27,9 @@ export default class main extends Component {
 
     name.then((data) => {
       this.setState({displayName: data[0].displayName})
+      simpleState.evoke("loader", false)
     });
-    simpleState.evoke("loader", false)
+    
   }
   componentWillUnmount(){
     simpleState.evoke("loader", true)
