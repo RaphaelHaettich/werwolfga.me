@@ -37,6 +37,20 @@ export default class Gameadmin extends Component {
     
   }
 
+  removePlayer = (data) => {
+    console.log("removeplayer")
+    console.log(data)
+    const gameId = sessionStorage.lobbyNumber;
+    let promise = new Promise((resolve, reject) => {
+      const collection = 'activegame/' + gameId + "/memberarray/"+ data;
+      remove(resolve, reject, collection);
+    })
+    promise.then((data) => {
+      console.log("removed")
+    })
+
+  }
+
   initVote = () => {
     simpleState.evoke("loader", true)
     this.setState({voting: true})
@@ -142,7 +156,7 @@ export default class Gameadmin extends Component {
         {this.state.voting === false ? 
         <div>
           <h2>Cards in game:</h2>
-          <Cards counter={false} data={this.state.list}/>
+          <Cards cardStyle={"action"} action={this.removePlayer} data={this.state.list}/>
           <div style={Styles.centeredOnlyHorizontal}>
           <Deleteandroutebutton
               route={"/main"}
