@@ -35,6 +35,7 @@ export default class Gameadmin extends Component {
       asArray: true,
       then(votesData){
         this.setState({voteData: votesData})
+        simpleState.evoke("loader", false)
       }
     })
   }
@@ -61,6 +62,7 @@ export default class Gameadmin extends Component {
           }
           const objectArr = Object.values(voteData)
           this.setState({votes: objectArr});
+          simpleState.evoke("loader", false)
         })
         
       }
@@ -68,6 +70,7 @@ export default class Gameadmin extends Component {
   }
 
   gameDone = () => {
+    simpleState.evoke("loader", true)
     this
       .props
       .history
@@ -75,6 +78,7 @@ export default class Gameadmin extends Component {
   }
 
   changeVote = () => {
+    simpleState.evoke("loader", true)
     this.listenToVoteData()
     this.setState({voted: false})
   }
@@ -85,6 +89,7 @@ export default class Gameadmin extends Component {
   }
 
   sendVote = () => {
+    simpleState.evoke("loader", true)
     const userId = base
       .app()
       .INTERNAL
@@ -107,6 +112,7 @@ export default class Gameadmin extends Component {
   }
 
   initVote = () => {
+    simpleState.evoke("loader", true)
     this.setState({voting: true})
     const gameId = sessionStorage.lobbyNumber;
     const userId = base
@@ -129,6 +135,7 @@ export default class Gameadmin extends Component {
   }
 
   initList = () => {
+    simpleState.evoke("loader", true)
     this.setState({voting: false})
   }
 
