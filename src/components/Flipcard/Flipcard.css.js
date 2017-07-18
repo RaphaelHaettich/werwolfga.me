@@ -9,7 +9,8 @@ var styles = {
         width: "auto",
         minWidth: "0%",
         backgroundColor: "dimgray",
-        padding: "14px"
+        padding: "14px",
+        marginBottom: "50px"
       },
       paper: {
         marginBottom: "50px"
