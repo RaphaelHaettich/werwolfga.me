@@ -24,8 +24,19 @@ export default class Gameadmin extends Component {
       voting: false,
       votes: [],
       voteData: [],
-      voted: false
+      voted: false,
+      buttonDisabled: true,
     }
+  }
+
+  listenToVoteData = () => {
+    base.listenTo('activegame/' + sessionStorage.lobbyNumber + "/voting/data", {
+      context: this,
+      asArray: true,
+      then(votesData){
+        this.setState({voteData: votesData})
+      }
+    })
   }
 
   listenToVotes = () => {
@@ -63,6 +74,15 @@ export default class Gameadmin extends Component {
       .push("main")
   }
 
+  changeVote = () => {
+    this.listenToVoteData()
+    this.setState({voted: false})
+  }
+
+  componentWillUpdate(data) {
+    console.log(data)
+  }
+
   sendVote = () => {
     const userId = base
       .app()
@@ -98,20 +118,14 @@ export default class Gameadmin extends Component {
     checkIfVoted.then((data) => {
       console.log(data)
       if(data.length === 0){
-        base.listenTo('activegame/' + sessionStorage.lobbyNumber + "/voting/data", {
-          context: this,
-          asArray: true,
-          then(votesData){
-            console.log(votesData)
-            this.setState({voteData: votesData})
-          }
-        })
+        this.listenToVoteData()
       }else{
         this.setState({voted: true})
         this.listenToVotes();
       }
     })
   }
+
   initList = () => {
     this.setState({voting: false})
   }
@@ -196,15 +210,25 @@ export default class Gameadmin extends Component {
             />
             <RaisedButton
               primary={true}
+              style={Styles.centeredOnlyHorizontal}
               label={"Vote!!"}
+              disabled={this.state.buttonDisabled}
               onClick={
               this.sendVote}/>
             </div>
             :
-            <Votelist
-              disabled={true}
-              voteData={this.state.votes}
-              />
+            <div>
+              <Votelist
+                disabled={true}
+                voteData={this.state.votes}
+                />
+              <RaisedButton
+                primary={true}
+                style={Styles.centeredOnlyHorizontal}
+                label={"Change Vote"}
+                onClick={
+                this.changeVote}/>
+              </div>
           }
           <FloatingActionButton 
             style={Styles.fab}
