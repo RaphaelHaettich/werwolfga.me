@@ -187,17 +187,37 @@ class create extends Component {
               ref={(dialog) => {
               this.dialog = dialog
             }}/>
-            <RaisedButton
-              primary={true}
-              onClick={this
-              .startGame
-              .bind(this)}
-              label={"Start"}/>
-            <Deleteandroutebutton
-              route={"/main"}
-              labelText={"Cancel (delete game)"}
-              dbReference={'activegame/' + this.state.lobbyKey}
-              removeState={'count'}/>
+            {window.matchMedia("(max-width: 374px)").matches ===  true ?
+            <div style={Styles.centeredOnlyHorizontalSmallScreen}>
+              <RaisedButton
+                style={Styles.buttonMarginRight}
+                primary={true}
+                onClick={this
+                .startGame
+                .bind(this)}
+                label={"Start"}/>
+              <Deleteandroutebutton
+                route={"/main"}
+                labelText={"Discard"}
+                dbReference={'activegame/' + this.state.lobbyKey}
+                removeState={'count'}/>
+            </div>
+            :
+            <div>
+              <RaisedButton
+                style={Styles.buttonMarginRight}
+                primary={true}
+                onClick={this
+                .startGame
+                .bind(this)}
+                label={"Start"}/>
+              <Deleteandroutebutton
+                route={"/main"}
+                labelText={"Discard"}
+                dbReference={'activegame/' + this.state.lobbyKey}
+                removeState={'count'}/>
+            </div>
+            }
           </div>
         </div>
 

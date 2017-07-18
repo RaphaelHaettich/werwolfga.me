@@ -37,10 +37,17 @@ export default class main extends Component {
     return (
       <div>
       <h2>Hi {this.state.displayName}</h2>
+      {window.matchMedia("(max-width: 361px)").matches ===  true ?
+      <div style={Styles.centeredSmallScreen}>
+        <Link style={Styles.buttonPaddingRight} to="/create"><RaisedButton label="Create" primary={true} /></Link>
+        <Link to="/join"><RaisedButton label="Join" primary={true} /></Link>
+      </div>
+      :
       <div style={Styles.centered}>
         <Link style={Styles.buttonPaddingRight} to="/create"><RaisedButton label="Create" primary={true} /></Link>
         <Link to="/join"><RaisedButton label="Join" primary={true} /></Link>
       </div>
+      }
       </div>
     )
   }
