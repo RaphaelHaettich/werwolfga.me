@@ -7,11 +7,13 @@ class CheckboxList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      votedkey: ""
+      votedkey: "",
+      checkboxChecked: false
     };
   }
   handleChange(event) {
     this.setState({votedkey: event.target.value});
+    this.setState({checkboxChecked: true});
     console.log(event.target);
   }
 
