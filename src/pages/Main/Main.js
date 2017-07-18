@@ -15,6 +15,7 @@ export default class main extends Component {
     };
   }
   componentDidMount(){
+    simpleState.evoke("loader", true)
     const userId = base
       .app()
       .INTERNAL
