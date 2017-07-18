@@ -38,6 +38,7 @@ export default class Gameadmin extends Component {
   }
 
   removePlayer = (data) => {
+    simpleState.evoke("loader", true)
     console.log("removeplayer")
     console.log(data)
     const gameId = sessionStorage.lobbyNumber;
@@ -47,6 +48,7 @@ export default class Gameadmin extends Component {
     })
     promise.then((data) => {
       console.log("removed")
+      simpleState.evoke("loader", false)
     })
 
   }
