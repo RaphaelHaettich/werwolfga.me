@@ -31,7 +31,6 @@ class card extends Component {
   }
 
   fabAction = () => {
-    console.log("FAB action")
     this.props.action(this.props.item.userKey)
   }
 
@@ -41,8 +40,7 @@ class card extends Component {
 
   render() {
     let item = this.props.item
-    console.log(this.props.action)
-
+    
     return (
       <div style={Styles.card}>
         <Divider/>
