@@ -25,22 +25,22 @@ export default class Gameadmin extends Component {
   }
 
   clearVote = () => {
+    simpleState.evoke("loader", true)
     const gameId = sessionStorage.lobbyNumber;
     let removeVoting = new Promise((resolve, reject) => {
       const collection = 'activegame/' + gameId + "/voting/";
       remove(resolve, reject, collection);
     })
     removeVoting.then((data) => {
-      console.log(data);
       this.initVote();
     })
     
   }
 
   initVote = () => {
+    simpleState.evoke("loader", true)
     this.setState({voting: true})
     const data = this.state.list
-    console.log(data)
     let votingData = []
     for(let i = 0; i < data.length; i++){
       votingData[data[i].userKey] = {
@@ -48,7 +48,6 @@ export default class Gameadmin extends Component {
         votes: 0
       }
     }
-    console.log(votingData);
     const gameId = sessionStorage.lobbyNumber;
     let postVotingData = new Promise((resolve, reject) => {
       const collection = 'activegame/' + gameId + "/voting/data"
@@ -75,6 +74,7 @@ export default class Gameadmin extends Component {
             }
             const objectArr = Object.values(voteData)
             this.setState({votes: objectArr});
+            simpleState.evoke("loader", false)
           })
         }
       })
@@ -82,6 +82,7 @@ export default class Gameadmin extends Component {
   }
 
   initList = () => {
+    simpleState.evoke("loader", true)
     this.setState({voting: false})
   }
 
@@ -129,7 +130,6 @@ export default class Gameadmin extends Component {
             activeData[i].cardHeader = activeData[i].displayName + ": "+data[index].name;
           }
           this.setState({list: activeData})
-          console.log(activeData)
           simpleState.evoke("loader", false)
         })
       })
@@ -162,6 +162,7 @@ export default class Gameadmin extends Component {
           voteData={this.state.votes}
           />
           <RaisedButton
+              style={Styles.centeredOnlyHorizontal}
               primary={true}
               label={"Clear vote"}
               onClick={
