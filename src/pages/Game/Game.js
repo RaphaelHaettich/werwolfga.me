@@ -40,6 +40,34 @@ export default class Gameadmin extends Component {
     })
   }
 
+  getCardInfo = (data, gameId, userId, lang) => {
+    let getCardInfos = new Promise((resolve, reject) => {
+      const collection = 'cards/'+ lang + "/" + data[0]
+      fetch(resolve, reject, collection);
+    })
+    getCardInfos.then((data) => {
+      let cardObj = {
+        description: data[0],
+        name: data[1],
+        pictureback: data[2],
+        picturefront: data[3]
+      }
+      this.setState({cards: cardObj})
+      simpleState.evoke("loader", false)
+      base.listenTo('activegame/' + gameId + "/memberarray/" + userId, {
+        context: this,
+        asArray: false,
+        then(data){
+          if(data.card === undefined){
+            this
+            .dialog
+            .handleOpen()  
+          }
+        }
+      })
+    })
+  }
+
   listenToVotes = () => {
     const gameId = sessionStorage.lobbyNumber;
     base.listenTo('activegame/' + gameId + "/voting/votes", {
@@ -158,32 +186,12 @@ export default class Gameadmin extends Component {
       getCurrentCard.then((data) => {
         if(data.length > 0){
           this.setState({displayName: data[1]})
-          let getCardInfos = new Promise((resolve, reject) => {
-            let lang = simpleState.getState("lang")
-            const collection = 'cards/'+ lang + "/" + data[0]
-            fetch(resolve, reject, collection);
-          })
-          getCardInfos.then((data) => {
-            let cardObj = {
-              description: data[0],
-              name: data[1],
-              pictureback: data[2],
-              picturefront: data[3]
-            }
-            this.setState({cards: cardObj})
-            simpleState.evoke("loader", false)
-            base.listenTo('activegame/' + gameId + "/memberarray/" + userId, {
-              context: this,
-              asArray: false,
-              then(data){
-                if(data.card === undefined){
-                  this
-                  .dialog
-                  .handleOpen()  
-                }
-              }
-            })
-          })
+          let lang = simpleState.getState("lang")
+          this.getCardInfo(data, gameId, userId, lang)
+          simpleState.subscribe('lang', this, (nextState) => {
+            simpleState.evoke("loader", true)
+            this.getCardInfo(data, gameId, userId, nextState)
+          });
         }else{
           this
           .props

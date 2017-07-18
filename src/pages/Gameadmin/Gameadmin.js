@@ -37,6 +37,29 @@ export default class Gameadmin extends Component {
     
   }
 
+  getCardInfo = (activeData, lang) => {
+    let getCardInfos = new Promise((resolve, reject) => {  
+      const collection = 'cards/' + lang
+      fetch(resolve, reject, collection);
+    })
+    getCardInfos.then((data) => {
+      for(var i = 0; i < activeData.length; i++){
+        const cardId = activeData[i].card;
+        const index = data.findIndex(i => i.key === cardId);
+        activeData[i].userKey = activeData[i].key;
+        activeData[i].key = data[index].key;
+        activeData[i].pictureback = data[index].pictureback;
+        activeData[i].picturefront = data[index].picturefront;
+        activeData[i].description = data[index].description;
+        activeData[i].name = data[index].name;
+        activeData[i].cardHeader = activeData[i].displayName + ": "+data[index].name;
+      }
+      this.setState({list: activeData})
+      simpleState.evoke("loader", false)
+    })
+  }
+
+
   removePlayer = (data) => {
     simpleState.evoke("loader", true)
     console.log("removeplayer")
@@ -127,27 +150,12 @@ export default class Gameadmin extends Component {
         asArray: true,
         then(data){
           const activeData = data;
-          let getCardInfos = new Promise((resolve, reject) => {
-            let lang = simpleState.getState("lang")
-            const collection = 'cards/' + lang
-            fetch(resolve, reject, collection);
-          })
-          getCardInfos.then((data) => {
-            
-            for(var i = 0; i < activeData.length; i++){
-              const cardId = activeData[i].card;
-              const index = data.findIndex(i => i.key === cardId);
-              activeData[i].userKey = activeData[i].key;
-              activeData[i].key = data[index].key;
-              activeData[i].pictureback = data[index].pictureback;
-              activeData[i].picturefront = data[index].picturefront;
-              activeData[i].description = data[index].description;
-              activeData[i].name = data[index].name;
-              activeData[i].cardHeader = activeData[i].displayName + ": "+data[index].name;
-            }
-            this.setState({list: activeData})
-            simpleState.evoke("loader", false)
-          })
+          let lang = simpleState.getState("lang")
+          this.getCardInfo(activeData, lang)
+          simpleState.subscribe('lang', this, (nextState) => {
+            simpleState.evoke("loader", true)
+            this.getCardInfo(activeData, nextState)
+          });
         }
       })
     }
