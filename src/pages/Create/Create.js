@@ -93,11 +93,18 @@ class create extends Component {
         createLobby();
       }
     })
-
-    this.ref = base.syncState("/cards", {
+    let lang = simpleState.getState("lang")
+    this.ref = base.syncState("/cards/" + lang , {
       context: this,
       state: 'list',
       asArray: true,
+    });
+    simpleState.subscribe('lang', this, (nextState) => {
+      this.ref = base.syncState("/cards/" + nextState , {
+        context: this,
+        state: 'list',
+        asArray: true,
+      });
     });
   }
 

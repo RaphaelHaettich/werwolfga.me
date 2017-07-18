@@ -159,7 +159,8 @@ export default class Gameadmin extends Component {
         if(data.length > 0){
           this.setState({displayName: data[1]})
           let getCardInfos = new Promise((resolve, reject) => {
-            const collection = 'cards/' + data[0]
+            let lang = simpleState.getState("lang")
+            const collection = 'cards/'+ lang + "/" + data[0]
             fetch(resolve, reject, collection);
           })
           getCardInfos.then((data) => {

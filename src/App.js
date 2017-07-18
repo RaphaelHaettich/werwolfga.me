@@ -63,11 +63,13 @@ export default class App extends Component {
     }
   }
   componentWillMount() {
+    simpleState.addListener('lang', localStorage.getItem("lang") || "en");
     simpleState.addListener('count', {count: 0});
     simpleState.addListener('cards', {list: []});
     simpleState.addListener('state', {state: "draft"});
     simpleState.addListener('gameId', {id: ""});
     simpleState.addListener('loader', true);
+    console.log(simpleState.getState("lang"))
 
     simpleState.subscribe('loader', this, (nextState) => {
       console.log("changed laoder state")
@@ -93,6 +95,7 @@ export default class App extends Component {
     simpleState.removeListener("state");
     simpleState.removeListener("gameId");
     simpleState.removeListener('loader');
+    simpleState.removeListener('lang');
   }
   render() {
     let loader = null;
