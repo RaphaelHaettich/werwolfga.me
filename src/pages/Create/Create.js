@@ -175,7 +175,7 @@ class create extends Component {
           <h3>
             Available Cards
           </h3>
-          <Cards counter={true} data={this.state.list}/>
+          <Cards cardStyle={"counter"} data={this.state.list}/>
           <div style={Styles.centeredOnlyHorizontal}>
             <h3>Lobby ID: {this.state.lobbyId}</h3>
             <Counterlabel

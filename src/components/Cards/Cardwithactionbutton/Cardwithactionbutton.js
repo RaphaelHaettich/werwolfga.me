@@ -9,8 +9,10 @@
 
 import React, {Component} from 'react';
 import Divider from 'material-ui/Divider';
-import Styles from './Cardwithoutcounter.css.js';
+import Styles from './Cardwithactionbutton.css.js';
 import SimpleState from 'react-simple-state';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import Delete from 'material-ui/svg-icons/action/delete';
 import {
   Card,
   CardText,
@@ -28,17 +30,29 @@ class card extends Component {
     }
   }
 
+  fabAction = () => {
+    console.log("FAB action")
+    this.props.action(this.props.item.userKey)
+  }
+
   componentDidMount() {
     simpleState.evoke("loader", false)
   }
 
   render() {
     let item = this.props.item
+    console.log(this.props.action)
 
     return (
       <div style={Styles.card}>
         <Divider/>
         <Card>
+          <FloatingActionButton 
+          mini={true}
+          style={Styles.fab}
+          onTouchTap={this.fabAction}>
+            <Delete />
+          </FloatingActionButton>
           <CardMedia overlay={< CardTitle title={
             item.cardHeader
           } />}>
