@@ -79,8 +79,9 @@ export default class Gameadmin extends Component {
     this.setState({voted: false})
   }
 
-  componentWillUpdate(data) {
-    console.log(data)
+  checkListChanged = () => {
+    console.log("checklist changed")
+    this.setState({buttonDisabled: false})
   }
 
   sendVote = () => {
@@ -89,6 +90,7 @@ export default class Gameadmin extends Component {
       .INTERNAL
       .getUid()
     console.log("send");
+    this.setState({buttonDisabled: true})
     const gameId = sessionStorage.lobbyNumber;
     let postVotingData = new Promise((resolve, reject) => {
       const collection = 'activegame/' + gameId + "/voting/votes/" + userId;
@@ -207,6 +209,7 @@ export default class Gameadmin extends Component {
               votesData={this.state.voteData}
               ref={(checkList) => {
                 this.checkList = checkList}}
+              checkListChanged={this.checkListChanged}
             />
             <RaisedButton
               primary={true}
