@@ -120,32 +120,32 @@ export default class Gameadmin extends Component {
         this.setState({gameCode: data})
       })
 
-      let getActiveCards = new Promise((resolve, reject) => {
-        const collection = 'activegame/' + gameId + "/memberarray/"
-        fetch(resolve, reject, collection);
-      })
-      getActiveCards.then((data) => {
-        const activeData = data;
-        let getCardInfos = new Promise((resolve, reject) => {
-          const collection = 'cards/'
-          fetch(resolve, reject, collection);
-        })
-        getCardInfos.then((data) => {
-          
-          for(var i = 0; i < activeData.length; i++){
-            const cardId = activeData[i].card;
-            const index = data.findIndex(i => i.key === cardId);
-            activeData[i].userKey = activeData[i].key;
-            activeData[i].key = data[index].key;
-            activeData[i].pictureback = data[index].pictureback;
-            activeData[i].picturefront = data[index].picturefront;
-            activeData[i].description = data[index].description;
-            activeData[i].name = data[index].name;
-            activeData[i].cardHeader = activeData[i].displayName + ": "+data[index].name;
-          }
-          this.setState({list: activeData})
-          simpleState.evoke("loader", false)
-        })
+      base.listenTo('activegame/' + gameId + "/memberarray/", {
+        context: this,
+        asArray: true,
+        then(data){
+          const activeData = data;
+          let getCardInfos = new Promise((resolve, reject) => {
+            const collection = 'cards/'
+            fetch(resolve, reject, collection);
+          })
+          getCardInfos.then((data) => {
+            
+            for(var i = 0; i < activeData.length; i++){
+              const cardId = activeData[i].card;
+              const index = data.findIndex(i => i.key === cardId);
+              activeData[i].userKey = activeData[i].key;
+              activeData[i].key = data[index].key;
+              activeData[i].pictureback = data[index].pictureback;
+              activeData[i].picturefront = data[index].picturefront;
+              activeData[i].description = data[index].description;
+              activeData[i].name = data[index].name;
+              activeData[i].cardHeader = activeData[i].displayName + ": "+data[index].name;
+            }
+            this.setState({list: activeData})
+            simpleState.evoke("loader", false)
+          })
+        }
       })
     }
   }
