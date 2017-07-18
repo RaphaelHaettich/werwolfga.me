@@ -13,18 +13,15 @@ class CheckboxList extends Component {
   handleChange(event) {
     this.setState({votedkey: event.target.value});
     this.props.checkListChanged();
-    console.log(event.target);
   }
 
   render() {
     let checkboxListItem = 
         this.props.votesData.map((item, index) => {
-            console.log(item);
         return (
             <RadioButton key={index} value={item.key +"|"+item.displayName} label={item.displayName} style={Styles.radioButton}/>
         )
     });
-      console.log(checkboxListItem)
     return ( 
       <Paper zDepth={2}>
         <RadioButtonGroup name="notRight" labelPosition="left" onChange={(e) => this.handleChange(e)}>

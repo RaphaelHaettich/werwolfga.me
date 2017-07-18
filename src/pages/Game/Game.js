@@ -84,7 +84,6 @@ export default class Gameadmin extends Component {
   }
 
   checkListChanged = () => {
-    console.log("checklist changed")
     this.setState({buttonDisabled: false})
   }
 
@@ -94,7 +93,6 @@ export default class Gameadmin extends Component {
       .app()
       .INTERNAL
       .getUid()
-    console.log("send");
     this.setState({buttonDisabled: true})
     const gameId = sessionStorage.lobbyNumber;
     let postVotingData = new Promise((resolve, reject) => {
@@ -124,7 +122,6 @@ export default class Gameadmin extends Component {
       fetch(resolve, reject, collection);
     })
     checkIfVoted.then((data) => {
-      console.log(data)
       if(data.length === 0){
         this.listenToVoteData()
       }else{
@@ -178,7 +175,6 @@ export default class Gameadmin extends Component {
               context: this,
               asArray: false,
               then(data){
-                console.log(data)
                 if(data.card === undefined){
                   this
                   .dialog
