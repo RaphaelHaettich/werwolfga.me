@@ -203,7 +203,7 @@ export default class Gameadmin extends Component {
           onTouchTap={this.initVote}>
           <Gavel />
         </FloatingActionButton>
-        </div>
+      </div>
       : 
         <div>
           {this.state.voted === false ? 
