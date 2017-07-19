@@ -8,7 +8,7 @@
 
 ###### Schema:
  ```
- Cards/
+ cards/
    de/
      uniquecCardKey/
        description: string
