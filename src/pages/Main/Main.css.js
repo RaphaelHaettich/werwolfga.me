@@ -13,6 +13,11 @@ var styles = {
   },
   buttonPaddingRight: {
     paddingRight: "5px"
+  },
+  notSelectable: {
+    MozUserSelect: "none",
+    WebkitUserSelect: "none",
+    msUserSelect: "none"
   }
 };
 

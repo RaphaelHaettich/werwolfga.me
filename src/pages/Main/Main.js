@@ -34,7 +34,7 @@ export default class main extends Component {
   render() {
     return (
       <div>
-        <h2>
+        <h2 style={Styles.notSelectable}>
           Hi {this.state.displayName}
         </h2>
         {window.matchMedia("(max-width: 361px)").matches === true

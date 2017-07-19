@@ -11,6 +11,11 @@ var styles = {
   },
   marginLeft: {
     marginLeft: "8px"
+  },
+  notSelectable: {
+    MozUserSelect: "none",
+    WebkitUserSelect: "none",
+    msUserSelect: "none"
   }
 };
 

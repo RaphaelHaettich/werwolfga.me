@@ -141,7 +141,7 @@ export default class join extends Component {
   render() {
     return (
       <Card>
-        <CardTitle title="Join Game" />
+        <CardTitle style={Styles.notSelectable} title="Join Game" />
         <CardActions>
           <form onSubmit={this.handleSubmit}>
             <Container style={Styles.marginLeft}>
