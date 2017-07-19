@@ -69,7 +69,7 @@ export default class join extends Component {
             .dialog
             .handleOpen()
           const collection = "activegame/" + key;
-          base.listenTo(collection, {
+          this.ref = base.listenTo(collection, {
             context: this,
             asArray: true,
             then(data) {
@@ -151,6 +151,14 @@ export default class join extends Component {
     }
     simpleState.evoke("loader", false)
   }
+
+  componentWillUnmount(){
+    if(this.ref){
+      base.removeBinding(this.ref);
+    }
+    
+  }
+
   render() {
     return (
       <Card>

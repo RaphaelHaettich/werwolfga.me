@@ -30,7 +30,7 @@ export default class Gameadmin extends Component {
   }
 
   listenToVoteData = () => {
-    base.listenTo('activegame/' + sessionStorage.lobbyNumber + "/voting/data", {
+    this.listen1 = base.listenTo('activegame/' + sessionStorage.lobbyNumber + "/voting/data", {
       context: this,
       asArray: true,
       then(votesData){
@@ -54,7 +54,7 @@ export default class Gameadmin extends Component {
       }
       this.setState({cards: cardObj})
       simpleState.evoke("loader", false)
-      base.listenTo('activegame/' + gameId + "/memberarray/" + userId, {
+      this.listen2 = base.listenTo('activegame/' + gameId + "/memberarray/" + userId, {
         context: this,
         asArray: false,
         then(data){
@@ -70,7 +70,7 @@ export default class Gameadmin extends Component {
 
   listenToVotes = () => {
     const gameId = sessionStorage.lobbyNumber;
-    base.listenTo('activegame/' + gameId + "/voting/votes", {
+    this.listen3 = base.listenTo('activegame/' + gameId + "/voting/votes", {
       context: this,
       asArray: true,
       then(votesData){
@@ -201,6 +201,28 @@ export default class Gameadmin extends Component {
       })
     }
   }
+
+  componentWillUnmount(){
+    console.log("componentWillUnmount start")
+    console.log(this.listen1)
+    console.log(this.listen2)
+    console.log(this.listen3)
+    
+    if(this.listen1){
+      console.log("plsunmount 1")
+      base.removeBinding(this.listen1);
+    }
+    if(this.listen2){
+      console.log("plsunmount 2")
+      base.removeBinding(this.listen2);
+    }
+    if(this.listen3){
+       console.log("plsunmount 3")
+      base.removeBinding(this.listen3);
+    }
+    console.log("componentWillUnmount end")
+  }
+
   render() {
     return (
       <div className="col-sm-6 col-sm-offset-3">

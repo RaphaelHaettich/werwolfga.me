@@ -80,6 +80,7 @@ export default class Gameadmin extends Component {
     simpleState.evoke("loader", true)
     this.setState({voting: true})
     const data = this.state.list
+    console.log(data)
     let votingData = []
     for(let i = 0; i < data.length; i++){
       votingData[data[i].userKey] = {
@@ -93,7 +94,7 @@ export default class Gameadmin extends Component {
       post(resolve, reject, votingData, collection);
     })
     postVotingData.then((data) => {
-      base.listenTo('activegame/' + gameId + "/voting/votes", {
+      this.listen1 = base.listenTo('activegame/' + gameId + "/voting/votes", {
         context: this,
         asArray: true,
         then(votesData){
@@ -145,7 +146,7 @@ export default class Gameadmin extends Component {
         this.setState({gameCode: data})
       })
 
-      base.listenTo('activegame/' + gameId + "/memberarray/", {
+      this.listen2 = base.listenTo('activegame/' + gameId + "/memberarray/", {
         context: this,
         asArray: true,
         then(data){
@@ -158,6 +159,15 @@ export default class Gameadmin extends Component {
           });
         }
       })
+    }
+  }
+
+  componentWillUnmount(){
+    if(this.listen1){
+      base.removeBinding(this.listen1);
+    }
+    if(this.listen2){
+      base.removeBinding(this.listen2);
     }
   }
   render() {

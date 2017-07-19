@@ -20,11 +20,16 @@ export default class counterlabel extends Component {
     
   }
   componentWillReceiveProps(props) {
-    base.bindToState(props.dbReference, {
+    this.ref = base.bindToState(props.dbReference, {
       context: this,
       state: 'count',
       asArray: true
     });
+  }
+  componentWillUnmount(){
+    if(this.ref){
+      base.removeBinding(this.ref);
+    }
   }
 
   render() {

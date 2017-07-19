@@ -173,6 +173,11 @@ class create extends Component {
         .handleOpen()
     }
   }
+  componentWillUnmount(){
+    if(this.ref){
+      base.removeBinding(this.ref);
+    }
+  }
 
   render() {
     
