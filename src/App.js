@@ -58,16 +58,22 @@ export default class App extends Component {
     };
   }
   componentWillMount() {
-    simpleState.addListener("lang", localStorage.getItem("lang") || "en");
+    const navlang = navigator.language.split("-")[0];
+    let language = undefined;
+    if (navlang === "en" || navlang === "de") {
+      language = navlang;
+    }
+    simpleState.addListener(
+      "lang",
+      localStorage.getItem("lang") || language || "en"
+    );
     simpleState.addListener("count", { count: 0 });
     simpleState.addListener("cards", { list: [] });
     simpleState.addListener("state", { state: "draft" });
     simpleState.addListener("gameId", { id: "" });
     simpleState.addListener("loader", true);
-    console.log(simpleState.getState("lang"));
 
     simpleState.subscribe("loader", this, nextState => {
-      console.log("changed laoder state");
       this.setState({
         loader: nextState
       });
