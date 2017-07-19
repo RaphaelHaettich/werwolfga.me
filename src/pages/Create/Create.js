@@ -93,10 +93,14 @@ class create extends Component {
       asArray: true
     });
     simpleState.subscribe("lang", this, nextState => {
+      simpleState.evoke("loader", true);
       this.ref = base.syncState("/cards/" + nextState, {
         context: this,
         state: "list",
-        asArray: true
+        asArray: true,
+        then(){
+          simpleState.evoke("loader", false);
+        }
       });
     });
   }
