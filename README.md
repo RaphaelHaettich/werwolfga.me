@@ -3,8 +3,8 @@
 *Using React, React Router, Firebase, and many more things*
 
 #### Instructions:
-* You need a Firebase Database with Email auth enabled
-* The only data you need in your Database are the cards
+* You need a Firebase database with email auth enabled
+* The only data you need in your database are the cards
 
 ###### Schema:
  ```
