@@ -27,7 +27,9 @@ class navbar extends Component {
     super(props);
     this.state = {
       authed: false,
-      loading: true
+      loading: true,
+      lang1Checked: false,
+      lang2Checked: false
     };
   }
   titleAction() {
@@ -38,16 +40,28 @@ class navbar extends Component {
     this.props.history.push(this.props.routeRight);
   };
 
+  componentWillMount() {
+    if (simpleState.getState("lang") === "en") {
+      this.setState({ lang1Checked: true });
+      this.setState({ lang2Checked: false });
+    } else if (simpleState.getState("lang") === "de") {
+      this.setState({ lang2Checked: true });
+      this.setState({ lang1Checked: false });
+    }
+  }
+
   lang1 = () => {
-    console.log("lang1");
     simpleState.evoke("lang", "en");
     localStorage.setItem("lang", "en");
+    this.setState({ lang1Checked: true });
+    this.setState({ lang2Checked: false });
   };
 
   lang2 = () => {
-    console.log("lang2");
     simpleState.evoke("lang", "de");
     localStorage.setItem("lang", "de");
+    this.setState({ lang2Checked: true });
+    this.setState({ lang1Checked: false });
   };
 
   render() {
@@ -61,10 +75,24 @@ class navbar extends Component {
         anchorOrigin={{ horizontal: "right", vertical: "top" }}
         targetOrigin={{ horizontal: "right", vertical: "top" }}
       >
-        <MenuItem primaryText="English" onTouchTap={this.lang1} />
-        <MenuItem primaryText="Deutsch" onTouchTap={this.lang2} />
+        <MenuItem
+          primaryText="English"
+          insetChildren={true}
+          checked={this.state.lang1Checked}
+          onTouchTap={this.lang1}
+        />
+        <MenuItem
+          primaryText="Deutsch"
+          insetChildren={true}
+          checked={this.state.lang2Checked}
+          onTouchTap={this.lang2}
+        />
         <Divider />
-        <MenuItem primaryText="Sign out" onTouchTap={this.rightLabelAction} />
+        <MenuItem
+          primaryText="Sign out"
+          insetChildren={true}
+          onTouchTap={this.rightLabelAction}
+        />
       </IconMenu>;
     return (
       <AppBar
