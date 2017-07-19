@@ -12,6 +12,7 @@ import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import {logout} from '../../helpers/auth'
 import AppBar from 'material-ui/AppBar';
+import Styles from './Navbar.css.js'
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
@@ -81,6 +82,7 @@ class navbar extends Component {
     );
     return (
       <AppBar
+        style={Styles.notSelectable}
         title={< span > {this.props.title} </span>}
         iconElementRight={this.props.authed
         ? <Logged />
