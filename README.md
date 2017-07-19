@@ -4,7 +4,7 @@
 
 #### Instructions:
 * You need a Firebase Database with Email auth enabled
-* The only data you need in your Database are the cards. 
+* The only data you need in your Database are the cards
 
 ###### Schema:
  ```
