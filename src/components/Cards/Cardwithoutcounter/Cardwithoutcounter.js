@@ -7,54 +7,52 @@
 *   cards
 */
 
-import React, {Component} from 'react';
-import Divider from 'material-ui/Divider';
-import Styles from './Cardwithoutcounter.css.js';
-import SimpleState from 'react-simple-state';
-import {
-  Card,
-  CardText,
-  CardMedia,
-  CardTitle
-} from 'material-ui/Card';
+import React, { Component } from "react";
+import Divider from "material-ui/Divider";
+import Styles from "./Cardwithoutcounter.css.js";
+import SimpleState from "react-simple-state";
+import { Card, CardText, CardMedia, CardTitle } from "material-ui/Card";
 
-const simpleState = new SimpleState()
+const simpleState = new SimpleState();
 
 class card extends Component {
   constructor(props) {
     super(props);
     this.state = {
       count: 0
-    }
+    };
   }
 
   componentDidMount() {
-    simpleState.evoke("loader", false)
+    simpleState.evoke("loader", false);
   }
 
   render() {
-    let item = this.props.item
+    let item = this.props.item;
 
     return (
       <div style={Styles.card}>
-        <Divider/>
+        <Divider />
         <Card>
-          <CardMedia overlay={< CardTitle title={
-            item.cardHeader
-          } />}>
-            <img style={Styles.cardImage} src={item.picturefront} alt="cardimage"/>
+          <CardMedia overlay={<CardTitle title={item.cardHeader} />}>
+            <img
+              style={Styles.cardImage}
+              src={item.picturefront}
+              alt="cardimage"
+            />
           </CardMedia>
           <CardTitle
             subtitle="Expand for Description"
             actAsExpander={true}
-            showExpandableButton={true}/>
+            showExpandableButton={true}
+          />
           <CardText expandable={true}>
             {item.description}
           </CardText>
         </Card>
       </div>
-    )
+    );
   }
 }
 
-export default card
+export default card;

@@ -5,29 +5,27 @@
 *   state: string
 */
 
-import React, {Component} from 'react'
-import {base} from '../../config/constants'
-import SimpleState from 'react-simple-state'
-const simpleState = new SimpleState()
-
+import React, { Component } from "react";
+import { base } from "../../config/constants";
+import SimpleState from "react-simple-state";
+const simpleState = new SimpleState();
 
 export default class counterlabel extends Component {
   constructor(props) {
     super(props);
     this.state = {
       count: 0
-    }
-    
+    };
   }
   componentWillReceiveProps(props) {
     this.ref = base.bindToState(props.dbReference, {
       context: this,
-      state: 'count',
+      state: "count",
       asArray: true
     });
   }
-  componentWillUnmount(){
-    if(this.ref){
+  componentWillUnmount() {
+    if (this.ref) {
       base.removeBinding(this.ref);
     }
   }
@@ -38,17 +36,18 @@ export default class counterlabel extends Component {
       count: counter
     });
     if (counter !== undefined) {
-      counter = counter.length
+      counter = counter.length;
     }
-    
+
     return (
       <div>
         <h3>
           {this.props.labelText}
-          <label>{counter}</label>
+          <label>
+            {counter}
+          </label>
         </h3>
       </div>
-    )
+    );
   }
 }
-

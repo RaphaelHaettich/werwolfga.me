@@ -5,29 +5,36 @@
 *   count: number/string
 */
 
-import React from 'react'
-import FlatButton from 'material-ui/FlatButton'
-import Styles from './Inputcounter.css.js'
+import React from "react";
+import FlatButton from "material-ui/FlatButton";
+import Styles from "./Inputcounter.css.js";
 
-
-const inputCounter = ({up, down, count}) => {
+const inputCounter = ({ up, down, count }) => {
   return (
     <div>
       <FlatButton
         style={Styles.buttonStyle}
         labelStyle={Styles.buttonLabelStyle}
-        onClick={() => {down()}}
+        onClick={() => {
+          down();
+        }}
         label="−"
-        primary={true}/>
-      <label style={Styles.counter}>{count}</label>
+        primary={true}
+      />
+      <label style={Styles.counter}>
+        {count}
+      </label>
       <FlatButton
         style={Styles.buttonStyle}
         labelStyle={Styles.buttonLabelStyle}
-        onClick={() => {up()}}
+        onClick={() => {
+          up();
+        }}
         label="+"
-        primary={true}/>
+        primary={true}
+      />
     </div>
   );
-}
+};
 
 export default inputCounter;
