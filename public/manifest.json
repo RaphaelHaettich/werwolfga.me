@@ -1,0 +1,13 @@
+{
+  "name": "Werwolf Game",
+  "short_name": "Werwolf",
+  "icons": [{
+    "src": "/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#b71c1c",
+  "theme_color": "#b71c1c"
+}
