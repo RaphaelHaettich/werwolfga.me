@@ -1,13 +1,25 @@
 {
-  "name": "Werwolf Game",
-  "short_name": "Werwolf",
-  "icons": [{
-    "src": "/icon-128x128.png",
-      "sizes": "128x128",
-      "type": "image/png"
-    }],
-  "start_url": "/index.html",
-  "display": "standalone",
-  "background_color": "#b71c1c",
-  "theme_color": "#b71c1c"
+    "name": "Werwolf Game",
+    "short_name": "Werwolf",
+    "icons": [
+        {
+            "src": "./Images/icon-128x128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
+            "src": "./Images/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "./Images/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/main",
+    "display": "standalone",
+    "background_color": "#303030",
+    "theme_color": "#b71c1c"
 }
