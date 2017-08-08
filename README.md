@@ -10,13 +10,13 @@
  ```
  cards/
    de/
-     uniquecCardKey/
+     replace_wiht_your_uniqueCardKey/
        description: string
        name: string
        pictureback: string:url
        picturefront: string:url
    en/
-     uniquecCardKey/
+     replace_wiht_your_uniqueCardKey/
        description: string
        name: string
        pictureback: string:url
