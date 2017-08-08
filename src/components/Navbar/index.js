@@ -32,7 +32,7 @@ class navbar extends Component {
       lang2Checked: false
     };
   }
-  titleAction() {
+  titleAction = () => {
     this.props.history.push(this.props.routeTitle);
   }
   rightLabelAction = () => {
@@ -65,7 +65,7 @@ class navbar extends Component {
   };
 
   render() {
-    const Logged = () =>
+    const Logged = () => (
       <IconMenu
         iconButtonElement={
           <IconButton>
@@ -93,7 +93,8 @@ class navbar extends Component {
           insetChildren
           onTouchTap={this.rightLabelAction}
         />
-      </IconMenu>;
+      </IconMenu>
+    );
     return (
       <AppBar
         style={Styles.notSelectable}
@@ -107,7 +108,7 @@ class navbar extends Component {
             ? <Logged />
             : <FlatButton label={this.props.labelRightNotAuthed} />
         }
-        onTitleTouchTap={this.titleAction.bind(this)}
+        onTitleTouchTap={this.titleAction}
         showMenuIconButton={false}
       />
     );

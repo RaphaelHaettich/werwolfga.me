@@ -105,7 +105,7 @@ class create extends Component {
     });
   }
 
-  startGame() {
+  startGame = () => {
     const usersObj = simpleState.getState('count');
     const cardsObj = simpleState.getState('cards');
     const cardsCount = cardsObj.list
@@ -204,7 +204,7 @@ class create extends Component {
                   tabIndex={0}
                   style={Styles.buttonMarginRight}
                   primary
-                  onClick={this.startGame.bind(this)}
+                  onClick={this.startGame}
                   label={'Start'}
                 />
                 <DeleteAndRouteButton
@@ -220,7 +220,7 @@ class create extends Component {
                   tabIndex={0}
                   style={Styles.buttonMarginRight}
                   primary
-                  onClick={this.startGame.bind(this)}
+                  onClick={this.startGame}
                   label={'Start'}
                 />
                 <DeleteAndRouteButton

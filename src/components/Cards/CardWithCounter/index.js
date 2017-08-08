@@ -93,8 +93,8 @@ class card extends Component {
           <CardActions>
             <InputCounter
               count={this.state.count}
-              up={this.up.bind(this)}
-              down={this.down.bind(this)}
+              up={this.up}
+              down={this.down}
             />
           </CardActions>
         </Card>

@@ -21,7 +21,7 @@ class deleteAndRouteButton extends Component {
     };
   }
 
-  delete() {
+  delete = () => {
     base
       .remove(this.props.dbReference)
       .then(() => {
@@ -38,7 +38,7 @@ class deleteAndRouteButton extends Component {
       <RaisedButton
         role="button"
         tabIndex={0}
-        onClick={this.delete.bind(this)}
+        onClick={this.delete}
         label={this.props.labelText}
         primary={this.state.primary}
       />
