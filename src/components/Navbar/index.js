@@ -76,20 +76,20 @@ class navbar extends Component {
         targetOrigin={{ horizontal: 'right', vertical: 'top' }}
       >
         <MenuItem
-          primaryText='English'
+          primaryText="English"
           insetChildren={true}
           checked={this.state.lang1Checked}
           onTouchTap={this.lang1}
         />
         <MenuItem
-          primaryText='Deutsch'
+          primaryText="Deutsch"
           insetChildren={true}
           checked={this.state.lang2Checked}
           onTouchTap={this.lang2}
         />
         <Divider />
         <MenuItem
-          primaryText='Sign out'
+          primaryText="Sign out"
           insetChildren={true}
           onTouchTap={this.rightLabelAction}
         />

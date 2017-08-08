@@ -141,7 +141,7 @@ export default class join extends Component {
   render() {
     return (
       <Card>
-        <CardTitle style={Styles.notSelectable} title='Join Game' />
+        <CardTitle style={Styles.notSelectable} title="Join Game" />
         <CardActions>
           <form onSubmit={this.handleSubmit}>
             <Container style={Styles.marginLeft}>
@@ -149,17 +149,17 @@ export default class join extends Component {
                 <Col xs={8}>
                   <TextField
                     ref={number => (this.number = number)}
-                    maxLength='6'
-                    type='tel'
-                    hintText='123456'
-                    floatingLabelText='Lobby Id'
+                    maxLength="6"
+                    type="tel"
+                    hintText="123456"
+                    floatingLabelText="Lobby Id"
                     fullWidth={true}
                   />
                 </Col>
                 <Col xs={4}>
                   <FlatButton
-                    type='submit'
-                    label='Join'
+                    type="submit"
+                    label="Join"
                     style={Styles.buttonHeight}
                   />
                 </Col>
@@ -168,7 +168,7 @@ export default class join extends Component {
           </form>
           {this.state.activeSession === true
             ? <RaisedButton
-              label='Rejoin game'
+              label="Rejoin game"
               primary={true}
               style={Styles.centeredOnlyHorizontal}
               onClick={this.joinLastGame}

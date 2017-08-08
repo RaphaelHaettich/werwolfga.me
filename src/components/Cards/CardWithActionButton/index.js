@@ -51,11 +51,11 @@ class card extends Component {
             <img
               style={Styles.cardImage}
               src={item.picturefront}
-              alt='cardimage'
+              alt="cardimage"
             />
           </CardMedia>
           <CardTitle
-            subtitle='Expand for Description'
+            subtitle="Expand for Description"
             actAsExpander={true}
             showExpandableButton={true}
           />
