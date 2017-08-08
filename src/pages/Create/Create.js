@@ -48,7 +48,7 @@ class create extends Component {
             alertMsg: 'Error: ' + error
           });
           this.dialog.handleOpen();
-          console.log(error);
+          console.error(error);
         });
     };
 
@@ -153,11 +153,11 @@ class create extends Component {
               this.props.history.push('gameadmin');
             })
             .catch(function(error) {
-              console.log(error);
+              console.error(error);
             });
         })
         .catch(function(error) {
-          console.log(error);
+          console.error(error);
         });
     } else {
       this.setState({

@@ -198,15 +198,12 @@ export default class Gameadmin extends Component {
 
   componentWillUnmount() {
     if (this.listen1) {
-      console.log("plsunmount 1");
       base.removeBinding(this.listen1);
     }
     if (this.listen2) {
-      console.log("plsunmount 2");
       base.removeBinding(this.listen2);
     }
     if (this.listen3) {
-      console.log("plsunmount 3");
       base.removeBinding(this.listen3);
     }
   }

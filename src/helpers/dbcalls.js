@@ -10,7 +10,7 @@ export var push = (resolve, reject, data, collection) => {
     })
     .catch(err => {
       //handle error
-      console.log(err);
+      console.error(err);
     });
 };
 
@@ -24,7 +24,7 @@ export var update = (resolve, reject, data, collection) => {
     })
     .catch(err => {
       //handle error
-      console.log(err);
+      console.error(err);
     });
 };
 
@@ -38,7 +38,7 @@ export var post = (resolve, reject, data, collection) => {
     })
     .catch(err => {
       //handle error
-      console.log(err);
+      console.error(err);
     });
 };
 
@@ -58,7 +58,7 @@ export var fetch = (resolve, reject, collection, query, asArray) => {
     })
     .catch(err => {
       //handle error
-      console.log(err);
+      console.error(err);
     });
 };
 
@@ -70,6 +70,6 @@ export var remove = (resolve, reject, collection) => {
     })
     .catch(err => {
       //handle error
-      console.log(err);
+      console.error(err);
     });
 };

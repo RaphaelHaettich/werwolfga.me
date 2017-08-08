@@ -76,11 +76,11 @@ export default class join extends Component {
               });
             })
             .catch(function(error) {
-              console.log(error);
+              console.error(error);
             });
         })
         .catch(function(error) {
-          console.log(error);
+          console.error(error);
         });
     };
 
