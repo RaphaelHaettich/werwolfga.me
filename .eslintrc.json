@@ -139,6 +139,12 @@
     ],
     "react/require-render-return": [
       1
+    ],
+    "react/sort-comp": [
+      1
+    ],
+    "react/no-is-mounted": [
+      1
     ]
   }
 }
