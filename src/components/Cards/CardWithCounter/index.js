@@ -30,9 +30,6 @@ class card extends Component {
     };
   }
 
-  componentDidMount() {
-    simpleState.evoke('loader', false);
-  }
   componentDidUpdate() {
     let cardState = simpleState.getState('cards');
     const index = cardState.list
@@ -69,6 +66,10 @@ class card extends Component {
     }
   }
 
+  handleImageLoaded = () => {
+    simpleState.evoke('loader', false);
+  }
+
   render() {
     let item = this.props.item;
     return (
@@ -80,6 +81,7 @@ class card extends Component {
               style={Styles.cardImage}
               src={item.picturefront}
               alt="cardimage"
+              onLoad={this.handleImageLoaded}
             />
           </CardMedia>
           <CardTitle

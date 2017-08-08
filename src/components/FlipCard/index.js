@@ -23,6 +23,10 @@ class card extends Component {
   componentDidMount() {
     simpleState.evoke('loader', false);
   }
+
+  handleImageLoaded = () => {
+    simpleState.evoke('loader', false);
+  }
   
   handleClick(e) {
     e.preventDefault();
@@ -62,6 +66,7 @@ class card extends Component {
           </Paper>}
         <ReactCardFlip isFlipped={this.state.isFlipped}>
           <img
+            onLoad={this.handleImageLoaded}
             role="button"
             tabIndex={0}
             style={Styles.cardImage}
@@ -71,6 +76,7 @@ class card extends Component {
             alt=""
           />
           <img
+            onLoad={this.handleImageLoaded}
             role="button"
             tabIndex={0}
             style={Styles.cardImage}

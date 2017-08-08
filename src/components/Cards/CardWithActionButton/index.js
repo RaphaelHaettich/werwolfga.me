@@ -25,7 +25,7 @@ class card extends Component {
     };
   }
 
-  componentDidMount() {
+  handleImageLoaded = () => {
     simpleState.evoke('loader', false);
   }
 
@@ -52,6 +52,7 @@ class card extends Component {
               style={Styles.cardImage}
               src={item.picturefront}
               alt="cardimage"
+              onLoad={this.handleImageLoaded}
             />
           </CardMedia>
           <CardTitle
