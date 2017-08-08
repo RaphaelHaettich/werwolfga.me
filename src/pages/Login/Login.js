@@ -12,11 +12,15 @@ function setErrorMsg(error) {
 }
 
 export default class Login extends Component {
-  state = {
-    loginMessage: null,
-    secondActionLabel: null,
-    secondActionShow: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      loginMessage: null,
+      secondActionLabel: null,
+      secondActionShow: false
+    };
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     login(this.email.input.value, this.pw.input.value).catch(e => {

@@ -12,9 +12,13 @@ function setErrorMsg(error) {
 }
 
 export default class Register extends Component {
-  state = {
-    registerError: null
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      registerError: null
+    };
+  }
+  
   handleSubmit = e => {
     e.preventDefault();
     if (this.displayName.input.value === "") {

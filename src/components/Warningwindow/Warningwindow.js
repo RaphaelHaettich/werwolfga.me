@@ -14,9 +14,12 @@ import Dialog from "material-ui/Dialog";
 import FlatButton from "material-ui/FlatButton";
 
 export default class DialogAlert extends React.Component {
-  state = {
-    open: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false
+    };
+  }
 
   handleOpen = () => {
     this.setState({ open: true });
