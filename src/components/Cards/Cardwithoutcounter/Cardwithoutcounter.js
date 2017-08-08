@@ -7,11 +7,11 @@
 *   cards
 */
 
-import React, { Component } from "react";
-import Divider from "material-ui/Divider";
-import Styles from "./Cardwithoutcounter.css.js";
-import SimpleState from "react-simple-state";
-import { Card, CardText, CardMedia, CardTitle } from "material-ui/Card";
+import React, { Component } from 'react';
+import Divider from 'material-ui/Divider';
+import Styles from './Cardwithoutcounter.css.js';
+import SimpleState from 'react-simple-state';
+import { Card, CardText, CardMedia, CardTitle } from 'material-ui/Card';
 
 const simpleState = new SimpleState();
 
@@ -24,7 +24,7 @@ class card extends Component {
   }
 
   componentDidMount() {
-    simpleState.evoke("loader", false);
+    simpleState.evoke('loader', false);
   }
 
   render() {

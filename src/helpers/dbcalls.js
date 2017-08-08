@@ -1,4 +1,4 @@
-import { base } from "../config/constants";
+import { base } from '../config/constants';
 
 export var push = (resolve, reject, data, collection) => {
   base
@@ -66,7 +66,7 @@ export var remove = (resolve, reject, collection) => {
   base
     .remove(collection)
     .then(() => {
-      resolve("done");
+      resolve('done');
     })
     .catch(err => {
       //handle error

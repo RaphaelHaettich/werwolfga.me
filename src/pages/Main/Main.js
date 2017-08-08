@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import RaisedButton from "material-ui/RaisedButton";
-import Styles from "./Main.css.js";
-import SimpleState from "react-simple-state";
-import { base } from "../../config/constants";
-import { fetch } from "../../helpers/dbcalls";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import RaisedButton from 'material-ui/RaisedButton';
+import Styles from './Main.css.js';
+import SimpleState from 'react-simple-state';
+import { base } from '../../config/constants';
+import { fetch } from '../../helpers/dbcalls';
 const simpleState = new SimpleState();
 
 export default class main extends Component {
@@ -15,21 +15,21 @@ export default class main extends Component {
     };
   }
   componentDidMount() {
-    simpleState.evoke("loader", true);
+    simpleState.evoke('loader', true);
     const userId = base.app().INTERNAL.getUid();
 
     let name = new Promise((resolve, reject) => {
-      const collection = "users/" + userId;
+      const collection = 'users/' + userId;
       fetch(resolve, reject, collection);
     });
 
     name.then(data => {
       this.setState({ displayName: data[0].displayName });
-      simpleState.evoke("loader", false);
+      simpleState.evoke('loader', false);
     });
   }
   componentWillUnmount() {
-    simpleState.evoke("loader", true);
+    simpleState.evoke('loader', true);
   }
   render() {
     return (
@@ -37,23 +37,23 @@ export default class main extends Component {
         <h2 style={Styles.notSelectable}>
           Hi {this.state.displayName}
         </h2>
-        {window.matchMedia("(max-width: 361px)").matches === true
+        {window.matchMedia('(max-width: 361px)').matches === true
           ? <div style={Styles.centeredSmallScreen}>
-              <Link style={Styles.buttonPaddingRight} to="/create">
-                <RaisedButton label="Create" primary={true} />
-              </Link>
-              <Link to="/join">
-                <RaisedButton label="Join" primary={true} />
-              </Link>
-            </div>
+            <Link style={Styles.buttonPaddingRight} to="/create">
+              <RaisedButton label="Create" primary={true} />
+            </Link>
+            <Link to="/join">
+              <RaisedButton label="Join" primary={true} />
+            </Link>
+          </div>
           : <div style={Styles.centered}>
-              <Link style={Styles.buttonPaddingRight} to="/create">
-                <RaisedButton label="Create" primary={true} />
-              </Link>
-              <Link to="/join">
-                <RaisedButton label="Join" primary={true} />
-              </Link>
-            </div>}
+            <Link style={Styles.buttonPaddingRight} to="/create">
+              <RaisedButton label="Create" primary={true} />
+            </Link>
+            <Link to="/join">
+              <RaisedButton label="Join" primary={true} />
+            </Link>
+          </div>}
       </div>
     );
   }

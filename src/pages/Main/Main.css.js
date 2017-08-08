@@ -1,23 +1,23 @@
 var styles = {
   centered: {
-    position: "fixed",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)"
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)'
   },
   centeredSmallScreen: {
-    position: "fixed",
-    top: "50%",
-    left: "40%",
-    transform: "translate(-30%, -50%)"
+    position: 'fixed',
+    top: '50%',
+    left: '40%',
+    transform: 'translate(-30%, -50%)'
   },
   buttonPaddingRight: {
-    paddingRight: "5px"
+    paddingRight: '5px'
   },
   notSelectable: {
-    MozUserSelect: "none",
-    WebkitUserSelect: "none",
-    msUserSelect: "none"
+    MozUserSelect: 'none',
+    WebkitUserSelect: 'none',
+    msUserSelect: 'none'
   }
 };
 

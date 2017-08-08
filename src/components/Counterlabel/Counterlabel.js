@@ -5,9 +5,9 @@
 *   state: string
 */
 
-import React, { Component } from "react";
-import { base } from "../../config/constants";
-import SimpleState from "react-simple-state";
+import React, { Component } from 'react';
+import { base } from '../../config/constants';
+import SimpleState from 'react-simple-state';
 const simpleState = new SimpleState();
 
 export default class counterlabel extends Component {
@@ -20,7 +20,7 @@ export default class counterlabel extends Component {
   componentWillReceiveProps(props) {
     this.ref = base.bindToState(props.dbReference, {
       context: this,
-      state: "count",
+      state: 'count',
       asArray: true
     });
   }

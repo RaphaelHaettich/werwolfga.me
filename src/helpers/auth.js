@@ -1,4 +1,4 @@
-import { ref, firebaseAuth } from "../config/constants";
+import { ref, firebaseAuth } from '../config/constants';
 
 export function auth(email, pw, displayName) {
   return firebaseAuth().createUserWithEmailAndPassword(email, pw).then(data => {

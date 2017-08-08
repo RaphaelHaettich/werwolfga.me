@@ -3,17 +3,17 @@
 *   item: object
 */
 
-import React, { Component } from "react";
-import Paper from "material-ui/Paper";
-import Styles from "./Flipcard.css.js";
-import ReactCardFlip from "react-card-flip";
-import SimpleState from "react-simple-state";
-import { Card, CardText, CardTitle } from "material-ui/Card";
+import React, { Component } from 'react';
+import Paper from 'material-ui/Paper';
+import Styles from './Flipcard.css.js';
+import ReactCardFlip from 'react-card-flip';
+import SimpleState from 'react-simple-state';
+import { Card, CardText, CardTitle } from 'material-ui/Card';
 const simpleState = new SimpleState();
 
 class card extends Component {
   componentDidMount() {
-    simpleState.evoke("loader", false);
+    simpleState.evoke('loader', false);
   }
   constructor(props) {
     super(props);
@@ -35,29 +35,29 @@ class card extends Component {
       <div>
         {this.state.isFlipped === false
           ? <Paper style={Styles.paper} zDepth={2}>
-              <Card>
-                <CardTitle
-                  title={item.name}
-                  subtitle="Expand for Description"
-                  actAsExpander={true}
-                  showExpandableButton={true}
-                />
-                <CardText expandable={true}>
-                  {item.description}
-                </CardText>
-              </Card>
-            </Paper>
+            <Card>
+              <CardTitle
+                title={item.name}
+                subtitle="Expand for Description"
+                actAsExpander={true}
+                showExpandableButton={true}
+              />
+              <CardText expandable={true}>
+                {item.description}
+              </CardText>
+            </Card>
+          </Paper>
           : <Paper style={Styles.paper} zDepth={2}>
-              <Card>
-                <CardTitle
-                  title="Hidden"
-                  subtitle="Expand for Description"
-                  actAsExpander={true}
-                  showExpandableButton={true}
-                />
-                <CardText expandable={true}>Hidden</CardText>
-              </Card>
-            </Paper>}
+            <Card>
+              <CardTitle
+                title="Hidden"
+                subtitle="Expand for Description"
+                actAsExpander={true}
+                showExpandableButton={true}
+              />
+              <CardText expandable={true}>Hidden</CardText>
+            </Card>
+          </Paper>}
         <ReactCardFlip isFlipped={this.state.isFlipped}>
           <img
             style={Styles.cardImage}

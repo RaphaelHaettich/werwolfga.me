@@ -1,8 +1,8 @@
 var styles = {
   notSelectable: {
-    MozUserSelect: "none",
-    WebkitUserSelect: "none",
-    msUserSelect: "none"
+    MozUserSelect: 'none',
+    WebkitUserSelect: 'none',
+    msUserSelect: 'none'
   }
 };
 

@@ -1,14 +1,14 @@
 var styles = {
   counter: {
-    marginRight: "5px",
-    marginLeft: "5px"
+    marginRight: '5px',
+    marginLeft: '5px'
   },
   buttonLabelStyle: {
     fontSize: 25,
-    fontWeight: "bold"
+    fontWeight: 'bold'
   },
   buttonStyle: {
-    minWidth: "25px"
+    minWidth: '25px'
   }
 };
 

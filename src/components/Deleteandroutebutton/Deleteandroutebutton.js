@@ -8,10 +8,10 @@
 *   primary: boolean
 */
 
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { base } from "../../config/constants";
-import RaisedButton from "material-ui/RaisedButton";
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { base } from '../../config/constants';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class deleteAndRouteButton extends Component {
   constructor(props) {

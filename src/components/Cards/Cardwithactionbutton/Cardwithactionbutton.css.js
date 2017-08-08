@@ -1,20 +1,20 @@
 var styles = {
   cardImage: {
-    maxHeight: "200px",
-    display: "block",
-    marginLeft: "auto",
-    marginRight: "auto",
-    width: "auto",
-    minWidth: "0%"
+    maxHeight: '200px',
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: 'auto',
+    minWidth: '0%'
   },
   card: {
-    marginBottom: "15px"
+    marginBottom: '15px'
   },
   fab: {
-    position: "absolute",
+    position: 'absolute',
     right: 0,
-    marginTop: "10px",
-    marginRight: "10px"
+    marginTop: '10px',
+    marginRight: '10px'
   }
 };
 

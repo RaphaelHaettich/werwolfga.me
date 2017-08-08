@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import Cards from "../../components/Cards/Cards";
-import { push, post, update } from "../../helpers/dbcalls";
-import { base } from "../../config/constants";
-import Deleteandroutebutton from "../../components/Deleteandroutebutton/Deleteandroutebutton";
-import Counterlabel from "../../components/Counterlabel/Counterlabel";
-import Styles from "./Create.css.js";
-import RaisedButton from "material-ui/RaisedButton";
-import SimpleState from "react-simple-state";
-import Warningwindow from "../../components/Warningwindow/Warningwindow";
-import shuffle from "../../helpers/shuffle";
+import React, { Component } from 'react';
+import Cards from '../../components/Cards/Cards';
+import { push, post, update } from '../../helpers/dbcalls';
+import { base } from '../../config/constants';
+import Deleteandroutebutton from '../../components/Deleteandroutebutton/Deleteandroutebutton';
+import Counterlabel from '../../components/Counterlabel/Counterlabel';
+import Styles from './Create.css.js';
+import RaisedButton from 'material-ui/RaisedButton';
+import SimpleState from 'react-simple-state';
+import Warningwindow from '../../components/Warningwindow/Warningwindow';
+import shuffle from '../../helpers/shuffle';
 
 const simpleState = new SimpleState();
 
@@ -16,9 +16,9 @@ class create extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lobbyId: "",
-      lobbyKey: "",
-      alertMsg: "",
+      lobbyId: '',
+      lobbyKey: '',
+      alertMsg: '',
       list: [],
       users: []
     };
@@ -31,11 +31,11 @@ class create extends Component {
     let createLobby = () => {
       const inviteCode = Math.floor(Math.random() * 900000) + 100000;
       let promise = new Promise((resolve, reject) => {
-        let collection = "activegame";
+        let collection = 'activegame';
         let data = {
           code: inviteCode,
           host: userId,
-          state: "draft"
+          state: 'draft'
         };
         push(resolve, reject, data, collection);
       });
@@ -45,7 +45,7 @@ class create extends Component {
         })
         .catch(function(error) {
           this.setState({
-            alertMsg: "Error: " + error
+            alertMsg: 'Error: ' + error
           });
           this.dialog.handleOpen();
           console.log(error);
@@ -55,11 +55,11 @@ class create extends Component {
     //functions to execute at start
     let hostExists = new Promise((resolve, reject) => {
       base
-        .fetch("activegame/", {
+        .fetch('activegame/', {
           context: this,
           asArray: true,
           queries: {
-            orderByChild: "host",
+            orderByChild: 'host',
             equalTo: userId
           }
         })
@@ -68,7 +68,7 @@ class create extends Component {
         })
         .catch(error => {
           this.setState({
-            alertMsg: "Error: " + error
+            alertMsg: 'Error: ' + error
           });
           this.dialog.handleOpen();
         });
@@ -76,9 +76,9 @@ class create extends Component {
     hostExists.then(data => {
       if (data.length > 0) {
         this.setState({ users: data[0].memberarray });
-        if (data[0].state === "ready") {
+        if (data[0].state === 'ready') {
           sessionStorage.lobbyNumber = data[0].key;
-          this.props.history.push("gameadmin");
+          this.props.history.push('gameadmin');
         } else {
           this.setState({ lobbyId: data[0].code, lobbyKey: data[0].key });
         }
@@ -86,28 +86,28 @@ class create extends Component {
         createLobby();
       }
     });
-    let lang = simpleState.getState("lang");
-    this.ref = base.syncState("/cards/" + lang, {
+    let lang = simpleState.getState('lang');
+    this.ref = base.syncState('/cards/' + lang, {
       context: this,
-      state: "list",
+      state: 'list',
       asArray: true
     });
-    simpleState.subscribe("lang", this, nextState => {
-      simpleState.evoke("loader", true);
-      this.ref = base.syncState("/cards/" + nextState, {
+    simpleState.subscribe('lang', this, nextState => {
+      simpleState.evoke('loader', true);
+      this.ref = base.syncState('/cards/' + nextState, {
         context: this,
-        state: "list",
+        state: 'list',
         asArray: true,
         then(){
-          simpleState.evoke("loader", false);
+          simpleState.evoke('loader', false);
         }
       });
     });
   }
 
   startGame() {
-    const usersObj = simpleState.getState("count");
-    const cardsObj = simpleState.getState("cards");
+    const usersObj = simpleState.getState('count');
+    const cardsObj = simpleState.getState('cards');
     const cardsCount = cardsObj.list
       .map(function(a) {
         return a.count;
@@ -115,7 +115,7 @@ class create extends Component {
       .reduce((a, b) => a + b, 0);
     const userCount = usersObj.count.length;
     if (cardsCount === userCount && userCount > 0) {
-      simpleState.evoke("loader", true);
+      simpleState.evoke('loader', true);
       let cards = [];
       for (let i = 0; i < cardsObj.list.length; i++) {
         for (let p = 0; p < cardsObj.list[i].count; p++) {
@@ -133,24 +133,24 @@ class create extends Component {
       }
       let updateMembers = new Promise((resolve, reject) => {
         const collection =
-          "activegame/" + this.state.lobbyKey + "/memberarray/";
+          'activegame/' + this.state.lobbyKey + '/memberarray/';
         post(resolve, reject, memberarray, collection);
       });
       updateMembers
         .then(data => {
           let setGameReady = new Promise((resolve, reject) => {
-            const collection = "activegame/" + this.state.lobbyKey;
+            const collection = 'activegame/' + this.state.lobbyKey;
             const object = {
-              state: "ready"
+              state: 'ready'
             };
             update(resolve, reject, object, collection);
           });
           setGameReady
             .then(data => {
-              simpleState.evoke("gameId", { id: this.state.lobbyKey });
+              simpleState.evoke('gameId', { id: this.state.lobbyKey });
               sessionStorage.lobbyNumber = this.state.lobbyKey;
-              simpleState.evoke("loader", true);
-              this.props.history.push("gameadmin");
+              simpleState.evoke('loader', true);
+              this.props.history.push('gameadmin');
             })
             .catch(function(error) {
               console.log(error);
@@ -162,8 +162,8 @@ class create extends Component {
     } else {
       this.setState({
         alertMsg:
-          "You need as many players as selected cards. Please delete or add some cards or p" +
-          "layers. "
+          'You need as many players as selected cards. Please delete or add some cards or p' +
+          'layers. '
       });
       this.dialog.handleOpen();
     }
@@ -179,17 +179,17 @@ class create extends Component {
       <div>
         <div>
           <h3>Available Cards</h3>
-          <Cards cardStyle={"counter"} data={this.state.list} />
+          <Cards cardStyle={'counter'} data={this.state.list} />
           <div style={Styles.centeredOnlyHorizontal}>
             <h3>
               Lobby ID: {this.state.lobbyId}
             </h3>
             <Counterlabel
-              labelText={"Joined People: "}
+              labelText={'Joined People: '}
               dbReference={
-                "activegame/" + this.state.lobbyKey + "/memberarray/"
+                'activegame/' + this.state.lobbyKey + '/memberarray/'
               }
-              state={"count"}
+              state={'count'}
             />
             <Warningwindow
               message={this.state.alertMsg}
@@ -197,35 +197,35 @@ class create extends Component {
                 this.dialog = dialog;
               }}
             />
-            {window.matchMedia("(max-width: 374px)").matches === true
+            {window.matchMedia('(max-width: 374px)').matches === true
               ? <div style={Styles.centeredOnlyHorizontalSmallScreen}>
-                  <RaisedButton
-                    style={Styles.buttonMarginRight}
-                    primary={true}
-                    onClick={this.startGame.bind(this)}
-                    label={"Start"}
-                  />
-                  <Deleteandroutebutton
-                    route={"/main"}
-                    labelText={"Discard"}
-                    dbReference={"activegame/" + this.state.lobbyKey}
-                    removeState={"count"}
-                  />
-                </div>
+                <RaisedButton
+                  style={Styles.buttonMarginRight}
+                  primary={true}
+                  onClick={this.startGame.bind(this)}
+                  label={'Start'}
+                />
+                <Deleteandroutebutton
+                  route={'/main'}
+                  labelText={'Discard'}
+                  dbReference={'activegame/' + this.state.lobbyKey}
+                  removeState={'count'}
+                />
+              </div>
               : <div>
-                  <RaisedButton
-                    style={Styles.buttonMarginRight}
-                    primary={true}
-                    onClick={this.startGame.bind(this)}
-                    label={"Start"}
-                  />
-                  <Deleteandroutebutton
-                    route={"/main"}
-                    labelText={"Discard"}
-                    dbReference={"activegame/" + this.state.lobbyKey}
-                    removeState={"count"}
-                  />
-                </div>}
+                <RaisedButton
+                  style={Styles.buttonMarginRight}
+                  primary={true}
+                  onClick={this.startGame.bind(this)}
+                  label={'Start'}
+                />
+                <Deleteandroutebutton
+                  route={'/main'}
+                  labelText={'Discard'}
+                  dbReference={'activegame/' + this.state.lobbyKey}
+                  removeState={'count'}
+                />
+              </div>}
           </div>
         </div>
       </div>

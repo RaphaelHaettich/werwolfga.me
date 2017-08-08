@@ -1,21 +1,21 @@
 var styles = {
   buttonHeight: {
-    height: "100px"
+    height: '100px'
   },
   centeredOnlyHorizontal: {
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    marginTop: "50px",
-    marginBottom: "10%",
-    position: "absolute"
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    marginTop: '50px',
+    marginBottom: '10%',
+    position: 'absolute'
   },
   marginLeft: {
-    marginLeft: "8px"
+    marginLeft: '8px'
   },
   notSelectable: {
-    MozUserSelect: "none",
-    WebkitUserSelect: "none",
-    msUserSelect: "none"
+    MozUserSelect: 'none',
+    WebkitUserSelect: 'none',
+    msUserSelect: 'none'
   }
 };
 

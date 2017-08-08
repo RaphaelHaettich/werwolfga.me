@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import Paper from "material-ui/Paper";
-import { RadioButton, RadioButtonGroup } from "material-ui/RadioButton";
-import Styles from "./Checkboxlist.css.js";
+import React, { Component } from 'react';
+import Paper from 'material-ui/Paper';
+import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
+import Styles from './Checkboxlist.css.js';
 
 class CheckboxList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      votedkey: ""
+      votedkey: ''
     };
   }
   handleChange(event) {
@@ -20,7 +20,7 @@ class CheckboxList extends Component {
       return (
         <RadioButton
           key={index}
-          value={item.key + "|" + item.displayName}
+          value={item.key + '|' + item.displayName}
           label={item.displayName}
           style={Styles.radioButton}
         />
