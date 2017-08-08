@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { auth } from "../../helpers/auth";
-import RaisedButton from "material-ui/RaisedButton";
-import { Link } from "react-router-dom";
-import TextField from "material-ui/TextField";
-import SimpleState from "react-simple-state";
-import Warningwindow from "../../components/Warningwindow/Warningwindow";
+import React, { Component } from 'react';
+import { auth } from '../../helpers/auth';
+import RaisedButton from 'material-ui/RaisedButton';
+import { Link } from 'react-router-dom';
+import TextField from 'material-ui/TextField';
+import SimpleState from 'react-simple-state';
+import Warningwindow from '../../components/Warningwindow/Warningwindow';
 const simpleState = new SimpleState();
 
 function setErrorMsg(error) {
@@ -21,8 +21,8 @@ export default class Register extends Component {
   
   handleSubmit = e => {
     e.preventDefault();
-    if (this.displayName.input.value === "") {
-      this.setState({ registerError: "You forgot the Username" });
+    if (this.displayName.input.value === '') {
+      this.setState({ registerError: 'You forgot the Username' });
       this.dialog.handleOpen();
     } else {
       auth(
@@ -36,7 +36,7 @@ export default class Register extends Component {
     }
   };
   componentDidMount() {
-    simpleState.evoke("loader", false);
+    simpleState.evoke('loader', false);
   }
   render() {
     return (
@@ -45,26 +45,26 @@ export default class Register extends Component {
         <form onSubmit={this.handleSubmit}>
           <TextField
             fullWidth={true}
-            type="email"
+            type='email'
             ref={email => (this.email = email)}
-            floatingLabelText="Email"
+            floatingLabelText='Email'
           />
           <TextField
             fullWidth={true}
-            type="text"
+            type='text'
             ref={displayName => (this.displayName = displayName)}
-            floatingLabelText="Username"
+            floatingLabelText='Username'
           />
           <TextField
             fullWidth={true}
-            type="password"
+            type='password'
             ref={pw => (this.pw = pw)}
-            floatingLabelText="Password"
+            floatingLabelText='Password'
           />
           <br />
-          <RaisedButton type="submit" label="Register" primary={true} />
-          <Link to="/login">
-            <RaisedButton label="Login" />
+          <RaisedButton type='submit' label='Register' primary={true} />
+          <Link to='/login'>
+            <RaisedButton label='Login' />
           </Link>
         </form>
         <Warningwindow

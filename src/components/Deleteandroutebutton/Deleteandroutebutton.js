@@ -29,7 +29,7 @@ class deleteAndRouteButton extends Component {
         sessionStorage.clear();
       })
       .catch(error => {
-        //handle error
+        console.error(error);
       });
   }
 

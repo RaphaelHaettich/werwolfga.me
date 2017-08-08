@@ -53,7 +53,7 @@ class create extends Component {
     };
 
     //functions to execute at start
-    let hostExists = new Promise((resolve, reject) => {
+    let hostExists = new Promise((resolve) => {
       base
         .fetch('activegame/', {
           context: this,
@@ -137,7 +137,7 @@ class create extends Component {
         post(resolve, reject, memberarray, collection);
       });
       updateMembers
-        .then(data => {
+        .then(() => {
           let setGameReady = new Promise((resolve, reject) => {
             const collection = 'activegame/' + this.state.lobbyKey;
             const object = {
@@ -146,7 +146,7 @@ class create extends Component {
             update(resolve, reject, object, collection);
           });
           setGameReady
-            .then(data => {
+            .then(() => {
               simpleState.evoke('gameId', { id: this.state.lobbyKey });
               sessionStorage.lobbyNumber = this.state.lobbyKey;
               simpleState.evoke('loader', true);

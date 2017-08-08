@@ -7,13 +7,13 @@
 *   cards
 */
 
-import React, { Component } from "react";
-import Divider from "material-ui/Divider";
-import Styles from "./Cardwithactionbutton.css.js";
-import SimpleState from "react-simple-state";
-import FloatingActionButton from "material-ui/FloatingActionButton";
-import Delete from "material-ui/svg-icons/action/delete";
-import { Card, CardText, CardMedia, CardTitle } from "material-ui/Card";
+import React, { Component } from 'react';
+import Divider from 'material-ui/Divider';
+import Styles from './Cardwithactionbutton.css.js';
+import SimpleState from 'react-simple-state';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import Delete from 'material-ui/svg-icons/action/delete';
+import { Card, CardText, CardMedia, CardTitle } from 'material-ui/Card';
 
 const simpleState = new SimpleState();
 
@@ -30,7 +30,7 @@ class card extends Component {
   };
 
   componentDidMount() {
-    simpleState.evoke("loader", false);
+    simpleState.evoke('loader', false);
   }
 
   render() {
@@ -51,11 +51,11 @@ class card extends Component {
             <img
               style={Styles.cardImage}
               src={item.picturefront}
-              alt="cardimage"
+              alt='cardimage'
             />
           </CardMedia>
           <CardTitle
-            subtitle="Expand for Description"
+            subtitle='Expand for Description'
             actAsExpander={true}
             showExpandableButton={true}
           />

@@ -9,9 +9,9 @@
 *
 */
 
-import React from "react";
-import Dialog from "material-ui/Dialog";
-import FlatButton from "material-ui/FlatButton";
+import React from 'react';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 export default class DialogAlert extends React.Component {
   constructor(props) {
@@ -34,21 +34,21 @@ export default class DialogAlert extends React.Component {
     const actions = [
       showActions === true
         ? <div>
-            <FlatButton
-              onClick={this.props.secondAction}
-              label={this.props.secondActionLabel || "placeholder"}
-            />
-            <FlatButton
-              label="Discard"
-              primary={true}
-              onTouchTap={this.handleClose}
-            />
-          </div>
-        : <FlatButton
+          <FlatButton
+            onClick={this.props.secondAction}
+            label={this.props.secondActionLabel || 'placeholder'}
+          />
+          <FlatButton
             label="Discard"
             primary={true}
             onTouchTap={this.handleClose}
           />
+        </div>
+        : <FlatButton
+          label="Discard"
+          primary={true}
+          onTouchTap={this.handleClose}
+        />
     ];
 
     return (

@@ -30,12 +30,12 @@ class card extends Component {
     };
   }
 
-  up(e) {
+  up = () => {
     this.setState({
       count: this.state.count + 1
     });
   }
-  down(e) {
+  down = () => {
     if (this.state.count > 0) {
       this.setState({
         count: this.state.count - 1
