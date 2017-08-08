@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
-import Styles from './Checkboxlist.css.js';
+import Styles from './style.css.js';
 
 class CheckboxList extends Component {
   constructor(props) {

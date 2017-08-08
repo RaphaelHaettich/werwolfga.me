@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import Cards from '../../components/Cards/Cards';
+import Cards from '../../components/Cards';
 import { push, post, update } from '../../helpers/dbcalls';
 import { base } from '../../config/constants';
-import Deleteandroutebutton from '../../components/Deleteandroutebutton/Deleteandroutebutton';
-import Counterlabel from '../../components/Counterlabel/Counterlabel';
-import Styles from './Create.css.js';
+import DeleteAndRouteButton from '../../components/DeleteAndRouteButton';
+import CounterLabel from '../../components/CounterLabel';
+import Styles from './style.css.js';
 import RaisedButton from 'material-ui/RaisedButton';
 import SimpleState from 'react-simple-state';
-import Warningwindow from '../../components/Warningwindow/Warningwindow';
+import WarningWindow from '../../components/WarningWindow';
 import shuffle from '../../helpers/shuffle';
 
 const simpleState = new SimpleState();
@@ -184,14 +184,14 @@ class create extends Component {
             <h3>
               Lobby ID: {this.state.lobbyId}
             </h3>
-            <Counterlabel
+            <CounterLabel
               labelText={'Joined People: '}
               dbReference={
                 'activegame/' + this.state.lobbyKey + '/memberarray/'
               }
               state={'count'}
             />
-            <Warningwindow
+            <WarningWindow
               message={this.state.alertMsg}
               ref={dialog => {
                 this.dialog = dialog;
@@ -205,7 +205,7 @@ class create extends Component {
                   onClick={this.startGame.bind(this)}
                   label={'Start'}
                 />
-                <Deleteandroutebutton
+                <DeleteAndRouteButton
                   route={'/main'}
                   labelText={'Discard'}
                   dbReference={'activegame/' + this.state.lobbyKey}
@@ -219,7 +219,7 @@ class create extends Component {
                   onClick={this.startGame.bind(this)}
                   label={'Start'}
                 />
-                <Deleteandroutebutton
+                <DeleteAndRouteButton
                   route={'/main'}
                   labelText={'Discard'}
                   dbReference={'activegame/' + this.state.lobbyKey}

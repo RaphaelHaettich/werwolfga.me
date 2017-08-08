@@ -12,7 +12,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { logout } from '../../helpers/auth';
 import AppBar from 'material-ui/AppBar';
-import Styles from './Navbar.css.js';
+import Styles from './style.css.js';
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';

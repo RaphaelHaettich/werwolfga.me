@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { fetch, post } from '../../helpers/dbcalls';
 import { base } from '../../config/constants';
-import Flipcard from '../../components/Flipcard/Flipcard';
-import CheckboxList from '../../components/Checkboxlist/Checkboxlist';
+import FlipCard from '../../components/FlipCard';
+import CheckboxList from '../../components/CheckboxList';
 import SimpleState from 'react-simple-state';
 import RaisedButton from 'material-ui/RaisedButton';
-import Warningwindow from '../../components/Warningwindow/Warningwindow';
+import WarningWindow from '../../components/WarningWindow';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Gavel from 'material-ui/svg-icons/action/gavel';
 import Viewlist from 'material-ui/svg-icons/action/view-list';
-import Votelist from '../../components/Votelist/Votelist';
-import Styles from './Game.css.js';
+import VoteList from '../../components/VoteList';
+import Styles from './style.css.js';
 const simpleState = new SimpleState();
 
 export default class Gameadmin extends Component {
@@ -216,7 +216,7 @@ export default class Gameadmin extends Component {
             <h2>
               {this.state.displayName} your card is:
             </h2>
-            <Flipcard data={this.state.cards} />
+            <FlipCard data={this.state.cards} />
             <FloatingActionButton
               style={Styles.fab}
               onTouchTap={this.initVote}
@@ -243,7 +243,7 @@ export default class Gameadmin extends Component {
                 />
               </div>
               : <div>
-                <Votelist disabled={true} voteData={this.state.votes} />
+                <VoteList disabled={true} voteData={this.state.votes} />
                 <RaisedButton
                   primary={true}
                   style={Styles.centeredOnlyHorizontal}
@@ -258,7 +258,7 @@ export default class Gameadmin extends Component {
               <Viewlist />
             </FloatingActionButton>
           </div>}
-        <Warningwindow
+        <WarningWindow
           message={'Game finished'}
           secondAction={this.gameDone}
           secondActionShow={true}

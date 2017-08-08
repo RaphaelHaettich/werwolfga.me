@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { fetch, post, remove } from '../../helpers/dbcalls';
 import SimpleState from 'react-simple-state';
-import Cards from '../../components/Cards/Cards';
+import Cards from '../../components/Cards';
 import { base } from '../../config/constants';
-import Votelist from '../../components/Votelist/Votelist';
-import Styles from './Gameadmin.css.js';
+import VoteList from '../../components/VoteList';
+import Styles from './style.css.js';
 import RaisedButton from 'material-ui/RaisedButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Gavel from 'material-ui/svg-icons/action/gavel';
 import Viewlist from 'material-ui/svg-icons/action/view-list';
-import Deleteandroutebutton from '../../components/Deleteandroutebutton/Deleteandroutebutton';
+import DeleteAndRouteButton from '../../components/DeleteAndRouteButton';
 const simpleState = new SimpleState();
 
 export default class Gameadmin extends Component {
@@ -183,7 +183,7 @@ export default class Gameadmin extends Component {
               data={this.state.list}
             />
             <div style={Styles.centeredOnlyHorizontal}>
-              <Deleteandroutebutton
+              <DeleteAndRouteButton
                 route={'/main'}
                 labelText={'Game finished'}
                 dbReference={'activegame/' + sessionStorage.lobbyNumber}
@@ -198,7 +198,7 @@ export default class Gameadmin extends Component {
             </FloatingActionButton>
           </div>
           : <div>
-            <Votelist disabled={true} voteData={this.state.votes} />
+            <VoteList disabled={true} voteData={this.state.votes} />
             <RaisedButton
               style={Styles.centeredOnlyHorizontal}
               primary={true}

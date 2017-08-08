@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
-import Styles from './Main.css.js';
+import Styles from './style.css.js';
 import SimpleState from 'react-simple-state';
 import { base } from '../../config/constants';
 import { fetch } from '../../helpers/dbcalls';

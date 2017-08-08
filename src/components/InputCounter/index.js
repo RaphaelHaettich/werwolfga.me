@@ -7,7 +7,7 @@
 
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
-import Styles from './Inputcounter.css.js';
+import Styles from './style.css.js';
 
 const inputCounter = ({ up, down, count }) => {
   return (

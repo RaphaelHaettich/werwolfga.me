@@ -9,7 +9,7 @@
 
 import React, { Component } from 'react';
 import Divider from 'material-ui/Divider';
-import Styles from './Cardwithoutcounter.css.js';
+import Styles from './style.css.js';
 import SimpleState from 'react-simple-state';
 import { Card, CardText, CardMedia, CardTitle } from 'material-ui/Card';
 

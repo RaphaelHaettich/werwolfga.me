@@ -4,7 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router-dom';
 import TextField from 'material-ui/TextField';
 import SimpleState from 'react-simple-state';
-import Warningwindow from '../../components/Warningwindow/Warningwindow';
+import WarningWindow from '../../components/WarningWindow';
 const simpleState = new SimpleState();
 
 function setErrorMsg(error) {
@@ -67,7 +67,7 @@ export default class Register extends Component {
             <RaisedButton label='Login' />
           </Link>
         </form>
-        <Warningwindow
+        <WarningWindow
           message={this.state.registerError}
           ref={dialog => {
             this.dialog = dialog;

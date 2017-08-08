@@ -5,8 +5,8 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { base } from '../../config/constants';
-import Warningwindow from '../../components/Warningwindow/Warningwindow';
-import Styles from './Join.css.js';
+import WarningWindow from '../../components/WarningWindow';
+import Styles from './style.css.js';
 import SimpleState from 'react-simple-state';
 import { Container, Row, Col } from 'react-grid-system';
 
@@ -175,7 +175,7 @@ export default class join extends Component {
             />
             : <div />}
         </CardActions>
-        <Warningwindow
+        <WarningWindow
           message={this.state.alertMsg}
           ref={dialog => {
             this.dialog = dialog;

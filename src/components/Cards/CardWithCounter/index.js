@@ -8,9 +8,9 @@
 */
 
 import React, { Component } from 'react';
-import Inputcounter from '../../Inputcounter/Inputcounter';
+import InputCounter from '../../InputCounter';
 import Divider from 'material-ui/Divider';
-import Styles from './Cardwithcounter.css.js';
+import Styles from './style.css.js';
 import SimpleState from 'react-simple-state';
 import {
   Card,
@@ -91,7 +91,7 @@ class card extends Component {
             {item.description}
           </CardText>
           <CardActions>
-            <Inputcounter
+            <InputCounter
               count={this.state.count}
               up={this.up.bind(this)}
               down={this.down.bind(this)}

@@ -5,9 +5,9 @@
 */
 
 import React, { Component } from 'react';
-import Cardwithcounter from './Cardwithcounter/Cardwithcounter';
-import Cardwithoutcounter from './Cardwithoutcounter/Cardwithoutcounter';
-import Cardwithactionbutton from './Cardwithactionbutton/Cardwithactionbutton';
+import CardWithCounter from './CardWithCounter';
+import CardWithoutCounter from './CardWithoutCounter';
+import CardWithActionButton from './CardWithActionButton';
 
 class cards extends Component {
   constructor(props) {
@@ -20,14 +20,14 @@ class cards extends Component {
   render() {
     var listItems = this.props.data.map((item, index) => {
       return this.props.cardStyle === 'counter'
-        ? <Cardwithcounter key={index} item={item} />
+        ? <CardWithCounter key={index} item={item} />
         : this.props.cardStyle === 'action'
-          ? <Cardwithactionbutton
+          ? <CardWithActionButton
             key={index}
             action={this.props.action}
             item={item}
           />
-          : <Cardwithoutcounter key={index} item={item} />;
+          : <CardWithoutCounter key={index} item={item} />;
     });
 
     return (

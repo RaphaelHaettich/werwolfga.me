@@ -5,7 +5,7 @@
 
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
-import Styles from './Flipcard.css.js';
+import Styles from './style.css.js';
 import ReactCardFlip from 'react-card-flip';
 import SimpleState from 'react-simple-state';
 import { Card, CardText, CardTitle } from 'material-ui/Card';

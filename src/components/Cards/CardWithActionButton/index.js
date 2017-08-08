@@ -9,7 +9,7 @@
 
 import React, { Component } from 'react';
 import Divider from 'material-ui/Divider';
-import Styles from './Cardwithactionbutton.css.js';
+import Styles from './style.css.js';
 import SimpleState from 'react-simple-state';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Delete from 'material-ui/svg-icons/action/delete';

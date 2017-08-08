@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import SimpleState from 'react-simple-state';
-import Warningwindow from '../../components/Warningwindow/Warningwindow';
+import WarningWindow from '../../components/WarningWindow';
 const simpleState = new SimpleState();
 
 function setErrorMsg(error) {
@@ -74,7 +74,7 @@ export default class Login extends Component {
           </Link>
           <br />
         </form>
-        <Warningwindow
+        <WarningWindow
           message={this.state.loginMessage}
           secondAction={this.resetPassword}
           secondActionShow={this.state.secondActionShow}
