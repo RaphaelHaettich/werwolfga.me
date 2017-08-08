@@ -105,6 +105,12 @@ class create extends Component {
     });
   }
 
+  componentWillUnmount() {
+    if (this.ref) {
+      base.removeBinding(this.ref);
+    }
+  }
+
   startGame = () => {
     const usersObj = simpleState.getState('count');
     const cardsObj = simpleState.getState('cards');
@@ -166,11 +172,6 @@ class create extends Component {
           'layers. '
       });
       this.dialog.handleOpen();
-    }
-  }
-  componentWillUnmount() {
-    if (this.ref) {
-      base.removeBinding(this.ref);
     }
   }
 

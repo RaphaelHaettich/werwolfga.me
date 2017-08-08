@@ -12,9 +12,6 @@ import { Card, CardText, CardTitle } from 'material-ui/Card';
 const simpleState = new SimpleState();
 
 class card extends Component {
-  componentDidMount() {
-    simpleState.evoke('loader', false);
-  }
   constructor(props) {
     super(props);
     this.state = {
@@ -22,6 +19,11 @@ class card extends Component {
     };
     this.handleClick = this.handleClick.bind(this);
   }
+
+  componentDidMount() {
+    simpleState.evoke('loader', false);
+  }
+  
   handleClick(e) {
     e.preventDefault();
     this.setState({

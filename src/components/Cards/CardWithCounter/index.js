@@ -30,18 +30,6 @@ class card extends Component {
     };
   }
 
-  up = () => {
-    this.setState({
-      count: this.state.count + 1
-    });
-  }
-  down = () => {
-    if (this.state.count > 0) {
-      this.setState({
-        count: this.state.count - 1
-      });
-    }
-  }
   componentDidMount() {
     simpleState.evoke('loader', false);
   }
@@ -68,9 +56,21 @@ class card extends Component {
     });
   }
 
+  up = () => {
+    this.setState({
+      count: this.state.count + 1
+    });
+  }
+  down = () => {
+    if (this.state.count > 0) {
+      this.setState({
+        count: this.state.count - 1
+      });
+    }
+  }
+
   render() {
     let item = this.props.item;
-
     return (
       <div style={Styles.card}>
         <Divider />

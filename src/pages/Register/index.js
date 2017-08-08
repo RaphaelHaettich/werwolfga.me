@@ -19,6 +19,10 @@ export default class Register extends Component {
     };
   }
 
+  componentDidMount() {
+    simpleState.evoke('loader', false);
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     if (this.displayName.input.value === '') {
@@ -35,9 +39,7 @@ export default class Register extends Component {
       });
     }
   };
-  componentDidMount() {
-    simpleState.evoke('loader', false);
-  }
+
   render() {
     return (
       <div>

@@ -21,6 +21,10 @@ export default class Login extends Component {
     };
   }
 
+  componentDidMount() {
+    simpleState.evoke('loader', false);
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     login(this.email.input.value, this.pw.input.value).catch(e => {
@@ -32,7 +36,7 @@ export default class Login extends Component {
       this.dialog.handleOpen();
     });
   };
-
+  
   resetPassword = () => {
     this.dialog.handleClose();
     this.setState({ secondActionShow: false });
@@ -47,9 +51,7 @@ export default class Login extends Component {
         this.dialog.handleOpen()
       );
   };
-  componentDidMount() {
-    simpleState.evoke('loader', false);
-  }
+
   render() {
     return (
       <div>

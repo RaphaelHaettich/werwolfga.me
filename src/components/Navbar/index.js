@@ -32,13 +32,6 @@ class navbar extends Component {
       lang2Checked: false
     };
   }
-  titleAction = () => {
-    this.props.history.push(this.props.routeTitle);
-  }
-  rightLabelAction = () => {
-    logout();
-    this.props.history.push(this.props.routeRight);
-  };
 
   componentWillMount() {
     if (simpleState.getState('lang') === 'en') {
@@ -49,6 +42,14 @@ class navbar extends Component {
       this.setState({ lang1Checked: false });
     }
   }
+
+  titleAction = () => {
+    this.props.history.push(this.props.routeTitle);
+  }
+  rightLabelAction = () => {
+    logout();
+    this.props.history.push(this.props.routeRight);
+  };
 
   lang1 = () => {
     simpleState.evoke('lang', 'en');

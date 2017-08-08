@@ -25,13 +25,13 @@ class card extends Component {
     };
   }
 
-  fabAction = () => {
-    this.props.action(this.props.item.userKey);
-  };
-
   componentDidMount() {
     simpleState.evoke('loader', false);
   }
+
+  fabAction = () => {
+    this.props.action(this.props.item.userKey);
+  };
 
   render() {
     let item = this.props.item;

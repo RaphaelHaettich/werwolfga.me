@@ -24,6 +24,54 @@ export default class Gameadmin extends Component {
     this.componentDidMount = this.componentDidMount.bind(this);
   }
 
+  componentDidMount() {
+    if (
+      simpleState.getState('gameId').id === '' &&
+      sessionStorage.lobbyNumber === undefined
+    ) {
+      this.props.history.push('main');
+    } else {
+      let gameId = '';
+      if (simpleState.getState('gameId').id !== '') {
+        gameId = simpleState.getState('gameId').id;
+        sessionStorage.lobbyNumber = gameId;
+      } else if (sessionStorage.lobbyNumber !== undefined) {
+        gameId = sessionStorage.lobbyNumber;
+      }
+      let getGameCode = new Promise((resolve, reject) => {
+        const collection = 'activegame/' + gameId + '/code/';
+        const arrayBoolean = false;
+        fetch(resolve, reject, collection, {}, arrayBoolean);
+      });
+      getGameCode.then(data => {
+        this.setState({ gameCode: data });
+      });
+
+      this.listen2 = base.listenTo('activegame/' + gameId + '/memberarray/', {
+        context: this,
+        asArray: true,
+        then(data) {
+          const activeData = data;
+          let lang = simpleState.getState('lang');
+          this.getCardInfo(activeData, lang);
+          simpleState.subscribe('lang', this, nextState => {
+            simpleState.evoke('loader', true);
+            this.getCardInfo(activeData, nextState);
+          });
+        }
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.listen1) {
+      base.removeBinding(this.listen1);
+    }
+    if (this.listen2) {
+      base.removeBinding(this.listen2);
+    }
+  }
+
   clearVote = () => {
     simpleState.evoke('loader', true);
     const gameId = sessionStorage.lobbyNumber;
@@ -121,53 +169,6 @@ export default class Gameadmin extends Component {
     this.setState({ voting: false });
   };
 
-  componentDidMount() {
-    if (
-      simpleState.getState('gameId').id === '' &&
-      sessionStorage.lobbyNumber === undefined
-    ) {
-      this.props.history.push('main');
-    } else {
-      let gameId = '';
-      if (simpleState.getState('gameId').id !== '') {
-        gameId = simpleState.getState('gameId').id;
-        sessionStorage.lobbyNumber = gameId;
-      } else if (sessionStorage.lobbyNumber !== undefined) {
-        gameId = sessionStorage.lobbyNumber;
-      }
-      let getGameCode = new Promise((resolve, reject) => {
-        const collection = 'activegame/' + gameId + '/code/';
-        const arrayBoolean = false;
-        fetch(resolve, reject, collection, {}, arrayBoolean);
-      });
-      getGameCode.then(data => {
-        this.setState({ gameCode: data });
-      });
-
-      this.listen2 = base.listenTo('activegame/' + gameId + '/memberarray/', {
-        context: this,
-        asArray: true,
-        then(data) {
-          const activeData = data;
-          let lang = simpleState.getState('lang');
-          this.getCardInfo(activeData, lang);
-          simpleState.subscribe('lang', this, nextState => {
-            simpleState.evoke('loader', true);
-            this.getCardInfo(activeData, nextState);
-          });
-        }
-      });
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.listen1) {
-      base.removeBinding(this.listen1);
-    }
-    if (this.listen2) {
-      base.removeBinding(this.listen2);
-    }
-  }
   render() {
     return (
       <div className="col-sm-6 col-sm-offset-3">

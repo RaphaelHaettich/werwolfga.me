@@ -21,6 +21,28 @@ export default class join extends Component {
     };
   }
 
+  componentDidMount() {
+    let lobbyCode = sessionStorage.lobbyNumber;
+    if (lobbyCode) {
+      let getGame = new Promise((resolve, reject) => {
+        const collection = 'activegame/' + lobbyCode;
+        fetch(resolve, reject, collection, {}, false);
+      });
+      getGame.then(data => {
+        if (data.state === 'ready') {
+          this.setState({ activeSession: true });
+        }
+      });
+    }
+    simpleState.evoke('loader', false);
+  }
+
+  componentWillUnmount() {
+    if (this.ref) {
+      base.removeBinding(this.ref);
+    }
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     const userId = base.app().INTERNAL.getUid();
@@ -115,28 +137,6 @@ export default class join extends Component {
     simpleState.evoke('loader', true);
     this.props.history.push('game');
   };
-
-  componentDidMount() {
-    let lobbyCode = sessionStorage.lobbyNumber;
-    if (lobbyCode) {
-      let getGame = new Promise((resolve, reject) => {
-        const collection = 'activegame/' + lobbyCode;
-        fetch(resolve, reject, collection, {}, false);
-      });
-      getGame.then(data => {
-        if (data.state === 'ready') {
-          this.setState({ activeSession: true });
-        }
-      });
-    }
-    simpleState.evoke('loader', false);
-  }
-
-  componentWillUnmount() {
-    if (this.ref) {
-      base.removeBinding(this.ref);
-    }
-  }
 
   render() {
     return (
