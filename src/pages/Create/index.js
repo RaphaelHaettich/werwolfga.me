@@ -200,8 +200,10 @@ class create extends Component {
             {window.matchMedia('(max-width: 374px)').matches === true
               ? <div style={Styles.centeredOnlyHorizontalSmallScreen}>
                 <RaisedButton
+                  role="button"
+                  tabIndex={0}
                   style={Styles.buttonMarginRight}
-                  primary={true}
+                  primary
                   onClick={this.startGame.bind(this)}
                   label={'Start'}
                 />
@@ -214,8 +216,10 @@ class create extends Component {
               </div>
               : <div>
                 <RaisedButton
+                  role="button"
+                  tabIndex={0}
                   style={Styles.buttonMarginRight}
-                  primary={true}
+                  primary
                   onClick={this.startGame.bind(this)}
                   label={'Start'}
                 />

@@ -43,10 +43,10 @@ class card extends Component {
           </CardMedia>
           <CardTitle
             subtitle="Expand for Description"
-            actAsExpander={true}
-            showExpandableButton={true}
+            actAsExpander
+            showExpandableButton
           />
-          <CardText expandable={true}>
+          <CardText expandable>
             {item.description}
           </CardText>
         </Card>

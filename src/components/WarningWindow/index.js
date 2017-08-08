@@ -35,18 +35,20 @@ export default class DialogAlert extends React.Component {
       showActions === true
         ? <div>
           <FlatButton
+            role="button"
+            tabIndex={0}
             onClick={this.props.secondAction}
             label={this.props.secondActionLabel || 'placeholder'}
           />
           <FlatButton
             label="Discard"
-            primary={true}
+            primary
             onTouchTap={this.handleClose}
           />
         </div>
         : <FlatButton
           label="Discard"
-          primary={true}
+          primary
           onTouchTap={this.handleClose}
         />
     ];
@@ -55,7 +57,7 @@ export default class DialogAlert extends React.Component {
       <div>
         <Dialog
           actions={actions}
-          modal={true}
+          modal
           open={this.state.open}
           onRequestClose={this.handleClose}
         >

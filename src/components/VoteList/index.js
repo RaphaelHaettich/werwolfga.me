@@ -12,10 +12,10 @@ class Votelist extends Component {
   }
 
   render() {
-    var listItems = this.props.voteData.map((item, index) => {
+    var listItems = this.props.voteData.map((item, id) => {
       return (
         <ListItem
-          key={index}
+          key={id}
           primaryText={item.displayName}
           secondaryText={item.votedFor}
           disabled={this.props.disabled}

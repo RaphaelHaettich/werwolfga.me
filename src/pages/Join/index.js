@@ -153,7 +153,7 @@ export default class join extends Component {
                     type="tel"
                     hintText="123456"
                     floatingLabelText="Lobby Id"
-                    fullWidth={true}
+                    fullWidth
                   />
                 </Col>
                 <Col xs={4}>
@@ -168,8 +168,10 @@ export default class join extends Component {
           </form>
           {this.state.activeSession === true
             ? <RaisedButton
+              role="button"
+              tabIndex={0}
               label="Rejoin game"
-              primary={true}
+              primary
               style={Styles.centeredOnlyHorizontal}
               onClick={this.joinLastGame}
             />

@@ -43,9 +43,9 @@ export default class counterlabel extends Component {
       <div>
         <h3>
           {this.props.labelText}
-          <label>
+          <div >
             {counter}
-          </label>
+          </div>
         </h3>
       </div>
     );

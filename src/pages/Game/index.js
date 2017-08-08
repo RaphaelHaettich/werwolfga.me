@@ -235,7 +235,9 @@ export default class Gameadmin extends Component {
                   checkListChanged={this.checkListChanged}
                 />
                 <RaisedButton
-                  primary={true}
+                  tabIndex={0}
+                  role="button"
+                  primary
                   style={Styles.centeredOnlyHorizontal}
                   label={'Vote!!'}
                   disabled={this.state.buttonDisabled}
@@ -243,9 +245,11 @@ export default class Gameadmin extends Component {
                 />
               </div>
               : <div>
-                <VoteList disabled={true} voteData={this.state.votes} />
+                <VoteList disabled voteData={this.state.votes} />
                 <RaisedButton
-                  primary={true}
+                  tabIndex={0}
+                  role="button"
+                  primary
                   style={Styles.centeredOnlyHorizontal}
                   label={'Change Vote'}
                   onClick={this.changeVote}
@@ -261,7 +265,7 @@ export default class Gameadmin extends Component {
         <WarningWindow
           message={'Game finished'}
           secondAction={this.gameDone}
-          secondActionShow={true}
+          secondActionShow
           secondActionLabel={'Leave game'}
           ref={dialog => {
             this.dialog = dialog;

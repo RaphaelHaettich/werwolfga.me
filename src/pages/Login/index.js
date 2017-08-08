@@ -57,18 +57,18 @@ export default class Login extends Component {
         <form onSubmit={this.handleSubmit}>
           <TextField
             type="email"
-            fullWidth={true}
+            fullWidth
             ref={email => (this.email = email)}
             floatingLabelText="Email"
           />
           <TextField
-            fullWidth={true}
+            fullWidth
             type="password"
             ref={pw => (this.pw = pw)}
             floatingLabelText="Password"
           />
           <br />
-          <RaisedButton type="submit" label="Login" primary={true} />
+          <RaisedButton type="submit" label="Login" primary />
           <Link to="/register">
             <RaisedButton label="Register" />
           </Link>

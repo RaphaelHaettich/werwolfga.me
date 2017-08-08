@@ -13,25 +13,29 @@ const inputCounter = ({ up, down, count }) => {
   return (
     <div>
       <FlatButton
+        role="button"
+        tabIndex={0}
         style={Styles.buttonStyle}
         labelStyle={Styles.buttonLabelStyle}
         onClick={() => {
           down();
         }}
         label="−"
-        primary={true}
+        primary
       />
-      <label style={Styles.counter}>
+      <div style={Styles.counter}>
         {count}
-      </label>
+      </div>
       <FlatButton
+        role="button"
+        tabIndex={0}
         style={Styles.buttonStyle}
         labelStyle={Styles.buttonLabelStyle}
         onClick={() => {
           up();
         }}
         label="+"
-        primary={true}
+        primary
       />
     </div>
   );

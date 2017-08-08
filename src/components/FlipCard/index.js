@@ -39,10 +39,10 @@ class card extends Component {
               <CardTitle
                 title={item.name}
                 subtitle="Expand for Description"
-                actAsExpander={true}
-                showExpandableButton={true}
+                actAsExpander
+                showExpandableButton
               />
-              <CardText expandable={true}>
+              <CardText expandable>
                 {item.description}
               </CardText>
             </Card>
@@ -52,22 +52,25 @@ class card extends Component {
               <CardTitle
                 title="Hidden"
                 subtitle="Expand for Description"
-                actAsExpander={true}
-                showExpandableButton={true}
+                actAsExpander
+                showExpandableButton
               />
-              <CardText expandable={true}>Hidden</CardText>
+              <CardText expandable>Hidden</CardText>
             </Card>
           </Paper>}
         <ReactCardFlip isFlipped={this.state.isFlipped}>
           <img
+            role="button"
+            tabIndex={0}
             style={Styles.cardImage}
             onClick={this.handleClick}
             key="front"
             src={item.picturefront}
             alt=""
           />
-
           <img
+            role="button"
+            tabIndex={0}
             style={Styles.cardImage}
             onClick={this.handleClick}
             key="back"

@@ -16,10 +16,10 @@ class CheckboxList extends Component {
   }
 
   render() {
-    let checkboxListItem = this.props.votesData.map((item, index) => {
+    let checkboxListItem = this.props.votesData.map((item, id) => {
       return (
         <RadioButton
-          key={index}
+          key={id}
           value={item.key + '|' + item.displayName}
           label={item.displayName}
           style={Styles.radioButton}

@@ -36,6 +36,8 @@ class deleteAndRouteButton extends Component {
   render() {
     return (
       <RaisedButton
+        role="button"
+        tabIndex={0}
         onClick={this.delete.bind(this)}
         label={this.props.labelText}
         primary={this.state.primary}

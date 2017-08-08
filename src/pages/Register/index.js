@@ -18,7 +18,7 @@ export default class Register extends Component {
       registerError: null
     };
   }
-  
+
   handleSubmit = e => {
     e.preventDefault();
     if (this.displayName.input.value === '') {
@@ -44,25 +44,25 @@ export default class Register extends Component {
         <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
           <TextField
-            fullWidth={true}
+            fullWidth
             type="email"
             ref={email => (this.email = email)}
             floatingLabelText="Email"
           />
           <TextField
-            fullWidth={true}
+            fullWidth
             type="text"
             ref={displayName => (this.displayName = displayName)}
             floatingLabelText="Username"
           />
           <TextField
-            fullWidth={true}
+            fullWidth
             type="password"
             ref={pw => (this.pw = pw)}
             floatingLabelText="Password"
           />
           <br />
-          <RaisedButton type="submit" label="Register" primary={true} />
+          <RaisedButton type="submit" label="Register" primary />
           <Link to="/login">
             <RaisedButton label="Login" />
           </Link>

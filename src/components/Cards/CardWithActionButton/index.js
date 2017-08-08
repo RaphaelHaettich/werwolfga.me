@@ -41,7 +41,7 @@ class card extends Component {
         <Divider />
         <Card>
           <FloatingActionButton
-            mini={true}
+            mini
             style={Styles.fab}
             onTouchTap={this.fabAction}
           >
@@ -56,10 +56,10 @@ class card extends Component {
           </CardMedia>
           <CardTitle
             subtitle="Expand for Description"
-            actAsExpander={true}
-            showExpandableButton={true}
+            actAsExpander
+            showExpandableButton
           />
-          <CardText expandable={true}>
+          <CardText expandable>
             {item.description}
           </CardText>
         </Card>

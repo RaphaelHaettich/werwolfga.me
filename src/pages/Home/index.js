@@ -14,10 +14,10 @@ export default class Home extends Component {
         Home. Not Protected. Anyone can see this.
         <br />
         <Link to="/login">
-          <RaisedButton label="Login" primary={true} />
+          <RaisedButton label="Login" primary />
         </Link>
         <Link to="/register">
-          <RaisedButton label="Registration" primary={true} />
+          <RaisedButton label="Registration" primary />
         </Link>
       </div>
     );

@@ -187,7 +187,7 @@ export default class Gameadmin extends Component {
                 route={'/main'}
                 labelText={'Game finished'}
                 dbReference={'activegame/' + sessionStorage.lobbyNumber}
-                primary={true}
+                primary
               />
             </div>
             <FloatingActionButton
@@ -198,10 +198,12 @@ export default class Gameadmin extends Component {
             </FloatingActionButton>
           </div>
           : <div>
-            <VoteList disabled={true} voteData={this.state.votes} />
+            <VoteList disabled voteData={this.state.votes} />
             <RaisedButton
+              role="button"
+              tabIndex={0}
               style={Styles.centeredOnlyHorizontal}
-              primary={true}
+              primary
               label={'Clear vote'}
               onClick={this.clearVote}
             />

@@ -18,16 +18,16 @@ class cards extends Component {
   }
 
   render() {
-    var listItems = this.props.data.map((item, index) => {
+    var listItems = this.props.data.map((item, id) => {
       return this.props.cardStyle === 'counter'
-        ? <CardWithCounter key={index} item={item} />
+        ? <CardWithCounter key={id} item={item} />
         : this.props.cardStyle === 'action'
           ? <CardWithActionButton
-            key={index}
+            key={id}
             action={this.props.action}
             item={item}
           />
-          : <CardWithoutCounter key={index} item={item} />;
+          : <CardWithoutCounter key={id} item={item} />;
     });
 
     return (

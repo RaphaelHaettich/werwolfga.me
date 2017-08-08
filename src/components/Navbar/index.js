@@ -77,20 +77,20 @@ class navbar extends Component {
       >
         <MenuItem
           primaryText="English"
-          insetChildren={true}
+          insetChildren
           checked={this.state.lang1Checked}
           onTouchTap={this.lang1}
         />
         <MenuItem
           primaryText="Deutsch"
-          insetChildren={true}
+          insetChildren
           checked={this.state.lang2Checked}
           onTouchTap={this.lang2}
         />
         <Divider />
         <MenuItem
           primaryText="Sign out"
-          insetChildren={true}
+          insetChildren
           onTouchTap={this.rightLabelAction}
         />
       </IconMenu>;

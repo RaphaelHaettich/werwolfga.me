@@ -40,18 +40,18 @@ export default class main extends Component {
         {window.matchMedia('(max-width: 361px)').matches === true
           ? <div style={Styles.centeredSmallScreen}>
             <Link style={Styles.buttonPaddingRight} to="/create">
-              <RaisedButton label="Create" primary={true} />
+              <RaisedButton label="Create" primary />
             </Link>
             <Link to="/join">
-              <RaisedButton label="Join" primary={true} />
+              <RaisedButton label="Join" primary />
             </Link>
           </div>
           : <div style={Styles.centered}>
             <Link style={Styles.buttonPaddingRight} to="/create">
-              <RaisedButton label="Create" primary={true} />
+              <RaisedButton label="Create" primary />
             </Link>
             <Link to="/join">
-              <RaisedButton label="Join" primary={true} />
+              <RaisedButton label="Join" primary />
             </Link>
           </div>}
       </div>
