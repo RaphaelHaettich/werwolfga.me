@@ -49,6 +49,16 @@
     "react/prop-types": [
       2,
       {"skipUndeclared": true}
+    ],
+    "react/prefer-es6-class": [
+      2, 
+      "always"
+    ],
+    "react/prefer-stateless-function": [
+      2
+    ],
+    "react/jsx-pascal-case": [
+      2
     ]
   }
 }
