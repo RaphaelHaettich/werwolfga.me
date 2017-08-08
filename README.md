@@ -22,7 +22,7 @@
        pictureback: string:url
        picturefront: string:url
 ```
-* Swap out the firebase config in ```config/constants``` with your own
+* Swap out the firebase config in ```src/config/constants``` with your own
 * ```yarn```
 * ```yarn start```
 * Visit ```localhost:3000```
