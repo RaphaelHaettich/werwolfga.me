@@ -121,6 +121,24 @@
     ],
     "react/jsx-boolean-value": [
       1
+    ],
+    "react/jsx-wrap-multilines": [
+      1
+    ],
+    "react/self-closing-comp": [
+      "error", {
+        "component": true,
+        "html": true
+      }
+    ],
+    "react/jsx-no-bind": [
+      1,
+      {
+        "allowArrowFunctions": true
+      }
+    ],
+    "react/require-render-return": [
+      1
     ]
   }
 }
