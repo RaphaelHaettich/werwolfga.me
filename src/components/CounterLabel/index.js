@@ -31,7 +31,7 @@ export default class counterlabel extends Component {
   }
 
   render() {
-    var counter = this.state.count;
+    let counter = this.state.count;
     simpleState.evoke(this.props.state, {
       count: counter,
     });

@@ -18,7 +18,7 @@ class cards extends Component {
   }
 
   render() {
-    var listItems = this.props.data.map((item, id) => this.props.cardStyle === 'counter'
+    const listItems = this.props.data.map((item, id) => this.props.cardStyle === 'counter'
       ? <CardWithCounter key={id} item={item} />
       : this.props.cardStyle === 'action'
         ? <CardWithActionButton

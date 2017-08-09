@@ -90,7 +90,7 @@ export default class Gameadmin extends Component {
       fetch(resolve, reject, collection);
     });
     getCardInfos.then((data) => {
-      for (var i = 0; i < activeData.length; i++) {
+      for (let i = 0; i < activeData.length; i++) {
         const cardId = activeData[i].card;
         const index = data.findIndex(i => i.key === cardId);
         activeData[i].userKey = activeData[i].key;

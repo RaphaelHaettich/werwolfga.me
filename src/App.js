@@ -59,10 +59,10 @@ export default class App extends Component {
     };
   }
   componentWillMount() {
-    const navlang = navigator.language.split('-')[0];
+    const navLang = navigator.language.split('-')[0];
     let language = undefined;
-    if (navlang === 'en' || navlang === 'de') {
-      language = navlang;
+    if (navLang === 'en' || navLang === 'de') {
+      language = navLang;
     }
     simpleState.addListener(
       'lang',

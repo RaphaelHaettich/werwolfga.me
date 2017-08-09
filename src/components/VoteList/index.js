@@ -12,7 +12,7 @@ class Votelist extends Component {
   }
 
   render() {
-    var listItems = this.props.voteData.map((item, id) => (
+    const listItems = this.props.voteData.map((item, id) => (
       <ListItem
         key={id}
         primaryText={item.displayName}

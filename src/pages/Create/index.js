@@ -25,7 +25,7 @@ class create extends Component {
   }
 
   componentDidMount() {
-    var self = this;
+    const self = this;
     const userId = base.app().INTERNAL.getUid();
     // functions to call
     const createLobby = () => {
