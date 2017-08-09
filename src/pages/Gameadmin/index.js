@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { fetch, post, remove } from '../../helpers/dbcalls';
+import React, { Component, } from 'react';
+import { fetch, post, remove, } from '../../helpers/dbcalls';
 import SimpleState from 'react-simple-state';
 import Cards from '../../components/Cards';
-import { base } from '../../config/constants';
+import { base, } from '../../config/constants';
 import VoteList from '../../components/VoteList';
 import Styles from './style.css.js';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -19,7 +19,7 @@ export default class Gameadmin extends Component {
       list: [],
       gameCode: null,
       voting: false,
-      votes: []
+      votes: [],
     };
     this.componentDidMount = this.componentDidMount.bind(this);
   }
@@ -44,7 +44,7 @@ export default class Gameadmin extends Component {
         fetch(resolve, reject, collection, {}, arrayBoolean);
       });
       getGameCode.then((data) => {
-        this.setState({ gameCode: data });
+        this.setState({ gameCode: data, });
       });
 
       this.listen2 = base.listenTo(`activegame/${gameId}/memberarray/`, {
@@ -58,7 +58,7 @@ export default class Gameadmin extends Component {
             simpleState.evoke('loader', true);
             this.getCardInfo(activeData, nextState);
           });
-        }
+        },
       });
     }
   }
@@ -102,7 +102,7 @@ export default class Gameadmin extends Component {
         activeData[i].cardHeader =
           `${activeData[i].displayName}: ${data[index].name}`;
       }
-      this.setState({ list: activeData });
+      this.setState({ list: activeData, });
       simpleState.evoke('loader', false);
     });
   };
@@ -121,13 +121,13 @@ export default class Gameadmin extends Component {
 
   initVote = () => {
     simpleState.evoke('loader', true);
-    this.setState({ voting: true });
+    this.setState({ voting: true, });
     const data = this.state.list;
     const votingData = [];
     for (let i = 0; i < data.length; i++) {
       votingData[data[i].userKey] = {
         displayName: data[i].displayName,
-        votes: 0
+        votes: 0,
       };
     }
     const gameId = sessionStorage.lobbyNumber;
@@ -156,17 +156,17 @@ export default class Gameadmin extends Component {
               voteData[key].votes += 1;
             }
             const objectArr = Object.values(voteData);
-            this.setState({ votes: objectArr });
+            this.setState({ votes: objectArr, });
             simpleState.evoke('loader', false);
           });
-        }
+        },
       });
     });
   };
 
   initList = () => {
     simpleState.evoke('loader', true);
-    this.setState({ voting: false });
+    this.setState({ voting: false, });
   };
 
   render() {

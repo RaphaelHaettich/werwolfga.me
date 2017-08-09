@@ -1,50 +1,50 @@
-import { base } from '../config/constants';
+import { base, } from '../config/constants';
 
-export var push = (resolve, reject, data, collection) => {
+export const push = (resolve, reject, data, collection) => {
   base
     .push(collection, {
-      data
+      data,
     })
     .then((snapshot) => {
       resolve(snapshot);
     })
     .catch((err) => {
-      //handle error
+      // handle error
       console.error(err);
     });
 };
 
-export var update = (resolve, reject, data, collection) => {
+export const update = (resolve, reject, data, collection) => {
   base
     .update(collection, {
-      data
+      data,
     })
     .then((snapshot) => {
       resolve(snapshot);
     })
     .catch((err) => {
-      //handle error
+      // handle error
       console.error(err);
     });
 };
 
-export var post = (resolve, reject, data, collection) => {
+export const post = (resolve, reject, data, collection) => {
   base
     .post(collection, {
-      data
+      data,
     })
     .then((snapshot) => {
       resolve(snapshot);
     })
     .catch((err) => {
-      //handle error
+      // handle error
       console.error(err);
     });
 };
 
-export var fetch = (resolve, reject, collection, queryParam, asArray) => {
+export const fetch = (resolve, reject, collection, queryParam, asArray) => {
   let array = true;
-  if(asArray) {
+  if (asArray) {
     array = asArray;
   }
   const query = queryParam || {};
@@ -52,25 +52,25 @@ export var fetch = (resolve, reject, collection, queryParam, asArray) => {
     .fetch(collection, {
       context: {},
       array,
-      queries: query
+      queries: query,
     })
     .then((snapshot) => {
       resolve(snapshot);
     })
     .catch((err) => {
-      //handle error
+      // handle error
       console.error(err);
     });
 };
 
-export var remove = (resolve, reject, collection) => {
+export const remove = (resolve, reject, collection) => {
   base
     .remove(collection)
     .then(() => {
       resolve('done');
     })
     .catch((err) => {
-      //handle error
+      // handle error
       console.error(err);
     });
 };

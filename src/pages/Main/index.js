@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component, } from 'react';
+import { Link, } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import Styles from './style.css.js';
 import SimpleState from 'react-simple-state';
-import { base } from '../../config/constants';
-import { fetch } from '../../helpers/dbcalls';
+import { base, } from '../../config/constants';
+import { fetch, } from '../../helpers/dbcalls';
 const simpleState = new SimpleState();
 
 export default class main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayName: null
+      displayName: null,
     };
   }
   componentDidMount() {
@@ -24,7 +24,7 @@ export default class main extends Component {
     });
 
     name.then((data) => {
-      this.setState({ displayName: data[0].displayName });
+      this.setState({ displayName: data[0].displayName, });
       simpleState.evoke('loader', false);
     });
   }

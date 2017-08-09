@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component, } from 'react';
+import { Link, } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import SimpleState from 'react-simple-state';
 const simpleState = new SimpleState();

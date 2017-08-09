@@ -3,19 +3,19 @@
 *   item: object
 */
 
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import Paper from 'material-ui/Paper';
 import Styles from './style.css.js';
 import ReactCardFlip from 'react-card-flip';
 import SimpleState from 'react-simple-state';
-import { Card, CardText, CardTitle } from 'material-ui/Card';
+import { Card, CardText, CardTitle, } from 'material-ui/Card';
 const simpleState = new SimpleState();
 
 class card extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isFlipped: false
+      isFlipped: false,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -24,10 +24,10 @@ class card extends Component {
     simpleState.evoke('loader', false);
   }
   
-  handleClick(e) {
-    e.preventDefault();
+  handleClick(event) {
+    event.preventDefault();
     this.setState({
-      isFlipped: !this.state.isFlipped
+      isFlipped: !this.state.isFlipped,
     });
   }
 

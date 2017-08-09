@@ -8,9 +8,9 @@
 *   authed: boolean
 */
 
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { logout } from '../../helpers/auth';
+import React, { Component, } from 'react';
+import { withRouter, } from 'react-router-dom';
+import { logout, } from '../../helpers/auth';
 import AppBar from 'material-ui/AppBar';
 import Styles from './style.css.js';
 import FlatButton from 'material-ui/FlatButton';
@@ -29,17 +29,17 @@ class navbar extends Component {
       authed: false,
       loading: true,
       lang1Checked: false,
-      lang2Checked: false
+      lang2Checked: false,
     };
   }
 
   componentWillMount() {
     if (simpleState.getState('lang') === 'en') {
-      this.setState({ lang1Checked: true });
-      this.setState({ lang2Checked: false });
+      this.setState({ lang1Checked: true, });
+      this.setState({ lang2Checked: false, });
     } else if (simpleState.getState('lang') === 'de') {
-      this.setState({ lang2Checked: true });
-      this.setState({ lang1Checked: false });
+      this.setState({ lang2Checked: true, });
+      this.setState({ lang1Checked: false, });
     }
   }
 
@@ -54,15 +54,15 @@ class navbar extends Component {
   lang1 = () => {
     simpleState.evoke('lang', 'en');
     localStorage.setItem('lang', 'en');
-    this.setState({ lang1Checked: true });
-    this.setState({ lang2Checked: false });
+    this.setState({ lang1Checked: true, });
+    this.setState({ lang2Checked: false, });
   };
 
   lang2 = () => {
     simpleState.evoke('lang', 'de');
     localStorage.setItem('lang', 'de');
-    this.setState({ lang2Checked: true });
-    this.setState({ lang1Checked: false });
+    this.setState({ lang2Checked: true, });
+    this.setState({ lang1Checked: false, });
   };
 
   render() {
@@ -73,8 +73,8 @@ class navbar extends Component {
             <MoreVertIcon />
           </IconButton>
         }
-        anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-        targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'top', }}
+        targetOrigin={{ horizontal: 'right', vertical: 'top', }}
       >
         <MenuItem
           primaryText="English"

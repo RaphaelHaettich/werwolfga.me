@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import Cards from '../../components/Cards';
-import { push, post, update } from '../../helpers/dbcalls';
-import { base } from '../../config/constants';
+import { push, post, update, } from '../../helpers/dbcalls';
+import { base, } from '../../config/constants';
 import DeleteAndRouteButton from '../../components/DeleteAndRouteButton';
 import CounterLabel from '../../components/CounterLabel';
 import Styles from './style.css.js';
@@ -20,14 +20,14 @@ class create extends Component {
       lobbyKey: '',
       alertMsg: '',
       list: [],
-      users: []
+      users: [],
     };
   }
 
   componentDidMount() {
     var self = this;
     const userId = base.app().INTERNAL.getUid();
-    //functions to call
+    // functions to call
     const createLobby = () => {
       const inviteCode = Math.floor(Math.random() * 900000) + 100000;
       const promise = new Promise((resolve, reject) => {
@@ -35,24 +35,24 @@ class create extends Component {
         const data = {
           code: inviteCode,
           host: userId,
-          state: 'draft'
+          state: 'draft',
         };
         push(resolve, reject, data, collection);
       });
       promise
         .then((data) => {
-          self.setState({ lobbyId: inviteCode, lobbyKey: data.key });
+          self.setState({ lobbyId: inviteCode, lobbyKey: data.key, });
         })
         .catch(function(error) {
           this.setState({
-            alertMsg: `Error: ${error}`
+            alertMsg: `Error: ${error}`,
           });
           this.dialog.handleOpen();
           console.error(error);
         });
     };
 
-    //functions to execute at start
+    // functions to execute at start
     const hostExists = new Promise((resolve) => {
       base
         .fetch('activegame/', {
@@ -60,27 +60,27 @@ class create extends Component {
           asArray: true,
           queries: {
             orderByChild: 'host',
-            equalTo: userId
-          }
+            equalTo: userId,
+          },
         })
         .then((data) => {
           resolve(data);
         })
         .catch((error) => {
           this.setState({
-            alertMsg: `Error: ${error}`
+            alertMsg: `Error: ${error}`,
           });
           this.dialog.handleOpen();
         });
     });
     hostExists.then((data) => {
       if (data.length > 0) {
-        this.setState({ users: data[0].memberarray });
+        this.setState({ users: data[0].memberarray, });
         if (data[0].state === 'ready') {
           sessionStorage.lobbyNumber = data[0].key;
           this.props.history.push('gameadmin');
         } else {
-          this.setState({ lobbyId: data[0].code, lobbyKey: data[0].key });
+          this.setState({ lobbyId: data[0].code, lobbyKey: data[0].key, });
         }
       } else {
         createLobby();
@@ -90,7 +90,7 @@ class create extends Component {
     this.ref = base.syncState(`/cards/${lang}`, {
       context: this,
       state: 'list',
-      asArray: true
+      asArray: true,
     });
     simpleState.subscribe('lang', this, (nextState) => {
       simpleState.evoke('loader', true);
@@ -100,7 +100,7 @@ class create extends Component {
         asArray: true,
         then() {
           simpleState.evoke('loader', false);
-        }
+        },
       });
     });
   }
@@ -122,7 +122,7 @@ class create extends Component {
       simpleState.evoke('loader', true);
       const cards = [];
       for (let i = 0; i < cardsObj.list.length; i++) {
-        for (let p = 0; p < cardsObj.list[i].count; p++) {
+        for (let j = 0; j < cardsObj.list[i].count; j++) {
           cards.push(cardsObj.list[i].key);
         }
       }
@@ -132,7 +132,7 @@ class create extends Component {
         const key = usersObj.count[i].key;
         memberarray[key] = {
           card: cards[i],
-          displayName: usersObj.count[i].displayName
+          displayName: usersObj.count[i].displayName,
         };
       }
       const updateMembers = new Promise((resolve, reject) => {
@@ -145,13 +145,13 @@ class create extends Component {
           const setGameReady = new Promise((resolve, reject) => {
             const collection = `activegame/${this.state.lobbyKey}`;
             const object = {
-              state: 'ready'
+              state: 'ready',
             };
             update(resolve, reject, object, collection);
           });
           setGameReady
             .then(() => {
-              simpleState.evoke('gameId', { id: this.state.lobbyKey });
+              simpleState.evoke('gameId', { id: this.state.lobbyKey, });
               sessionStorage.lobbyNumber = this.state.lobbyKey;
               simpleState.evoke('loader', true);
               this.props.history.push('gameadmin');
@@ -167,7 +167,7 @@ class create extends Component {
       this.setState({
         alertMsg:
         'You need as many players as selected cards. Please delete or add some cards or p' +
-        'layers. '
+        'layers. ',
       });
       this.dialog.handleOpen();
     }

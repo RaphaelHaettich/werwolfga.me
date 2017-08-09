@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { Card, CardActions, CardTitle } from 'material-ui/Card';
-import { update, fetch } from '../../helpers/dbcalls';
+import React, { Component, } from 'react';
+import { Card, CardActions, CardTitle, } from 'material-ui/Card';
+import { update, fetch, } from '../../helpers/dbcalls';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import { base } from '../../config/constants';
+import { base, } from '../../config/constants';
 import WarningWindow from '../../components/WarningWindow';
 import Styles from './style.css.js';
 import SimpleState from 'react-simple-state';
-import { Container, Row, Col } from 'react-grid-system';
+import { Container, Row, Col, } from 'react-grid-system';
 
 const simpleState = new SimpleState();
 
@@ -17,7 +17,7 @@ export default class join extends Component {
     super(props);
     this.state = {
       alertMsg: '',
-      activeSession: false
+      activeSession: false,
     };
   }
 
@@ -30,7 +30,7 @@ export default class join extends Component {
       });
       getGame.then((data) => {
         if (data.state === 'ready') {
-          this.setState({ activeSession: true });
+          this.setState({ activeSession: true, });
         }
       });
     }
@@ -43,8 +43,8 @@ export default class join extends Component {
     }
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = (event) => {
+    event.preventDefault();
     const userId = base.app().INTERNAL.getUid();
 
     const getUUID = new Promise((resolve, reject) => {
@@ -52,12 +52,12 @@ export default class join extends Component {
       if (isNaN(number) !== true) {
         const query = {
           orderByChild: 'code',
-          equalTo: Number(number)
+          equalTo: Number(number),
         };
         const collection = 'activegame/';
         fetch(resolve, reject, collection, query);
       } else {
-        this.setState({ alertMsg: 'Please insert a number!' });
+        this.setState({ alertMsg: 'Please insert a number!', });
         this.dialog.handleOpen();
       }
     });
@@ -74,16 +74,16 @@ export default class join extends Component {
             const collection = `activegame/${key}/memberarray/${userId}`;
             const object = {
               card: 'null',
-              displayName: data[0].displayName
+              displayName: data[0].displayName,
             };
             update(resolve, reject, object, collection);
           });
           addUser
             .then(() => {
               sessionStorage.lobbyNumber = key;
-              simpleState.evoke('gameId', { id: key });
+              simpleState.evoke('gameId', { id: key, });
               this.setState({
-                alertMsg: 'Game found! Now waiting until creator starts game'
+                alertMsg: 'Game found! Now waiting until creator starts game',
               });
               this.dialog.handleOpen();
               const collection = `activegame/${key}`;
@@ -94,7 +94,7 @@ export default class join extends Component {
                   if (data[3] === 'ready') {
                     this.props.history.push('game');
                   }
-                }
+                },
               });
             })
             .catch((error) => {
@@ -114,20 +114,20 @@ export default class join extends Component {
           const userIdArr = Object.keys(data[0].memberarray);
           if (userIdArr.indexOf(userId) > -1 && data[0].state === 'ready') {
             sessionStorage.lobbyNumber = data[0].key;
-            simpleState.evoke('gameId', { id: data[0].key });
+            simpleState.evoke('gameId', { id: data[0].key, });
             simpleState.evoke('loader', true);
             this.props.history.push('game');
           } else {
             if (data[0].state === 'draft') {
               addUser(data[0].key);
             } else {
-              this.setState({ alertMsg: 'The game already started, sorry' });
+              this.setState({ alertMsg: 'The game already started, sorry', });
               this.dialog.handleOpen();
             }
           }
         }
       } else {
-        this.setState({ alertMsg: 'There is no game with this ID' });
+        this.setState({ alertMsg: 'There is no game with this ID', });
         this.dialog.handleOpen();
       }
     });

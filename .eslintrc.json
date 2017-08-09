@@ -7,7 +7,8 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:jsx-a11y/recommended"
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/errors"
   ],
   "parser": "babel-eslint",
   "parserOptions": {
@@ -19,23 +20,24 @@
   },
   "plugins": [
     "react",
-    "jsx-a11y"
+    "jsx-a11y",
+    "import"
   ],
   "rules": {
     "indent": [
-      "error",
+      1,
       2
     ],
     "linebreak-style": [
-      "error",
+      1,
       "windows"
     ],
     "quotes": [
-      "error",
+      2,
       "single"
     ],
     "semi": [
-      "error",
+      1,
       "always"
     ],
     "no-console": [
@@ -47,11 +49,14 @@
         ]
       }
     ],
+    "radix": [
+      1
+    ],
     "no-multi-spaces": [
       1
     ],
     "prefer-const": [
-      "error",
+      2,
       {
         "destructuring": "any",
         "ignoreReadBeforeAssign": false
@@ -61,7 +66,7 @@
       1
     ],
     "object-shorthand": [
-      "error",
+      2,
       "always"
     ],
     "quote-props": [
@@ -93,15 +98,15 @@
       1
     ],
     "space-before-function-paren": [
-      "error",
+      2,
       "never"
     ],
     "template-curly-spacing": [
-      "error",
+      2,
       "never"
     ],
     "space-before-blocks": [
-      "error",
+      2,
       "always"
     ],
     "no-param-reassign": [
@@ -111,25 +116,136 @@
       1
     ],
     "prefer-arrow-callback": [
-      "error"
+      2
     ],
     "arrow-spacing": [
-      "error",
+      2,
       {
         "before": true,
         "after": true
       }
     ],
     "arrow-parens": [
-      "error",
+      2,
       "as-needed",
       {
         "requireForBlockBody": true
       }
     ],
     "arrow-body-style": [
-      "error",
+      2,
       "as-needed"
+    ],
+    "no-useless-constructor": [
+      1
+    ],
+    "no-duplicate-imports": [
+      1
+    ],
+    "no-iterator": [
+      2
+    ],
+    "no-restricted-syntax": [
+      1
+    ],
+    "no-restricted-properties": [
+      1
+    ],
+    "no-unneeded-ternary": [
+      2
+    ],
+    "no-case-declarations": [
+      1
+    ],
+    "no-plusplus": [
+      1,
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "eqeqeq": [
+      2,
+      "smart"
+    ],
+    "dot-notation": [
+      1
+    ],
+    "brace-style": [
+      1
+    ],
+    "no-whitespace-before-property": [
+      2
+    ],
+    "spaced-comment": [
+      1
+    ],
+    "keyword-spacing": [
+      1
+    ],
+    "space-infix-ops": [
+      1
+    ],
+    "padded-blocks": [
+      1,
+      "never"
+    ],
+    "space-in-parens": [
+      2,
+      "never"
+    ],
+    "array-bracket-spacing": [
+      1,
+      "never"
+    ],
+    "object-curly-spacing": [
+      1,
+      "always"
+    ],
+    "newline-per-chained-call": [
+      1
+    ],
+    "eol-last": [
+      1
+    ],
+    "max-len": [
+      1,
+      100
+    ],
+    "comma-dangle": [
+      1,
+      "always"
+    ],
+    "comma-style": [
+      1
+    ],
+    "id-length": [
+      2,
+      {
+        "min": 3,
+        "properties": "never",
+        "exceptions": [
+          "i",
+          "j",
+          "a",
+          "b",
+          "id"
+        ]
+      }
+    ],
+    "camelcase": [
+      2
+    ],
+    "import/no-mutable-exports": [
+      2
+    ],
+    "import/prefer-default-export": [
+      1
+    ],
+    "import/first": [
+      2
+    ],
+    "import/no-webpack-loader-syntax": [
+      2
     ],
     "jsx-quotes": [
       1

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { login, resetPassword } from '../../helpers/auth';
-import { Link } from 'react-router-dom';
+import React, { Component, } from 'react';
+import { login, resetPassword, } from '../../helpers/auth';
+import { Link, } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import SimpleState from 'react-simple-state';
@@ -8,7 +8,7 @@ import WarningWindow from '../../components/WarningWindow';
 const simpleState = new SimpleState();
 
 const setErrorMsg = function setErrorMsg(error) {
-  return { loginMessage: error };
+  return { loginMessage: error, };
 };
 
 export default class Login extends Component {
@@ -17,7 +17,7 @@ export default class Login extends Component {
     this.state = {
       loginMessage: null,
       secondActionLabel: null,
-      secondActionShow: false
+      secondActionShow: false,
     };
   }
 
@@ -25,21 +25,21 @@ export default class Login extends Component {
     simpleState.evoke('loader', false);
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    login(this.email.input.value, this.pw.input.value).catch((e) => {
-      if (e.code === 'auth/wrong-password') {
-        this.setState({ secondActionLabel: 'Forgot Password' });
-        this.setState({ secondActionShow: true });
+  handleSubmit = (event) => {
+    event.preventDefault();
+    login(this.email.input.value, this.password.input.value).catch((event) => {
+      if (event.code === 'auth/wrong-password') {
+        this.setState({ secondActionLabel: 'Forgot Password', });
+        this.setState({ secondActionShow: true, });
       }
-      this.setState(setErrorMsg(e.message));
+      this.setState(setErrorMsg(event.message));
       this.dialog.handleOpen();
     });
   };
   
   resetPassword = () => {
     this.dialog.handleClose();
-    this.setState({ secondActionShow: false });
+    this.setState({ secondActionShow: false, });
     resetPassword(this.email.input.value)
       .then(() =>
         this.setState(
@@ -66,7 +66,7 @@ export default class Login extends Component {
           <TextField
             fullWidth
             type="password"
-            ref={pw => (this.pw = pw)}
+            ref={password => (this.password = password)}
             floatingLabelText="Password"
           />
           <br />

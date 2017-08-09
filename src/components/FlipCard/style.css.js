@@ -1,4 +1,4 @@
-var styles = {
+const styles = {
   cardImage: {
     height: '300px',
     maxHeight: '100%',
@@ -10,11 +10,11 @@ var styles = {
     minWidth: '0%',
     backgroundColor: 'dimgray',
     padding: '14px',
-    marginBottom: '50px'
+    marginBottom: '50px',
   },
   paper: {
-    marginBottom: '50px'
-  }
+    marginBottom: '50px',
+  },
 };
 
 export default styles;

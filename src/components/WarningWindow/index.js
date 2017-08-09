@@ -17,16 +17,16 @@ export default class DialogAlert extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      open: false,
     };
   }
 
   handleOpen = () => {
-    this.setState({ open: true });
+    this.setState({ open: true, });
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ open: false, });
   };
 
   render() {
@@ -50,7 +50,7 @@ export default class DialogAlert extends React.Component {
           label="Discard"
           primary
           onTouchTap={this.handleClose}
-        />
+        />,
     ];
 
     return (

@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import { auth } from '../../helpers/auth';
+import React, { Component, } from 'react';
+import { auth, } from '../../helpers/auth';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Link } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import TextField from 'material-ui/TextField';
 import SimpleState from 'react-simple-state';
 import WarningWindow from '../../components/WarningWindow';
 const simpleState = new SimpleState();
 
 const setErrorMsg = function setErrorMsg(error) {
-  return { registerError: error.message };
+  return { registerError: error.message, };
 };
 
 export default class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      registerError: null
+      registerError: null,
     };
   }
 
@@ -23,18 +23,18 @@ export default class Register extends Component {
     simpleState.evoke('loader', false);
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = (event) => {
+    event.preventDefault();
     if (this.displayName.input.value === '') {
-      this.setState({ registerError: 'You forgot the Username' });
+      this.setState({ registerError: 'You forgot the Username', });
       this.dialog.handleOpen();
     } else {
       auth(
         this.email.input.value,
-        this.pw.input.value,
+        this.password.input.value,
         this.displayName.input.value
-      ).catch((e) => {
-        this.setState(setErrorMsg(e));
+      ).catch((event) => {
+        this.setState(setErrorMsg(event));
         this.dialog.handleOpen();
       });
     }
@@ -60,7 +60,7 @@ export default class Register extends Component {
           <TextField
             fullWidth
             type="password"
-            ref={pw => (this.pw = pw)}
+            ref={password => (this.password = password)}
             floatingLabelText="Password"
           />
           <br />

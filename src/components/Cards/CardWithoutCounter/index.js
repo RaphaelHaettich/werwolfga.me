@@ -7,11 +7,11 @@
 *   cards
 */
 
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import Divider from 'material-ui/Divider';
 import Styles from './style.css.js';
 import SimpleState from 'react-simple-state';
-import { Card, CardText, CardMedia, CardTitle } from 'material-ui/Card';
+import { Card, CardText, CardMedia, CardTitle, } from 'material-ui/Card';
 
 const simpleState = new SimpleState();
 
@@ -19,7 +19,7 @@ class card extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 0
+      count: 0,
     };
   }
 

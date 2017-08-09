@@ -5,9 +5,9 @@ import {
   pinkA400,
   pinkA100,
   fullWhite,
-  red900
+  red900,
 } from 'material-ui/styles/colors';
-import { fade } from 'material-ui/utils/colorManipulator';
+import { fade, } from 'material-ui/utils/colorManipulator';
 import Spacing from 'material-ui/styles/spacing';
 
 export default {
@@ -28,6 +28,6 @@ export default {
     borderColor: (0, fade)(fullWhite, 0.3),
     disabledColor: (0, fade)(fullWhite, 0.3),
     pickerHeaderColor: (0, fade)(fullWhite, 0.12),
-    clockCircleColor: (0, fade)(fullWhite, 0.12)
-  }
+    clockCircleColor: (0, fade)(fullWhite, 0.12),
+  },
 };

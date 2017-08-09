@@ -1,15 +1,15 @@
-var styles = {
+const styles = {
   cardImage: {
     maxHeight: '200px',
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
     width: 'auto',
-    minWidth: '0%'
+    minWidth: '0%',
   },
   card: {
-    marginBottom: '15px'
-  }
+    marginBottom: '15px',
+  },
 };
 
 export default styles;

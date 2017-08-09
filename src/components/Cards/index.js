@@ -4,7 +4,7 @@
 *   counter: boolean
 */
 
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import CardWithCounter from './CardWithCounter';
 import CardWithoutCounter from './CardWithoutCounter';
 import CardWithActionButton from './CardWithActionButton';
@@ -13,7 +13,7 @@ class cards extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: []
+      list: [],
     };
   }
 

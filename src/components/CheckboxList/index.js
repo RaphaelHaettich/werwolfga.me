@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import Paper from 'material-ui/Paper';
-import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
+import { RadioButton, RadioButtonGroup, } from 'material-ui/RadioButton';
 import Styles from './style.css.js';
 
 class CheckboxList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      votedkey: ''
+      votedkey: '',
     };
   }
   handleChange(event) {
-    this.setState({ votedkey: event.target.value });
+    this.setState({ votedkey: event.target.value, });
     this.props.checkListChanged();
   }
 
@@ -29,7 +29,7 @@ class CheckboxList extends Component {
         <RadioButtonGroup
           name="notRight"
           labelPosition="left"
-          onChange={e => this.handleChange(e)}
+          onChange={event => this.handleChange(event)}
         >
           {checkboxListItem}
         </RadioButtonGroup>

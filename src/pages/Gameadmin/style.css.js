@@ -1,10 +1,10 @@
-var styles = {
+const styles = {
   centeredOnlyHorizontal: {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     marginTop: '50px',
     marginBottom: '10%',
-    position: 'absolute'
+    position: 'absolute',
   },
   fab: {
     margin: 0,
@@ -13,8 +13,8 @@ var styles = {
     bottom: 20,
     left: 'auto',
     position: 'fixed',
-    zIndex: 999
-  }
+    zIndex: 999,
+  },
 };
 
 export default styles;

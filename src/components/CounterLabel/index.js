@@ -5,8 +5,8 @@
 *   state: string
 */
 
-import React, { Component } from 'react';
-import { base } from '../../config/constants';
+import React, { Component, } from 'react';
+import { base, } from '../../config/constants';
 import SimpleState from 'react-simple-state';
 const simpleState = new SimpleState();
 
@@ -14,14 +14,14 @@ export default class counterlabel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 0
+      count: 0,
     };
   }
   componentWillReceiveProps(props) {
     this.ref = base.bindToState(props.dbReference, {
       context: this,
       state: 'count',
-      asArray: true
+      asArray: true,
     });
   }
   componentWillUnmount() {
@@ -33,7 +33,7 @@ export default class counterlabel extends Component {
   render() {
     var counter = this.state.count;
     simpleState.evoke(this.props.state, {
-      count: counter
+      count: counter,
     });
     if (counter !== undefined) {
       counter = counter.length;

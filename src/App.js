@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Route, BrowserRouter, Redirect, Switch } from 'react-router-dom';
+import React, { Component, } from 'react';
+import { Route, BrowserRouter, Redirect, Switch, } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import wolvestheme from './themes/wolvestheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -11,7 +11,7 @@ import Create from './pages/Create';
 import Join from './pages/Join';
 import Gameadmin from './pages/Gameadmin';
 import Game from './pages/Game';
-import { firebaseAuth } from './config/constants';
+import { firebaseAuth, } from './config/constants';
 import Navbar from './components/Navbar';
 import Paper from 'material-ui/Paper';
 import Styles from './style.css.js';
@@ -31,8 +31,8 @@ const PrivateRoute = function PrivateRoute({ component: Component, authed, ...re
               to={{
                 pathname: '/login',
                 state: {
-                  from: props.location
-                }
+                  from: props.location,
+                },
               }}
             />)}
     />
@@ -55,7 +55,7 @@ export default class App extends Component {
     this.state = {
       authed: false,
       loading: true,
-      loader: true
+      loader: true,
     };
   }
   componentWillMount() {
@@ -68,15 +68,15 @@ export default class App extends Component {
       'lang',
       localStorage.getItem('lang') || language || 'en'
     );
-    simpleState.addListener('count', { count: 0 });
-    simpleState.addListener('cards', { list: [] });
-    simpleState.addListener('state', { state: 'draft' });
-    simpleState.addListener('gameId', { id: '' });
+    simpleState.addListener('count', { count: 0, });
+    simpleState.addListener('cards', { list: [], });
+    simpleState.addListener('state', { state: 'draft', });
+    simpleState.addListener('gameId', { id: '', });
     simpleState.addListener('loader', true);
 
     simpleState.subscribe('loader', this, (nextState) => {
       this.setState({
-        loader: nextState
+        loader: nextState,
       });
     });
   }
@@ -84,9 +84,9 @@ export default class App extends Component {
   componentDidMount() {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
-        this.setState({ authed: true, loading: false });
+        this.setState({ authed: true, loading: false, });
       } else {
-        this.setState({ authed: false, loading: false });
+        this.setState({ authed: false, loading: false, });
       }
     });
   }
@@ -111,7 +111,7 @@ export default class App extends Component {
     return this.state.loading === true
       ? <h1>Loading</h1>
       : <MuiThemeProvider
-        style={{ height: '100%' }}
+        style={{ height: '100%', }}
         muiTheme={getMuiTheme(wolvestheme)}
       >
         <Paper>

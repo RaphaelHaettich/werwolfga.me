@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { fetch, post } from '../../helpers/dbcalls';
-import { base } from '../../config/constants';
+import React, { Component, } from 'react';
+import { fetch, post, } from '../../helpers/dbcalls';
+import { base, } from '../../config/constants';
 import FlipCard from '../../components/FlipCard';
 import CheckboxList from '../../components/CheckboxList';
 import SimpleState from 'react-simple-state';
@@ -23,7 +23,7 @@ export default class Gameadmin extends Component {
       votes: [],
       voteData: [],
       voted: false,
-      buttonDisabled: true
+      buttonDisabled: true,
     };
   }
 
@@ -48,7 +48,7 @@ export default class Gameadmin extends Component {
       });
       getCurrentCard.then((data) => {
         if (data.length > 0) {
-          this.setState({ displayName: data[1] });
+          this.setState({ displayName: data[1], });
           const lang = simpleState.getState('lang');
           this.getCardInfo(data, gameId, userId, lang);
           simpleState.subscribe('lang', this, (nextState) => {
@@ -81,9 +81,9 @@ export default class Gameadmin extends Component {
         context: this,
         asArray: true,
         then(votesData) {
-          this.setState({ voteData: votesData });
+          this.setState({ voteData: votesData, });
           simpleState.evoke('loader', false);
-        }
+        },
       }
     );
   };
@@ -98,9 +98,9 @@ export default class Gameadmin extends Component {
         description: data[0],
         name: data[1],
         pictureback: data[2],
-        picturefront: data[3]
+        picturefront: data[3],
       };
-      this.setState({ cards: cardObj });
+      this.setState({ cards: cardObj, });
       simpleState.evoke('loader', false);
       this.listen2 = base.listenTo(
         `activegame/${gameId}/memberarray/${userId}`,
@@ -111,7 +111,7 @@ export default class Gameadmin extends Component {
             if (data.card === undefined) {
               this.dialog.handleOpen();
             }
-          }
+          },
         }
       );
     });
@@ -139,10 +139,10 @@ export default class Gameadmin extends Component {
             voteData[key].votes += 1;
           }
           const objectArr = Object.values(voteData);
-          this.setState({ votes: objectArr });
+          this.setState({ votes: objectArr, });
           simpleState.evoke('loader', false);
         });
-      }
+      },
     });
   };
 
@@ -154,17 +154,17 @@ export default class Gameadmin extends Component {
   changeVote = () => {
     simpleState.evoke('loader', true);
     this.listenToVoteData();
-    this.setState({ voted: false });
+    this.setState({ voted: false, });
   };
 
   checkListChanged = () => {
-    this.setState({ buttonDisabled: false });
+    this.setState({ buttonDisabled: false, });
   };
 
   sendVote = () => {
     simpleState.evoke('loader', true);
     const userId = base.app().INTERNAL.getUid();
-    this.setState({ buttonDisabled: true });
+    this.setState({ buttonDisabled: true, });
     const gameId = sessionStorage.lobbyNumber;
     const postVotingData = new Promise((resolve, reject) => {
       const collection = `activegame/${gameId}/voting/votes/${userId}`;
@@ -174,19 +174,19 @@ export default class Gameadmin extends Component {
       const votingData = {
         displayName: this.state.displayName,
         votedForKey: votedKey,
-        votedForDisplayName: displayName
+        votedForDisplayName: displayName,
       };
       post(resolve, reject, votingData, collection);
     });
     postVotingData.then(() => {
-      this.setState({ voted: true });
+      this.setState({ voted: true, });
       this.listenToVotes();
     });
   };
 
   initVote = () => {
     simpleState.evoke('loader', true);
-    this.setState({ voting: true });
+    this.setState({ voting: true, });
     const gameId = sessionStorage.lobbyNumber;
     const userId = base.app().INTERNAL.getUid();
     const checkIfVoted = new Promise((resolve, reject) => {
@@ -197,7 +197,7 @@ export default class Gameadmin extends Component {
       if (data.length === 0) {
         this.listenToVoteData();
       } else {
-        this.setState({ voted: true });
+        this.setState({ voted: true, });
         this.listenToVotes();
       }
     });
@@ -205,7 +205,7 @@ export default class Gameadmin extends Component {
 
   initList = () => {
     simpleState.evoke('loader', true);
-    this.setState({ voting: false });
+    this.setState({ voting: false, });
   };
 
   render() {

@@ -8,16 +8,16 @@
 *   primary: boolean
 */
 
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { base } from '../../config/constants';
+import React, { Component, } from 'react';
+import { withRouter, } from 'react-router-dom';
+import { base, } from '../../config/constants';
 import RaisedButton from 'material-ui/RaisedButton';
 
 class deleteAndRouteButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      primary: this.props.primary || false
+      primary: this.props.primary || false,
     };
   }
 

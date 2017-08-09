@@ -7,7 +7,7 @@
 *   cards
 */
 
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import InputCounter from '../../InputCounter';
 import Divider from 'material-ui/Divider';
 import Styles from './style.css.js';
@@ -17,7 +17,7 @@ import {
   CardActions,
   CardText,
   CardMedia,
-  CardTitle
+  CardTitle,
 } from 'material-ui/Card';
 
 const simpleState = new SimpleState();
@@ -26,7 +26,7 @@ class card extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 0
+      count: 0,
     };
   }
 
@@ -36,33 +36,33 @@ class card extends Component {
   componentDidUpdate() {
     const cardState = simpleState.getState('cards');
     const index = cardState.list
-      .map(e => e.key)
+      .map(a => a.key)
       .indexOf(this.props.item.key);
     if (index !== -1) {
       cardState.list[index] = {
         key: this.props.item.key,
-        count: this.state.count
+        count: this.state.count,
       };
     } else {
       cardState.list.push({
         key: this.props.item.key,
-        count: this.state.count
+        count: this.state.count,
       });
     }
     simpleState.evoke('cards', {
-      list: cardState.list
+      list: cardState.list,
     });
   }
 
   up = () => {
     this.setState({
-      count: this.state.count + 1
+      count: this.state.count + 1,
     });
   }
   down = () => {
     if (this.state.count > 0) {
       this.setState({
-        count: this.state.count - 1
+        count: this.state.count - 1,
       });
     }
   }

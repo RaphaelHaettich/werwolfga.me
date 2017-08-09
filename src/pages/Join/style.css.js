@@ -1,22 +1,22 @@
-var styles = {
+const styles = {
   buttonHeight: {
-    height: '100px'
+    height: '100px',
   },
   centeredOnlyHorizontal: {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     marginTop: '50px',
     marginBottom: '10%',
-    position: 'absolute'
+    position: 'absolute',
   },
   marginLeft: {
-    marginLeft: '8px'
+    marginLeft: '8px',
   },
   notSelectable: {
     MozUserSelect: 'none',
     WebkitUserSelect: 'none',
-    msUserSelect: 'none'
-  }
+    msUserSelect: 'none',
+  },
 };
 
 export default styles;
