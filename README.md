@@ -1,4 +1,4 @@
-# Werewolvesgame Project WIP
+# Werwolfgame Project 
 
 *Using React, React Router, Firebase, and many more things*
 
