@@ -98,9 +98,6 @@ class Create extends Component {
         context: this,
         state: 'list',
         asArray: true,
-        then() {
-          simpleState.evoke('loader', false);
-        },
       });
     });
   }

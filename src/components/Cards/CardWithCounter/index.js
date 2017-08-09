@@ -30,9 +30,6 @@ class CardWithCounter extends Component {
     };
   }
 
-  componentDidMount() {
-    simpleState.evoke('loader', false);
-  }
   componentDidUpdate() {
     const cardState = simpleState.getState('cards');
     const index = cardState.list
@@ -67,6 +64,10 @@ class CardWithCounter extends Component {
     }
   }
 
+  handleImageLoaded = () => {
+    simpleState.evoke('loader', false);
+  }
+
   render() {
     const item = this.props.item;
     return (
@@ -78,6 +79,7 @@ class CardWithCounter extends Component {
               style={Styles.cardImage}
               src={item.picturefront}
               alt="cardimage"
+              onLoad={this.handleImageLoaded}
             />
           </CardMedia>
           <CardTitle

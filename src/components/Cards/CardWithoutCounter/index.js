@@ -23,7 +23,7 @@ class CardWithoutCounter extends Component {
     };
   }
 
-  componentDidMount() {
+  handleImageLoaded = () => {
     simpleState.evoke('loader', false);
   }
 
@@ -38,6 +38,7 @@ class CardWithoutCounter extends Component {
               style={Styles.cardImage}
               src={item.picturefront}
               alt="cardimage"
+              onLoad={this.handleImageLoaded}
             />
           </CardMedia>
           <CardTitle

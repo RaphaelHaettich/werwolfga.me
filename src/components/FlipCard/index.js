@@ -23,6 +23,10 @@ class FlipCard extends Component {
   componentDidMount() {
     simpleState.evoke('loader', false);
   }
+
+  handleImageLoaded = () => {
+    simpleState.evoke('loader', false);
+  }
   
   handleClick(event) {
     event.preventDefault();
@@ -62,6 +66,7 @@ class FlipCard extends Component {
           </Paper>}
         <ReactCardFlip isFlipped={this.state.isFlipped}>
           <img
+            onLoad={this.handleImageLoaded}
             role="button"
             tabIndex={0}
             style={Styles.cardImage}
@@ -71,6 +76,7 @@ class FlipCard extends Component {
             alt=""
           />
           <img
+            onLoad={this.handleImageLoaded}
             role="button"
             tabIndex={0}
             style={Styles.cardImage}
