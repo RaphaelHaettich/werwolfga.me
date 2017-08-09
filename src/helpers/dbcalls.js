@@ -51,7 +51,7 @@ export const fetch = (resolve, reject, collection, queryParam, asArray) => {
   base
     .fetch(collection, {
       context: {},
-      array,
+      asArray: array,
       queries: query,
     })
     .then((snapshot) => {
