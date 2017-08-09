@@ -43,15 +43,15 @@ export default class Gameadmin extends Component {
         gameId = sessionStorage.lobbyNumber;
       }
       const getCurrentCard = new Promise((resolve, reject) => {
-        const collection = 'activegame/' + gameId + '/memberarray/' + userId;
+        const collection = `activegame/${gameId}/memberarray/${userId}`;
         fetch(resolve, reject, collection);
       });
-      getCurrentCard.then(data => {
+      getCurrentCard.then((data) => {
         if (data.length > 0) {
           this.setState({ displayName: data[1] });
           const lang = simpleState.getState('lang');
           this.getCardInfo(data, gameId, userId, lang);
-          simpleState.subscribe('lang', this, nextState => {
+          simpleState.subscribe('lang', this, (nextState) => {
             simpleState.evoke('loader', true);
             this.getCardInfo(data, gameId, userId, nextState);
           });
@@ -76,7 +76,7 @@ export default class Gameadmin extends Component {
 
   listenToVoteData = () => {
     this.listen1 = base.listenTo(
-      'activegame/' + sessionStorage.lobbyNumber + '/voting/data',
+      `activegame/${sessionStorage.lobbyNumber}/voting/data`,
       {
         context: this,
         asArray: true,
@@ -90,10 +90,10 @@ export default class Gameadmin extends Component {
 
   getCardInfo = (data, gameId, userId, lang) => {
     const getCardInfos = new Promise((resolve, reject) => {
-      const collection = 'cards/' + lang + '/' + data[0];
+      const collection = `cards/${lang}/${data[0]}`;
       fetch(resolve, reject, collection);
     });
-    getCardInfos.then(data => {
+    getCardInfos.then((data) => {
       const cardObj = {
         description: data[0],
         name: data[1],
@@ -103,7 +103,7 @@ export default class Gameadmin extends Component {
       this.setState({ cards: cardObj });
       simpleState.evoke('loader', false);
       this.listen2 = base.listenTo(
-        'activegame/' + gameId + '/memberarray/' + userId,
+        `activegame/${gameId}/memberarray/${userId}`,
         {
           context: this,
           asArray: false,
@@ -119,20 +119,20 @@ export default class Gameadmin extends Component {
 
   listenToVotes = () => {
     const gameId = sessionStorage.lobbyNumber;
-    this.listen3 = base.listenTo('activegame/' + gameId + '/voting/votes', {
+    this.listen3 = base.listenTo(`activegame/${gameId}/voting/votes`, {
       context: this,
       asArray: true,
       then(votesData) {
         const getVoteData = new Promise((resolve, reject) => {
-          const collection = 'activegame/' + gameId + '/voting/data/';
+          const collection = `activegame/${gameId}/voting/data/`;
           fetch(resolve, reject, collection, {}, false);
         });
-        getVoteData.then(voteData => {
+        getVoteData.then((voteData) => {
           for (let i = 0; i < votesData.length; i++) {
             const key = votesData[i].votedForKey;
             if (voteData[key].votedFor) {
               voteData[key].votedFor =
-                voteData[key].votedFor + ', ' + votesData[i].displayName;
+                `${voteData[key].votedFor}, ${votesData[i].displayName}`;
             } else {
               voteData[key].votedFor = votesData[i].displayName;
             }
@@ -167,7 +167,7 @@ export default class Gameadmin extends Component {
     this.setState({ buttonDisabled: true });
     const gameId = sessionStorage.lobbyNumber;
     const postVotingData = new Promise((resolve, reject) => {
-      const collection = 'activegame/' + gameId + '/voting/votes/' + userId;
+      const collection = `activegame/${gameId}/voting/votes/${userId}`;
       const splitString = this.checkList.state.votedkey.split('|');
       const votedKey = splitString[0];
       const displayName = splitString[1];
@@ -190,10 +190,10 @@ export default class Gameadmin extends Component {
     const gameId = sessionStorage.lobbyNumber;
     const userId = base.app().INTERNAL.getUid();
     const checkIfVoted = new Promise((resolve, reject) => {
-      const collection = 'activegame/' + gameId + '/voting/votes/' + userId;
+      const collection = `activegame/${gameId}/voting/votes/${userId}`;
       fetch(resolve, reject, collection);
     });
-    checkIfVoted.then(data => {
+    checkIfVoted.then((data) => {
       if (data.length === 0) {
         this.listenToVoteData();
       } else {
@@ -229,7 +229,7 @@ export default class Gameadmin extends Component {
               ? <div>
                 <CheckboxList
                   votesData={this.state.voteData}
-                  ref={checkList => {
+                  ref={(checkList) => {
                     this.checkList = checkList;
                   }}
                   checkListChanged={this.checkListChanged}
@@ -267,7 +267,7 @@ export default class Gameadmin extends Component {
           secondAction={this.gameDone}
           secondActionShow
           secondActionLabel={'Leave game'}
-          ref={dialog => {
+          ref={(dialog) => {
             this.dialog = dialog;
           }}
         />

@@ -7,9 +7,9 @@ import SimpleState from 'react-simple-state';
 import WarningWindow from '../../components/WarningWindow';
 const simpleState = new SimpleState();
 
-function setErrorMsg(error) {
+const setErrorMsg = function setErrorMsg(error) {
   return { registerError: error.message };
-}
+};
 
 export default class Register extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ export default class Register extends Component {
     simpleState.evoke('loader', false);
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     if (this.displayName.input.value === '') {
       this.setState({ registerError: 'You forgot the Username' });
@@ -33,7 +33,7 @@ export default class Register extends Component {
         this.email.input.value,
         this.pw.input.value,
         this.displayName.input.value
-      ).catch(e => {
+      ).catch((e) => {
         this.setState(setErrorMsg(e));
         this.dialog.handleOpen();
       });
@@ -71,7 +71,7 @@ export default class Register extends Component {
         </form>
         <WarningWindow
           message={this.state.registerError}
-          ref={dialog => {
+          ref={(dialog) => {
             this.dialog = dialog;
           }}
         />

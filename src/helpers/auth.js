@@ -1,24 +1,24 @@
 import { ref, firebaseAuth } from '../config/constants';
 
-export function auth(email, pw, displayName) {
-  return firebaseAuth().createUserWithEmailAndPassword(email, pw).then(data => {
+export const auth = function auth(email, pw, displayName) {
+  return firebaseAuth().createUserWithEmailAndPassword(email, pw).then((data) => {
     saveUser(data, displayName);
   });
-}
+};
 
-export function logout() {
+export const logout = function logout() {
   return firebaseAuth().signOut();
-}
+};
 
-export function login(email, pw) {
+export const login = function login(email, pw) {
   return firebaseAuth().signInWithEmailAndPassword(email, pw);
-}
+};
 
-export function resetPassword(email) {
+export const resetPassword = function resetPassword(email) {
   return firebaseAuth().sendPasswordResetEmail(email);
-}
+};
 
-export function saveUser(user, displayName) {
+export const saveUser = function saveUser(user, displayName) {
   return ref
     .child(`users/${user.uid}/info`)
     .set({
@@ -27,4 +27,4 @@ export function saveUser(user, displayName) {
       displayName
     })
     .then(() => user);
-}
+};

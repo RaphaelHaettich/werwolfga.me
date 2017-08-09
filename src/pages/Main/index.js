@@ -19,11 +19,11 @@ export default class main extends Component {
     const userId = base.app().INTERNAL.getUid();
 
     const name = new Promise((resolve, reject) => {
-      const collection = 'users/' + userId;
+      const collection = `users/${userId}`;
       fetch(resolve, reject, collection);
     });
 
-    name.then(data => {
+    name.then((data) => {
       this.setState({ displayName: data[0].displayName });
       simpleState.evoke('loader', false);
     });

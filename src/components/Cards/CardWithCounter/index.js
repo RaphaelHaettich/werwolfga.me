@@ -36,9 +36,7 @@ class card extends Component {
   componentDidUpdate() {
     const cardState = simpleState.getState('cards');
     const index = cardState.list
-      .map(function(e) {
-        return e.key;
-      })
+      .map(e => e.key)
       .indexOf(this.props.item.key);
     if (index !== -1) {
       cardState.list[index] = {

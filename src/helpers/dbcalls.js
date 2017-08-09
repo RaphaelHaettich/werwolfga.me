@@ -5,10 +5,10 @@ export var push = (resolve, reject, data, collection) => {
     .push(collection, {
       data
     })
-    .then(snapshot => {
+    .then((snapshot) => {
       resolve(snapshot);
     })
-    .catch(err => {
+    .catch((err) => {
       //handle error
       console.error(err);
     });
@@ -19,10 +19,10 @@ export var update = (resolve, reject, data, collection) => {
     .update(collection, {
       data
     })
-    .then(snapshot => {
+    .then((snapshot) => {
       resolve(snapshot);
     })
-    .catch(err => {
+    .catch((err) => {
       //handle error
       console.error(err);
     });
@@ -33,30 +33,31 @@ export var post = (resolve, reject, data, collection) => {
     .post(collection, {
       data
     })
-    .then(snapshot => {
+    .then((snapshot) => {
       resolve(snapshot);
     })
-    .catch(err => {
+    .catch((err) => {
       //handle error
       console.error(err);
     });
 };
 
-export var fetch = (resolve, reject, collection, query, asArray) => {
-  if (asArray === undefined) {
-    asArray = true;
+export var fetch = (resolve, reject, collection, queryParam, asArray) => {
+  let array = true;
+  if(asArray) {
+    array = asArray;
   }
-  query = query || {};
+  const query = queryParam || {};
   base
     .fetch(collection, {
       context: {},
-      asArray,
+      array,
       queries: query
     })
-    .then(snapshot => {
+    .then((snapshot) => {
       resolve(snapshot);
     })
-    .catch(err => {
+    .catch((err) => {
       //handle error
       console.error(err);
     });
@@ -68,7 +69,7 @@ export var remove = (resolve, reject, collection) => {
     .then(() => {
       resolve('done');
     })
-    .catch(err => {
+    .catch((err) => {
       //handle error
       console.error(err);
     });

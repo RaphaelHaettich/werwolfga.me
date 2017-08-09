@@ -40,12 +40,12 @@ class create extends Component {
         push(resolve, reject, data, collection);
       });
       promise
-        .then(data => {
+        .then((data) => {
           self.setState({ lobbyId: inviteCode, lobbyKey: data.key });
         })
         .catch(function(error) {
           this.setState({
-            alertMsg: 'Error: ' + error
+            alertMsg: `Error: ${error}`
           });
           this.dialog.handleOpen();
           console.error(error);
@@ -63,17 +63,17 @@ class create extends Component {
             equalTo: userId
           }
         })
-        .then(data => {
+        .then((data) => {
           resolve(data);
         })
-        .catch(error => {
+        .catch((error) => {
           this.setState({
-            alertMsg: 'Error: ' + error
+            alertMsg: `Error: ${error}`
           });
           this.dialog.handleOpen();
         });
     });
-    hostExists.then(data => {
+    hostExists.then((data) => {
       if (data.length > 0) {
         this.setState({ users: data[0].memberarray });
         if (data[0].state === 'ready') {
@@ -87,18 +87,18 @@ class create extends Component {
       }
     });
     const lang = simpleState.getState('lang');
-    this.ref = base.syncState('/cards/' + lang, {
+    this.ref = base.syncState(`/cards/${lang}`, {
       context: this,
       state: 'list',
       asArray: true
     });
-    simpleState.subscribe('lang', this, nextState => {
+    simpleState.subscribe('lang', this, (nextState) => {
       simpleState.evoke('loader', true);
-      this.ref = base.syncState('/cards/' + nextState, {
+      this.ref = base.syncState(`/cards/${nextState}`, {
         context: this,
         state: 'list',
         asArray: true,
-        then(){
+        then() {
           simpleState.evoke('loader', false);
         }
       });
@@ -115,9 +115,7 @@ class create extends Component {
     const usersObj = simpleState.getState('count');
     const cardsObj = simpleState.getState('cards');
     const cardsCount = cardsObj.list
-      .map(function(a) {
-        return a.count;
-      })
+      .map(a => a.count)
       .reduce((a, b) => a + b, 0);
     const userCount = usersObj.count.length;
     if (cardsCount === userCount && userCount > 0) {
@@ -139,13 +137,13 @@ class create extends Component {
       }
       const updateMembers = new Promise((resolve, reject) => {
         const collection =
-          'activegame/' + this.state.lobbyKey + '/memberarray/';
+          `activegame/${this.state.lobbyKey}/memberarray/`;
         post(resolve, reject, memberarray, collection);
       });
       updateMembers
         .then(() => {
           const setGameReady = new Promise((resolve, reject) => {
-            const collection = 'activegame/' + this.state.lobbyKey;
+            const collection = `activegame/${this.state.lobbyKey}`;
             const object = {
               state: 'ready'
             };
@@ -158,18 +156,18 @@ class create extends Component {
               simpleState.evoke('loader', true);
               this.props.history.push('gameadmin');
             })
-            .catch(function(error) {
+            .catch((error) => {
               console.error(error);
             });
         })
-        .catch(function(error) {
+        .catch((error) => {
           console.error(error);
         });
     } else {
       this.setState({
         alertMsg:
-          'You need as many players as selected cards. Please delete or add some cards or p' +
-          'layers. '
+        'You need as many players as selected cards. Please delete or add some cards or p' +
+        'layers. '
       });
       this.dialog.handleOpen();
     }
@@ -188,13 +186,13 @@ class create extends Component {
             <CounterLabel
               labelText={'Joined People: '}
               dbReference={
-                'activegame/' + this.state.lobbyKey + '/memberarray/'
+                `activegame/${this.state.lobbyKey}/memberarray/`
               }
               state={'count'}
             />
             <WarningWindow
               message={this.state.alertMsg}
-              ref={dialog => {
+              ref={(dialog) => {
                 this.dialog = dialog;
               }}
             />
@@ -211,7 +209,7 @@ class create extends Component {
                 <DeleteAndRouteButton
                   route={'/main'}
                   labelText={'Discard'}
-                  dbReference={'activegame/' + this.state.lobbyKey}
+                  dbReference={`activegame/${this.state.lobbyKey}`}
                   removeState={'count'}
                 />
               </div>
@@ -227,7 +225,7 @@ class create extends Component {
                 <DeleteAndRouteButton
                   route={'/main'}
                   labelText={'Discard'}
-                  dbReference={'activegame/' + this.state.lobbyKey}
+                  dbReference={`activegame/${this.state.lobbyKey}`}
                   removeState={'count'}
                 />
               </div>}

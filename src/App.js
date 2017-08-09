@@ -19,26 +19,27 @@ import CircularProgress from 'material-ui/CircularProgress';
 import SimpleState from 'react-simple-state';
 const simpleState = new SimpleState();
 
-function PrivateRoute({ component: Component, authed, ...rest }) {
+const PrivateRoute = function PrivateRoute({ component: Component, authed, ...rest }) {
   return (
     <Route
       {...rest}
       render={props =>
-        authed === true
-          ? <Component {...props} />
-          : <Redirect
-            to={{
-              pathname: '/login',
-              state: {
-                from: props.location
-              }
-            }}
-          />}
+        (
+          authed === true
+            ? <Component {...props} />
+            : <Redirect
+              to={{
+                pathname: '/login',
+                state: {
+                  from: props.location
+                }
+              }}
+            />)}
     />
   );
-}
+};
 
-function PublicRoute({ component: Component, authed, ...rest }) {
+const PublicRoute = function PublicRoute({ component: Component, authed, ...rest }) {
   return (
     <Route
       {...rest}
@@ -46,7 +47,7 @@ function PublicRoute({ component: Component, authed, ...rest }) {
         authed === false ? <Component {...props} /> : <Redirect to="/main" />}
     />
   );
-}
+};
 
 export default class App extends Component {
   constructor(props) {
@@ -73,7 +74,7 @@ export default class App extends Component {
     simpleState.addListener('gameId', { id: '' });
     simpleState.addListener('loader', true);
 
-    simpleState.subscribe('loader', this, nextState => {
+    simpleState.subscribe('loader', this, (nextState) => {
       this.setState({
         loader: nextState
       });
@@ -81,7 +82,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    this.removeListener = firebaseAuth().onAuthStateChanged(user => {
+    this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ authed: true, loading: false });
       } else {

@@ -25,10 +25,10 @@ export default class join extends Component {
     const lobbyCode = sessionStorage.lobbyNumber;
     if (lobbyCode) {
       const getGame = new Promise((resolve, reject) => {
-        const collection = 'activegame/' + lobbyCode;
+        const collection = `activegame/${lobbyCode}`;
         fetch(resolve, reject, collection, {}, false);
       });
-      getGame.then(data => {
+      getGame.then((data) => {
         if (data.state === 'ready') {
           this.setState({ activeSession: true });
         }
@@ -43,7 +43,7 @@ export default class join extends Component {
     }
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const userId = base.app().INTERNAL.getUid();
 
@@ -62,16 +62,16 @@ export default class join extends Component {
       }
     });
 
-    const addUser = key => {
+    const addUser = (key) => {
       simpleState.evoke('loader', true);
       const getDisplayName = new Promise((resolve, reject) => {
-        const collection = 'users/' + userId;
+        const collection = `users/${userId}`;
         fetch(resolve, reject, collection);
       });
       getDisplayName
-        .then(data => {
+        .then((data) => {
           const addUser = new Promise((resolve, reject) => {
-            const collection = 'activegame/' + key + '/memberarray/' + userId;
+            const collection = `activegame/${key}/memberarray/${userId}`;
             const object = {
               card: 'null',
               displayName: data[0].displayName
@@ -86,7 +86,7 @@ export default class join extends Component {
                 alertMsg: 'Game found! Now waiting until creator starts game'
               });
               this.dialog.handleOpen();
-              const collection = 'activegame/' + key;
+              const collection = `activegame/${key}`;
               this.ref = base.listenTo(collection, {
                 context: this,
                 asArray: true,
@@ -97,16 +97,16 @@ export default class join extends Component {
                 }
               });
             })
-            .catch(function (error) {
+            .catch((error) => {
               console.error(error);
             });
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.error(error);
         });
     };
 
-    getUUID.then(data => {
+    getUUID.then((data) => {
       if (data.length > 0) {
         if (data[0].memberarray === undefined) {
           addUser(data[0].key);
@@ -179,7 +179,7 @@ export default class join extends Component {
         </CardActions>
         <WarningWindow
           message={this.state.alertMsg}
-          ref={dialog => {
+          ref={(dialog) => {
             this.dialog = dialog;
           }}
         />

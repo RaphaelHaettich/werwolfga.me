@@ -28,7 +28,7 @@ class deleteAndRouteButton extends Component {
         this.props.history.push(this.props.route);
         sessionStorage.clear();
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   }

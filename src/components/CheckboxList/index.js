@@ -16,16 +16,14 @@ class CheckboxList extends Component {
   }
 
   render() {
-    const checkboxListItem = this.props.votesData.map((item, id) => {
-      return (
-        <RadioButton
-          key={id}
-          value={item.key + '|' + item.displayName}
-          label={item.displayName}
-          style={Styles.radioButton}
-        />
-      );
-    });
+    const checkboxListItem = this.props.votesData.map((item, id) => (
+      <RadioButton
+        key={id}
+        value={`${item.key}|${item.displayName}`}
+        label={item.displayName}
+        style={Styles.radioButton}
+      />
+    ));
     return (
       <Paper zDepth={2}>
         <RadioButtonGroup

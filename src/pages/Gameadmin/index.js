@@ -39,22 +39,22 @@ export default class Gameadmin extends Component {
         gameId = sessionStorage.lobbyNumber;
       }
       const getGameCode = new Promise((resolve, reject) => {
-        const collection = 'activegame/' + gameId + '/code/';
+        const collection = `activegame/${gameId}/code/`;
         const arrayBoolean = false;
         fetch(resolve, reject, collection, {}, arrayBoolean);
       });
-      getGameCode.then(data => {
+      getGameCode.then((data) => {
         this.setState({ gameCode: data });
       });
 
-      this.listen2 = base.listenTo('activegame/' + gameId + '/memberarray/', {
+      this.listen2 = base.listenTo(`activegame/${gameId}/memberarray/`, {
         context: this,
         asArray: true,
         then(data) {
           const activeData = data;
           const lang = simpleState.getState('lang');
           this.getCardInfo(activeData, lang);
-          simpleState.subscribe('lang', this, nextState => {
+          simpleState.subscribe('lang', this, (nextState) => {
             simpleState.evoke('loader', true);
             this.getCardInfo(activeData, nextState);
           });
@@ -76,7 +76,7 @@ export default class Gameadmin extends Component {
     simpleState.evoke('loader', true);
     const gameId = sessionStorage.lobbyNumber;
     const removeVoting = new Promise((resolve, reject) => {
-      const collection = 'activegame/' + gameId + '/voting/';
+      const collection = `activegame/${gameId}/voting/`;
       remove(resolve, reject, collection);
     });
     removeVoting.then(() => {
@@ -86,10 +86,10 @@ export default class Gameadmin extends Component {
 
   getCardInfo = (activeData, lang) => {
     const getCardInfos = new Promise((resolve, reject) => {
-      const collection = 'cards/' + lang;
+      const collection = `cards/${lang}`;
       fetch(resolve, reject, collection);
     });
-    getCardInfos.then(data => {
+    getCardInfos.then((data) => {
       for (var i = 0; i < activeData.length; i++) {
         const cardId = activeData[i].card;
         const index = data.findIndex(i => i.key === cardId);
@@ -100,18 +100,18 @@ export default class Gameadmin extends Component {
         activeData[i].description = data[index].description;
         activeData[i].name = data[index].name;
         activeData[i].cardHeader =
-          activeData[i].displayName + ': ' + data[index].name;
+          `${activeData[i].displayName}: ${data[index].name}`;
       }
       this.setState({ list: activeData });
       simpleState.evoke('loader', false);
     });
   };
 
-  removePlayer = data => {
+  removePlayer = (data) => {
     simpleState.evoke('loader', true);
     const gameId = sessionStorage.lobbyNumber;
     const promise = new Promise((resolve, reject) => {
-      const collection = 'activegame/' + gameId + '/memberarray/' + data;
+      const collection = `activegame/${gameId}/memberarray/${data}`;
       remove(resolve, reject, collection);
     });
     promise.then(() => {
@@ -132,24 +132,24 @@ export default class Gameadmin extends Component {
     }
     const gameId = sessionStorage.lobbyNumber;
     const postVotingData = new Promise((resolve, reject) => {
-      const collection = 'activegame/' + gameId + '/voting/data';
+      const collection = `activegame/${gameId}/voting/data`;
       post(resolve, reject, votingData, collection);
     });
     postVotingData.then(() => {
-      this.listen1 = base.listenTo('activegame/' + gameId + '/voting/votes', {
+      this.listen1 = base.listenTo(`activegame/${gameId}/voting/votes`, {
         context: this,
         asArray: true,
         then(votesData) {
           const getVoteData = new Promise((resolve, reject) => {
-            const collection = 'activegame/' + gameId + '/voting/data/';
+            const collection = `activegame/${gameId}/voting/data/`;
             fetch(resolve, reject, collection, {}, false);
           });
-          getVoteData.then(voteData => {
+          getVoteData.then((voteData) => {
             for (let i = 0; i < votesData.length; i++) {
               const key = votesData[i].votedForKey;
               if (voteData[key].votedFor) {
                 voteData[key].votedFor =
-                  voteData[key].votedFor + ', ' + votesData[i].displayName;
+                  `${voteData[key].votedFor}, ${votesData[i].displayName}`;
               } else {
                 voteData[key].votedFor = votesData[i].displayName;
               }
@@ -187,7 +187,7 @@ export default class Gameadmin extends Component {
               <DeleteAndRouteButton
                 route={'/main'}
                 labelText={'Game finished'}
-                dbReference={'activegame/' + sessionStorage.lobbyNumber}
+                dbReference={`activegame/${sessionStorage.lobbyNumber}`}
                 primary
               />
             </div>

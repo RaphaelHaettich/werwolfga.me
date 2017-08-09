@@ -7,9 +7,9 @@ import SimpleState from 'react-simple-state';
 import WarningWindow from '../../components/WarningWindow';
 const simpleState = new SimpleState();
 
-function setErrorMsg(error) {
+const setErrorMsg = function setErrorMsg(error) {
   return { loginMessage: error };
-}
+};
 
 export default class Login extends Component {
   constructor(props) {
@@ -25,9 +25,9 @@ export default class Login extends Component {
     simpleState.evoke('loader', false);
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
-    login(this.email.input.value, this.pw.input.value).catch(e => {
+    login(this.email.input.value, this.pw.input.value).catch((e) => {
       if (e.code === 'auth/wrong-password') {
         this.setState({ secondActionLabel: 'Forgot Password' });
         this.setState({ secondActionShow: true });
@@ -47,7 +47,7 @@ export default class Login extends Component {
         )
       )
       .catch(
-        error => this.setState(setErrorMsg('Email address not found. Error: '+ error)),
+        error => this.setState(setErrorMsg(`Email address not found. Error: ${error}`)),
         this.dialog.handleOpen()
       );
   };
@@ -81,7 +81,7 @@ export default class Login extends Component {
           secondAction={this.resetPassword}
           secondActionShow={this.state.secondActionShow}
           secondActionLabel={this.state.secondActionLabel}
-          ref={dialog => {
+          ref={(dialog) => {
             this.dialog = dialog;
           }}
         />
