@@ -12,7 +12,7 @@ import shuffle from '../../helpers/shuffle';
 
 const simpleState = new SimpleState();
 
-class create extends Component {
+class Create extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -236,4 +236,4 @@ class create extends Component {
   }
 }
 
-export default create;
+export default Create;

@@ -13,7 +13,7 @@ import { withRouter, } from 'react-router-dom';
 import { base, } from '../../config/constants';
 import RaisedButton from 'material-ui/RaisedButton';
 
-class deleteAndRouteButton extends Component {
+class DeleteAndRouteButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,4 +46,4 @@ class deleteAndRouteButton extends Component {
   }
 }
 
-export default withRouter(deleteAndRouteButton);
+export default withRouter(DeleteAndRouteButton);

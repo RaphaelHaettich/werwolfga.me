@@ -13,7 +13,7 @@ import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
-export default class DialogAlert extends React.Component {
+export default class WarningWindow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

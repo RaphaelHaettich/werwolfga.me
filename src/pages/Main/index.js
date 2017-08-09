@@ -7,7 +7,7 @@ import { base, } from '../../config/constants';
 import { fetch, } from '../../helpers/dbcalls';
 const simpleState = new SimpleState();
 
-export default class main extends Component {
+export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {

@@ -10,7 +10,7 @@ import { base, } from '../../config/constants';
 import SimpleState from 'react-simple-state';
 const simpleState = new SimpleState();
 
-export default class counterlabel extends Component {
+export default class Counterlabel extends Component {
   constructor(props) {
     super(props);
     this.state = {

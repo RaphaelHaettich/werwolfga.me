@@ -235,6 +235,9 @@
     "camelcase": [
       2
     ],
+    "new-cap": [
+      1
+    ],
     "import/no-mutable-exports": [
       2
     ],

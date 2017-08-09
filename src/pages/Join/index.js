@@ -12,7 +12,7 @@ import { Container, Row, Col, } from 'react-grid-system';
 
 const simpleState = new SimpleState();
 
-export default class join extends Component {
+export default class Join extends Component {
   constructor(props) {
     super(props);
     this.state = {

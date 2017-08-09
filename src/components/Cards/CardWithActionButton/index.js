@@ -17,7 +17,7 @@ import { Card, CardText, CardMedia, CardTitle, } from 'material-ui/Card';
 
 const simpleState = new SimpleState();
 
-class card extends Component {
+class CardWithActionButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,4 +68,4 @@ class card extends Component {
   }
 }
 
-export default card;
+export default CardWithActionButton;

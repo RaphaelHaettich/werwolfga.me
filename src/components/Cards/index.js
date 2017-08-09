@@ -9,7 +9,7 @@ import CardWithCounter from './CardWithCounter';
 import CardWithoutCounter from './CardWithoutCounter';
 import CardWithActionButton from './CardWithActionButton';
 
-class cards extends Component {
+class Cards extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,4 +36,4 @@ class cards extends Component {
   }
 }
 
-export default cards;
+export default Cards;

@@ -11,7 +11,7 @@ import SimpleState from 'react-simple-state';
 import { Card, CardText, CardTitle, } from 'material-ui/Card';
 const simpleState = new SimpleState();
 
-class card extends Component {
+class FlipCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -85,4 +85,4 @@ class card extends Component {
   }
 }
 
-export default card;
+export default FlipCard;

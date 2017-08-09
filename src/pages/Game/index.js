@@ -13,7 +13,7 @@ import VoteList from '../../components/VoteList';
 import Styles from './style.css.js';
 const simpleState = new SimpleState();
 
-export default class Gameadmin extends Component {
+export default class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {

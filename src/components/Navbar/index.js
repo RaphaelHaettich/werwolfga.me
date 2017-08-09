@@ -22,7 +22,7 @@ import Divider from 'material-ui/Divider';
 import SimpleState from 'react-simple-state';
 const simpleState = new SimpleState();
 
-class navbar extends Component {
+class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -116,4 +116,4 @@ class navbar extends Component {
   }
 }
 
-export default withRouter(navbar);
+export default withRouter(Navbar);

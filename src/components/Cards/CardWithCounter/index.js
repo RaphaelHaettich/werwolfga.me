@@ -22,7 +22,7 @@ import {
 
 const simpleState = new SimpleState();
 
-class card extends Component {
+class CardWithCounter extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -101,4 +101,4 @@ class card extends Component {
   }
 }
 
-export default card;
+export default CardWithCounter;
