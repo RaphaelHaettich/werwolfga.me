@@ -3,7 +3,7 @@ import { base } from '../config/constants';
 export var push = (resolve, reject, data, collection) => {
   base
     .push(collection, {
-      data: data
+      data
     })
     .then(snapshot => {
       resolve(snapshot);
@@ -17,7 +17,7 @@ export var push = (resolve, reject, data, collection) => {
 export var update = (resolve, reject, data, collection) => {
   base
     .update(collection, {
-      data: data
+      data
     })
     .then(snapshot => {
       resolve(snapshot);
@@ -31,7 +31,7 @@ export var update = (resolve, reject, data, collection) => {
 export var post = (resolve, reject, data, collection) => {
   base
     .post(collection, {
-      data: data
+      data
     })
     .then(snapshot => {
       resolve(snapshot);
@@ -50,7 +50,7 @@ export var fetch = (resolve, reject, collection, query, asArray) => {
   base
     .fetch(collection, {
       context: {},
-      asArray: asArray,
+      asArray,
       queries: query
     })
     .then(snapshot => {

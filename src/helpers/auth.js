@@ -24,7 +24,7 @@ export function saveUser(user, displayName) {
     .set({
       email: user.email,
       uid: user.uid,
-      displayName: displayName
+      displayName
     })
     .then(() => user);
 }

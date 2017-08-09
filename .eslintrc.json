@@ -50,10 +50,24 @@
     "no-multi-spaces": [
       1
     ],
-    "prefer-const": ["error", {
+    "prefer-const": [
+      "error",
+      {
         "destructuring": "any",
         "ignoreReadBeforeAssign": false
-    }],
+      }
+    ],
+    "no-new-object": [
+      1
+    ],
+    "object-shorthand": [
+      "error",
+      "always"
+    ],
+    "quote-props": [
+      1,
+      "as-needed"
+    ],
     "jsx-quotes": [
       1
     ],
@@ -130,7 +144,8 @@
       1
     ],
     "react/self-closing-comp": [
-      "error", {
+      "error",
+      {
         "component": true,
         "html": true
       }
