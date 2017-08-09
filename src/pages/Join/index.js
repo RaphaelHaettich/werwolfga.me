@@ -22,6 +22,11 @@ export default class Join extends Component {
   }
 
   componentDidMount() {
+    const urlParamId = localStorage.getItem('urlParamId');
+    if (urlParamId) {
+      localStorage.removeItem('urlParamId');
+      this.joinGame(Number(urlParamId));
+    }
     const lobbyCode = sessionStorage.lobbyNumber;
     if (lobbyCode) {
       const getGame = new Promise((resolve, reject) => {
@@ -43,12 +48,16 @@ export default class Join extends Component {
     }
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  joinGame = (urlParamId) => {
     const userId = base.app().INTERNAL.getUid();
-
     const getUUID = new Promise((resolve, reject) => {
-      const number = this.number.input.value;
+      let number;
+      if (urlParamId) {
+        number = urlParamId;
+      } else {
+        number = this.number.input.value;
+      }
+      
       if (isNaN(number) !== true) {
         const query = {
           orderByChild: 'code',
@@ -131,6 +140,11 @@ export default class Join extends Component {
         this.dialog.handleOpen();
       }
     });
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.joinGame();
   };
 
   joinLastGame = () => {
@@ -150,6 +164,7 @@ export default class Join extends Component {
                   <TextField
                     ref={number => (this.number = number)}
                     maxLength="6"
+                    id="numberField"
                     type="tel"
                     hintText="123456"
                     floatingLabelText="Lobby Id"

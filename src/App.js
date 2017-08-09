@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import Main from './pages/Main';
 import Create from './pages/Create';
 import Join from './pages/Join';
+import InviteLink from './pages/InviteLink';
 import Gameadmin from './pages/Gameadmin';
 import Game from './pages/Game';
 import { firebaseAuth, } from './config/constants';
@@ -17,6 +18,7 @@ import Paper from 'material-ui/Paper';
 import Styles from './style.css.js';
 import CircularProgress from 'material-ui/CircularProgress';
 import SimpleState from 'react-simple-state';
+
 const simpleState = new SimpleState();
 
 const PrivateRoute = function PrivateRoute({ component: Component, authed, ...rest }) {
@@ -45,6 +47,16 @@ const PublicRoute = function PublicRoute({ component: Component, authed, ...rest
       {...rest}
       render={props =>
         authed === false ? <Component {...props} /> : <Redirect to="/main" />}
+    />
+  );
+};
+
+const NeutralRoute = function NeutralRoute({ component: Component, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        <Component {...props} />}
     />
   );
 };
@@ -103,7 +115,7 @@ export default class App extends Component {
     let loader = null;
     if (this.state.loader === true) {
       loader = (
-        <div id="swag" style={Styles.hidePage}>
+        <div style={Styles.hidePage}>
           <CircularProgress style={Styles.centered} />
         </div>
       );
@@ -164,6 +176,11 @@ export default class App extends Component {
                       authed={this.state.authed}
                       path="/game"
                       component={Game}
+                    />
+                    <NeutralRoute
+                      authed={this.state.authed}
+                      path="/invitelink"
+                      component={InviteLink}
                     />
                     <Route render={() => <h3>No Match</h3>} />
                   </Switch>
