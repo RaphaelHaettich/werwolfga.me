@@ -34,7 +34,7 @@ class card extends Component {
     simpleState.evoke('loader', false);
   }
   componentDidUpdate() {
-    let cardState = simpleState.getState('cards');
+    const cardState = simpleState.getState('cards');
     const index = cardState.list
       .map(function(e) {
         return e.key;
@@ -70,7 +70,7 @@ class card extends Component {
   }
 
   render() {
-    let item = this.props.item;
+    const item = this.props.item;
     return (
       <div style={Styles.card}>
         <Divider />

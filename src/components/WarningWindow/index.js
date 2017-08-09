@@ -30,7 +30,7 @@ export default class DialogAlert extends React.Component {
   };
 
   render() {
-    let showActions = this.props.secondActionShow || false;
+    const showActions = this.props.secondActionShow || false;
     const actions = [
       showActions === true
         ? <div>

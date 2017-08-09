@@ -50,6 +50,10 @@
     "no-multi-spaces": [
       1
     ],
+    "prefer-const": ["error", {
+        "destructuring": "any",
+        "ignoreReadBeforeAssign": false
+    }],
     "jsx-quotes": [
       1
     ],

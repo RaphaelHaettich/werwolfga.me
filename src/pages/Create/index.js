@@ -28,11 +28,11 @@ class create extends Component {
     var self = this;
     const userId = base.app().INTERNAL.getUid();
     //functions to call
-    let createLobby = () => {
+    const createLobby = () => {
       const inviteCode = Math.floor(Math.random() * 900000) + 100000;
-      let promise = new Promise((resolve, reject) => {
-        let collection = 'activegame';
-        let data = {
+      const promise = new Promise((resolve, reject) => {
+        const collection = 'activegame';
+        const data = {
           code: inviteCode,
           host: userId,
           state: 'draft'
@@ -53,7 +53,7 @@ class create extends Component {
     };
 
     //functions to execute at start
-    let hostExists = new Promise((resolve) => {
+    const hostExists = new Promise((resolve) => {
       base
         .fetch('activegame/', {
           context: this,
@@ -86,7 +86,7 @@ class create extends Component {
         createLobby();
       }
     });
-    let lang = simpleState.getState('lang');
+    const lang = simpleState.getState('lang');
     this.ref = base.syncState('/cards/' + lang, {
       context: this,
       state: 'list',
@@ -122,14 +122,14 @@ class create extends Component {
     const userCount = usersObj.count.length;
     if (cardsCount === userCount && userCount > 0) {
       simpleState.evoke('loader', true);
-      let cards = [];
+      const cards = [];
       for (let i = 0; i < cardsObj.list.length; i++) {
         for (let p = 0; p < cardsObj.list[i].count; p++) {
           cards.push(cardsObj.list[i].key);
         }
       }
       shuffle(cards);
-      let memberarray = [];
+      const memberarray = [];
       for (let i = 0; i < usersObj.count.length; i++) {
         const key = usersObj.count[i].key;
         memberarray[key] = {
@@ -137,14 +137,14 @@ class create extends Component {
           displayName: usersObj.count[i].displayName
         };
       }
-      let updateMembers = new Promise((resolve, reject) => {
+      const updateMembers = new Promise((resolve, reject) => {
         const collection =
           'activegame/' + this.state.lobbyKey + '/memberarray/';
         post(resolve, reject, memberarray, collection);
       });
       updateMembers
         .then(() => {
-          let setGameReady = new Promise((resolve, reject) => {
+          const setGameReady = new Promise((resolve, reject) => {
             const collection = 'activegame/' + this.state.lobbyKey;
             const object = {
               state: 'ready'

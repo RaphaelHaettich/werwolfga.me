@@ -42,14 +42,14 @@ export default class Gameadmin extends Component {
       } else if (sessionStorage.lobbyNumber !== undefined) {
         gameId = sessionStorage.lobbyNumber;
       }
-      let getCurrentCard = new Promise((resolve, reject) => {
+      const getCurrentCard = new Promise((resolve, reject) => {
         const collection = 'activegame/' + gameId + '/memberarray/' + userId;
         fetch(resolve, reject, collection);
       });
       getCurrentCard.then(data => {
         if (data.length > 0) {
           this.setState({ displayName: data[1] });
-          let lang = simpleState.getState('lang');
+          const lang = simpleState.getState('lang');
           this.getCardInfo(data, gameId, userId, lang);
           simpleState.subscribe('lang', this, nextState => {
             simpleState.evoke('loader', true);
@@ -89,12 +89,12 @@ export default class Gameadmin extends Component {
   };
 
   getCardInfo = (data, gameId, userId, lang) => {
-    let getCardInfos = new Promise((resolve, reject) => {
+    const getCardInfos = new Promise((resolve, reject) => {
       const collection = 'cards/' + lang + '/' + data[0];
       fetch(resolve, reject, collection);
     });
     getCardInfos.then(data => {
-      let cardObj = {
+      const cardObj = {
         description: data[0],
         name: data[1],
         pictureback: data[2],
@@ -123,7 +123,7 @@ export default class Gameadmin extends Component {
       context: this,
       asArray: true,
       then(votesData) {
-        let getVoteData = new Promise((resolve, reject) => {
+        const getVoteData = new Promise((resolve, reject) => {
           const collection = 'activegame/' + gameId + '/voting/data/';
           fetch(resolve, reject, collection, {}, false);
         });
@@ -166,7 +166,7 @@ export default class Gameadmin extends Component {
     const userId = base.app().INTERNAL.getUid();
     this.setState({ buttonDisabled: true });
     const gameId = sessionStorage.lobbyNumber;
-    let postVotingData = new Promise((resolve, reject) => {
+    const postVotingData = new Promise((resolve, reject) => {
       const collection = 'activegame/' + gameId + '/voting/votes/' + userId;
       const splitString = this.checkList.state.votedkey.split('|');
       const votedKey = splitString[0];
@@ -189,7 +189,7 @@ export default class Gameadmin extends Component {
     this.setState({ voting: true });
     const gameId = sessionStorage.lobbyNumber;
     const userId = base.app().INTERNAL.getUid();
-    let checkIfVoted = new Promise((resolve, reject) => {
+    const checkIfVoted = new Promise((resolve, reject) => {
       const collection = 'activegame/' + gameId + '/voting/votes/' + userId;
       fetch(resolve, reject, collection);
     });

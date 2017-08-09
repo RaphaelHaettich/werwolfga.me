@@ -18,7 +18,7 @@ export default class main extends Component {
     simpleState.evoke('loader', true);
     const userId = base.app().INTERNAL.getUid();
 
-    let name = new Promise((resolve, reject) => {
+    const name = new Promise((resolve, reject) => {
       const collection = 'users/' + userId;
       fetch(resolve, reject, collection);
     });

@@ -34,7 +34,7 @@ class card extends Component {
   };
 
   render() {
-    let item = this.props.item;
+    const item = this.props.item;
 
     return (
       <div style={Styles.card}>

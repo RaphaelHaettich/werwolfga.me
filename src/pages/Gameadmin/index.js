@@ -38,7 +38,7 @@ export default class Gameadmin extends Component {
       } else if (sessionStorage.lobbyNumber !== undefined) {
         gameId = sessionStorage.lobbyNumber;
       }
-      let getGameCode = new Promise((resolve, reject) => {
+      const getGameCode = new Promise((resolve, reject) => {
         const collection = 'activegame/' + gameId + '/code/';
         const arrayBoolean = false;
         fetch(resolve, reject, collection, {}, arrayBoolean);
@@ -52,7 +52,7 @@ export default class Gameadmin extends Component {
         asArray: true,
         then(data) {
           const activeData = data;
-          let lang = simpleState.getState('lang');
+          const lang = simpleState.getState('lang');
           this.getCardInfo(activeData, lang);
           simpleState.subscribe('lang', this, nextState => {
             simpleState.evoke('loader', true);
@@ -75,7 +75,7 @@ export default class Gameadmin extends Component {
   clearVote = () => {
     simpleState.evoke('loader', true);
     const gameId = sessionStorage.lobbyNumber;
-    let removeVoting = new Promise((resolve, reject) => {
+    const removeVoting = new Promise((resolve, reject) => {
       const collection = 'activegame/' + gameId + '/voting/';
       remove(resolve, reject, collection);
     });
@@ -85,7 +85,7 @@ export default class Gameadmin extends Component {
   };
 
   getCardInfo = (activeData, lang) => {
-    let getCardInfos = new Promise((resolve, reject) => {
+    const getCardInfos = new Promise((resolve, reject) => {
       const collection = 'cards/' + lang;
       fetch(resolve, reject, collection);
     });
@@ -110,7 +110,7 @@ export default class Gameadmin extends Component {
   removePlayer = data => {
     simpleState.evoke('loader', true);
     const gameId = sessionStorage.lobbyNumber;
-    let promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
       const collection = 'activegame/' + gameId + '/memberarray/' + data;
       remove(resolve, reject, collection);
     });
@@ -123,7 +123,7 @@ export default class Gameadmin extends Component {
     simpleState.evoke('loader', true);
     this.setState({ voting: true });
     const data = this.state.list;
-    let votingData = [];
+    const votingData = [];
     for (let i = 0; i < data.length; i++) {
       votingData[data[i].userKey] = {
         displayName: data[i].displayName,
@@ -131,7 +131,7 @@ export default class Gameadmin extends Component {
       };
     }
     const gameId = sessionStorage.lobbyNumber;
-    let postVotingData = new Promise((resolve, reject) => {
+    const postVotingData = new Promise((resolve, reject) => {
       const collection = 'activegame/' + gameId + '/voting/data';
       post(resolve, reject, votingData, collection);
     });
@@ -140,7 +140,7 @@ export default class Gameadmin extends Component {
         context: this,
         asArray: true,
         then(votesData) {
-          let getVoteData = new Promise((resolve, reject) => {
+          const getVoteData = new Promise((resolve, reject) => {
             const collection = 'activegame/' + gameId + '/voting/data/';
             fetch(resolve, reject, collection, {}, false);
           });

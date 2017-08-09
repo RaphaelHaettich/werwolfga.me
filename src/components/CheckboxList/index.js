@@ -16,7 +16,7 @@ class CheckboxList extends Component {
   }
 
   render() {
-    let checkboxListItem = this.props.votesData.map((item, id) => {
+    const checkboxListItem = this.props.votesData.map((item, id) => {
       return (
         <RadioButton
           key={id}

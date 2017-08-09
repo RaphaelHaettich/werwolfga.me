@@ -32,7 +32,7 @@ class card extends Component {
   }
 
   render() {
-    let item = this.props.data;
+    const item = this.props.data;
     return (
       <div>
         {this.state.isFlipped === false

@@ -22,9 +22,9 @@ export default class join extends Component {
   }
 
   componentDidMount() {
-    let lobbyCode = sessionStorage.lobbyNumber;
+    const lobbyCode = sessionStorage.lobbyNumber;
     if (lobbyCode) {
-      let getGame = new Promise((resolve, reject) => {
+      const getGame = new Promise((resolve, reject) => {
         const collection = 'activegame/' + lobbyCode;
         fetch(resolve, reject, collection, {}, false);
       });
@@ -47,7 +47,7 @@ export default class join extends Component {
     e.preventDefault();
     const userId = base.app().INTERNAL.getUid();
 
-    let getUUID = new Promise((resolve, reject) => {
+    const getUUID = new Promise((resolve, reject) => {
       const number = this.number.input.value;
       if (isNaN(number) !== true) {
         const query = {
@@ -62,17 +62,17 @@ export default class join extends Component {
       }
     });
 
-    let addUser = key => {
+    const addUser = key => {
       simpleState.evoke('loader', true);
-      let getDisplayName = new Promise((resolve, reject) => {
+      const getDisplayName = new Promise((resolve, reject) => {
         const collection = 'users/' + userId;
         fetch(resolve, reject, collection);
       });
       getDisplayName
         .then(data => {
-          let addUser = new Promise((resolve, reject) => {
+          const addUser = new Promise((resolve, reject) => {
             const collection = 'activegame/' + key + '/memberarray/' + userId;
-            let object = {
+            const object = {
               card: 'null',
               displayName: data[0].displayName
             };
