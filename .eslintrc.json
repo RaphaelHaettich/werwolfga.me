@@ -41,7 +41,7 @@
       "always"
     ],
     "no-console": [
-      "error",
+      1,
       {
         "allow": [
           "warn",
