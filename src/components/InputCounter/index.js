@@ -22,9 +22,9 @@ const InputCounter = ({ up, down, count, }) => (
       label="−"
       primary
     />
-    <div style={Styles.counter}>
+    <span style={Styles.counter}>
       {count}
-    </div>
+    </span>
     <FlatButton
       role="button"
       tabIndex={0}
