@@ -1,13 +1,11 @@
 /*
 *   Required Props:
 *   data: objectarray
-*   counter: boolean
+*   cardStyle: string (counter | action)
 */
 
 import React, { Component, } from 'react';
-import CardWithCounter from './CardWithCounter';
-import CardWithoutCounter from './CardWithoutCounter';
-import CardWithActionButton from './CardWithActionButton';
+import ChildCard from './ChildCard';
 
 class Cards extends Component {
   constructor(props) {
@@ -19,14 +17,15 @@ class Cards extends Component {
 
   render() {
     const listItems = this.props.data.map((item, id) => this.props.cardStyle === 'counter'
-      ? <CardWithCounter key={id} item={item} />
+      ? <ChildCard key={id} item={item} counter actionCard={false} />
       : this.props.cardStyle === 'action'
-        ? <CardWithActionButton
+        ? <ChildCard
           key={id}
           action={this.props.action}
           item={item}
+          actionCard
         />
-        : <CardWithoutCounter key={id} item={item} />);
+        : <ChildCard key={id} item={item} counter={false} actionCard={false} />);
 
     return (
       <div>
