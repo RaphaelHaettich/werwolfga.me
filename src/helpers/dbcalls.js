@@ -44,9 +44,10 @@ export const post = (resolve, reject, data, collection) => {
 
 export const fetch = (resolve, reject, collection, queryParam, asArray) => {
   let array = true;
-  if (asArray) {
+  if (asArray !== undefined) {
     array = asArray;
   }
+  
   const query = queryParam || {};
   base
     .fetch(collection, {
