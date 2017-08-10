@@ -4,6 +4,7 @@ import { push, post, update, } from '../../helpers/dbcalls';
 import { base, } from '../../config/constants';
 import DeleteAndRouteButton from '../../components/DeleteAndRouteButton';
 import CounterLabel from '../../components/CounterLabel';
+import ShareFAB from '../../components/ShareFAB';
 import Styles from './style.css.js';
 import RaisedButton from 'material-ui/RaisedButton';
 import SimpleState from 'react-simple-state';
@@ -228,6 +229,7 @@ class Create extends Component {
               </div>}
           </div>
         </div>
+        <ShareFAB />
       </div>
     );
   }
