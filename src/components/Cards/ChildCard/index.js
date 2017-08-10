@@ -81,7 +81,6 @@ class ChildCard extends Component {
 
   render() {
     const item = this.props.item;
-    console.warn(item);
     return (
       <div style={Styles.card}>
         <Divider />
