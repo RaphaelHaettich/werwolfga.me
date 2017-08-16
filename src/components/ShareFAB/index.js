@@ -1,6 +1,7 @@
 /*
 *   Required Props:
 *   lobbyKey: string,
+*   shareText: object
 * 
 */
 
@@ -31,17 +32,14 @@ class ChildCard extends Component {
 
   fabActionMail = () => {
     // eslint-disable-next-line max-len
-    const body = `Join%20the%20game%20with%20this%20Link:%20${location.origin}/invitelink?id=${this.props.lobbyKey}.`;
-    window.location.href = `mailto:?subject=Werwolf%20Game%20Invite&body=${body}`;
+    window.location.href = `mailto:?subject=${this.props.shareText.mail.subject}&body=${this.props.shareText.mail.body}`;
   };
   fabActionWhatsApp = () => {
-    // eslint-disable-next-line max-len
-    const body = `You%20are%20invited%20to%20join%20the%20Werwolfgame%20with%20this%20Link:%20${location.origin}/invitelink?id=${this.props.lobbyKey}.`;
-    window.location.href = `whatsapp://send?text=${body}`;
+    window.location.href = `whatsapp://send?text=${this.props.shareText.whatsApp.body}`;
   };
   fabActionCopy = () => {
     // eslint-disable-next-line max-len
-    const copyToClipboard = clipboard(`${location.origin}/invitelink?id=${this.props.lobbyKey}`);
+    const copyToClipboard = clipboard(this.props.shareText.clipboard.url);
     if (copyToClipboard) {
       this.setState({ open: true, snackMessage: 'Successful copied link to clipboard', });
     } else {

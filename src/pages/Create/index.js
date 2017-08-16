@@ -230,7 +230,22 @@ class Create extends Component {
               </div>}
           </div>
         </div>
-        <ShareFAB lobbyKey={this.state.lobbyId} />
+        <ShareFAB 
+          shareText = {{
+            mail: {
+            // eslint-disable-next-line max-len
+              body: `Join%20the%20game%20with%20this%20Link:%20${location.origin}/invitelink?id=${this.state.lobbyId}.`, 
+              subject: 'Werwolf%20Game%20Invite',
+            }, 
+            whatsApp: {
+            // eslint-disable-next-line max-len
+              body: `You%20are%20invited%20to%20join%20the%20Werwolfgame%20with%20this%20Link:%20${location.origin}/invitelink?id=${this.state.lobbyId}.`,
+            }, 
+            clipboard: {
+              url: `${location.origin}/invitelink?id=${this.state.lobbyId}`,
+            },
+          }}
+        />
       </div>
     );
   }
