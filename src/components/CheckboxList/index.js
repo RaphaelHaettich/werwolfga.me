@@ -1,3 +1,10 @@
+/*
+*   Required Props:
+*   checkListChanged: function,
+*   votesData: array
+* 
+*/
+
 import React, { Component, } from 'react';
 import Paper from 'material-ui/Paper';
 import { RadioButton, RadioButtonGroup, } from 'material-ui/RadioButton';
@@ -11,7 +18,9 @@ class CheckboxList extends Component {
     };
   }
   handleChange(event) {
+    // set state to if voted or not
     this.setState({ votedkey: event.target.value, });
+    // call function in parent when changed
     this.props.checkListChanged();
   }
 

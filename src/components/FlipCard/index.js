@@ -17,7 +17,6 @@ class FlipCard extends Component {
     this.state = {
       isFlipped: false,
     };
-    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -28,8 +27,9 @@ class FlipCard extends Component {
     simpleState.evoke('loader', false);
   }
   
-  handleClick(event) {
+  handleClick = (event) => {
     event.preventDefault();
+    // revert flipped state
     this.setState({
       isFlipped: !this.state.isFlipped,
     });
@@ -39,31 +39,34 @@ class FlipCard extends Component {
     const item = this.props.data;
     return (
       <div>
-        {this.state.isFlipped === false
-          ? <Paper style={Styles.paper} zDepth={2}>
-            <Card>
-              <CardTitle
-                title={item.name}
-                subtitle="Expand for Description"
-                actAsExpander
-                showExpandableButton
-              />
-              <CardText expandable>
-                {item.description}
-              </CardText>
-            </Card>
-          </Paper>
-          : <Paper style={Styles.paper} zDepth={2}>
-            <Card>
-              <CardTitle
-                title="Hidden"
-                subtitle="Expand for Description"
-                actAsExpander
-                showExpandableButton
-              />
-              <CardText expandable>Hidden</CardText>
-            </Card>
-          </Paper>}
+        {// when card is not flipped show one side
+          this.state.isFlipped === false
+            ? <Paper style={Styles.paper} zDepth={2}>
+              <Card>
+                <CardTitle
+                  title={item.name}
+                  subtitle="Expand for Description"
+                  actAsExpander
+                  showExpandableButton
+                />
+                <CardText expandable>
+                  {item.description}
+                </CardText>
+              </Card>
+            </Paper>
+            :
+            // when card is flipped show the other side 
+            <Paper style={Styles.paper} zDepth={2}>
+              <Card>
+                <CardTitle
+                  title="Hidden"
+                  subtitle="Expand for Description"
+                  actAsExpander
+                  showExpandableButton
+                />
+                <CardText expandable>Hidden</CardText>
+              </Card>
+            </Paper>}
         <ReactCardFlip isFlipped={this.state.isFlipped}>
           <img
             onLoad={this.handleImageLoaded}

@@ -22,6 +22,7 @@ class DeleteAndRouteButton extends Component {
   }
 
   delete = () => {
+    // remove reference from db and route to other page
     base
       .remove(this.props.dbReference)
       .then(() => {

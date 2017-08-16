@@ -34,6 +34,7 @@ class Navbar extends Component {
   }
 
   componentWillMount() {
+    // check language and set the language as selected
     if (simpleState.getState('lang') === 'en') {
       this.setState({ lang1Checked: true, });
       this.setState({ lang2Checked: false, });
@@ -51,6 +52,7 @@ class Navbar extends Component {
     this.props.history.push(this.props.routeRight);
   };
 
+  // set language to lang 1
   lang1 = () => {
     simpleState.evoke('lang', 'en');
     localStorage.setItem('lang', 'en');
@@ -58,6 +60,7 @@ class Navbar extends Component {
     this.setState({ lang2Checked: false, });
   };
 
+  // set language to lang 1
   lang2 = () => {
     simpleState.evoke('lang', 'de');
     localStorage.setItem('lang', 'de');
@@ -67,6 +70,7 @@ class Navbar extends Component {
 
   render() {
     const Logged = () => (
+      // dropdown menu to show when logged in
       <IconMenu
         iconButtonElement={
           <IconButton>
@@ -106,6 +110,7 @@ class Navbar extends Component {
             </span>
           }
           iconElementRight={
+            // show login instead of dropdown menu
             this.props.authed
               ? <Logged />
               : <FlatButton label={this.props.labelRightNotAuthed} />

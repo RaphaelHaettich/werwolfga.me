@@ -36,6 +36,7 @@ class ChildCard extends Component {
   }
 
   componentDidUpdate() {
+    // create array with counter of all cards
     if (this.props.counter) {
       const cardState = simpleState.getState('cards');
       const index = cardState.list
@@ -67,6 +68,7 @@ class ChildCard extends Component {
       count: this.state.count + 1,
     });
   }
+
   down = () => {
     if (this.state.count > 0) {
       this.setState({
@@ -76,6 +78,7 @@ class ChildCard extends Component {
   }
 
   fabAction = () => {
+    // execute action defined in parent with userkey
     this.props.action(this.props.item.userKey);
   };
 
@@ -85,7 +88,7 @@ class ChildCard extends Component {
       <div style={Styles.card}>
         <Divider />
         <Card>
-          {
+          {// when action active, show it
             this.props.actionCard
               ?
               <FloatingActionButton
@@ -114,7 +117,8 @@ class ChildCard extends Component {
           <CardText expandable>
             {item.description}
           </CardText>
-          {
+          
+          {// when counter active, show it
             this.props.counter 
               ? 
               <CardActions>

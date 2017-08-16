@@ -18,6 +18,7 @@ export default class Counterlabel extends Component {
     };
   }
   componentWillReceiveProps(props) {
+    // bind to database endpoint
     this.ref = base.bindToState(props.dbReference, {
       context: this,
       state: 'count',
@@ -25,6 +26,7 @@ export default class Counterlabel extends Component {
     });
   }
   componentWillUnmount() {
+    // remove count state binding
     if (this.ref) {
       base.removeBinding(this.ref);
     }
@@ -32,13 +34,14 @@ export default class Counterlabel extends Component {
 
   render() {
     let counter = this.state.count;
+    // set global state
     simpleState.evoke(this.props.state, {
       count: counter,
     });
     if (counter !== undefined) {
+      // get the number of items at db endpoint
       counter = counter.length;
     }
-
     return (
       <div>
         <h3>
