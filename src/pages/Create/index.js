@@ -100,6 +100,7 @@ class Create extends Component {
         state: 'list',
         asArray: true,
       });
+      simpleState.evoke('loader', false);
     });
   }
 
