@@ -5,6 +5,7 @@ import { Link, } from 'react-router-dom';
 import TextField from 'material-ui/TextField';
 import SimpleState from 'react-simple-state';
 import WarningWindow from '../../components/WarningWindow';
+import Styles from './style.css.js';
 const simpleState = new SimpleState();
 
 const setErrorMsg = function setErrorMsg(error) {
@@ -42,7 +43,7 @@ export default class Register extends Component {
 
   render() {
     return (
-      <div>
+      <div style={Styles.padding}>
         <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
           <TextField
