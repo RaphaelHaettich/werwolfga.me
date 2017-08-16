@@ -42,7 +42,6 @@ class ChildCard extends Component {
   fabActionCopy = () => {
     // eslint-disable-next-line max-len
     const copyToClipboard = clipboard(`${location.origin}/invitelink?id=${this.props.lobbyKey}`);
-    console.log(copyToClipboard);
     if (copyToClipboard) {
       this.setState({ open: true, snackMessage: 'Successful copied link to clipboard', });
     } else {
