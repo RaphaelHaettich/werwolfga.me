@@ -1,8 +1,9 @@
 const styles = {
-  notSelectable: {
+  navbar: {
     MozUserSelect: 'none',
     WebkitUserSelect: 'none',
     msUserSelect: 'none',
+    position: 'fixed',
   },
 };
 

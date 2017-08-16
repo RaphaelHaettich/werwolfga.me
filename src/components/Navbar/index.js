@@ -97,21 +97,24 @@ class Navbar extends Component {
       </IconMenu>
     );
     return (
-      <AppBar
-        style={Styles.notSelectable}
-        title={
-          <span>
-            {this.props.title}
-          </span>
-        }
-        iconElementRight={
-          this.props.authed
-            ? <Logged />
-            : <FlatButton label={this.props.labelRightNotAuthed} />
-        }
-        onTitleTouchTap={this.titleAction}
-        showMenuIconButton={false}
-      />
+      <div>
+        <AppBar
+          style={Styles.navbar}
+          title={
+            <span>
+              {this.props.title}
+            </span>
+          }
+          iconElementRight={
+            this.props.authed
+              ? <Logged />
+              : <FlatButton label={this.props.labelRightNotAuthed} />
+          }
+          onTitleTouchTap={this.titleAction}
+          showMenuIconButton={false}
+        />
+        <div style={{ paddingTop: '64px', }} />
+      </div>
     );
   }
 }
