@@ -229,7 +229,7 @@ class Create extends Component {
               </div>}
           </div>
         </div>
-        <ShareFAB />
+        <ShareFAB lobbyKey={this.state.lobbyId} />
       </div>
     );
   }
