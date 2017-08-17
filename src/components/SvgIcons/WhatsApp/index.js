@@ -13,8 +13,8 @@ const Icon = props => (
   </SvgIcon>
 );
 
-const WhatsAppIcon = () => (
-  <Icon viewBox="0 0 448 512" />
+const WhatsAppIcon = props => (
+  <Icon {...props} viewBox="0 0 448 512" />
 );
 
 export default WhatsAppIcon;

@@ -26,10 +26,6 @@ class ChildCard extends Component {
     };
   }
 
-  componentDidUpdate() {
-
-  }
-
   fabActionMail = () => {
     // eslint-disable-next-line max-len
     window.location.href = `mailto:?subject=${this.props.shareText.mail.subject}&body=${this.props.shareText.mail.body}`;
@@ -61,7 +57,7 @@ class ChildCard extends Component {
         >
           <SpeedDialItem
             label="Whatsapp"
-            fabContent={<WhatsApp Style={{ fill: 'green', }} />}
+            fabContent={<WhatsApp style={{ fill: 'white', }} />}
             onTouchTap={this.fabActionWhatsApp}
             style={Styles.speedDialItem}
           />
