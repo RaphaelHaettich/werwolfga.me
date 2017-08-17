@@ -21,7 +21,6 @@ export default class Gameadmin extends Component {
       voting: false,
       votes: [],
     };
-    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   componentDidMount() {
@@ -70,8 +69,16 @@ export default class Gameadmin extends Component {
     if (this.listen2) {
       base.removeBinding(this.listen2);
     }
-    // remove global state subscribes
-    simpleState.unsubscribe('lang', this);
+    
+    // find function to check if simpleState has subscription
+    const langHasSubscription = function langHasSubscription(element) {
+      return element.id === 'lang' && element.subscriptions.length > 0;
+    };
+    // find if simple state has subscription
+    if (simpleState.listeners.find(langHasSubscription)) {
+      // remove global state subscribes
+      simpleState.unsubscribe('lang', this);
+    }
   }
 
   clearVote = () => {
