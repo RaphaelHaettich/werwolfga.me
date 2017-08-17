@@ -10,6 +10,8 @@ import Main from './pages/Main';
 import Create from './pages/Create';
 import Join from './pages/Join';
 import InviteLink from './pages/InviteLink';
+import About from './pages/About';
+import Rules from './pages/Rules';
 import Gameadmin from './pages/Gameadmin';
 import Game from './pages/Game';
 import { firebaseAuth, } from './config/constants';
@@ -134,6 +136,7 @@ export default class App extends Component {
     }
     return this.state.loading === true
       ? <h1>Loading</h1>
+      // INIT Material UI Theme
       : <MuiThemeProvider
         style={{ height: '100%', }}
         muiTheme={getMuiTheme(wolvestheme)}
@@ -193,6 +196,16 @@ export default class App extends Component {
                       authed={this.state.authed}
                       path="/invitelink"
                       component={InviteLink}
+                    />
+                    <NeutralRoute
+                      authed={this.state.authed}
+                      path="/about"
+                      component={About}
+                    />
+                    <NeutralRoute
+                      authed={this.state.authed}
+                      path="/rules"
+                      component={Rules}
                     />
                     <Route render={() => <h3>No Match</h3>} />
                   </Switch>
