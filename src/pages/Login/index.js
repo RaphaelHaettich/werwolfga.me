@@ -28,7 +28,9 @@ export default class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    // login with provided info
     login(this.email.input.value, this.password.input.value).catch((event) => {
+      // if error show info with option to recover password
       if (event.code === 'auth/wrong-password') {
         this.setState({ secondActionLabel: 'Forgot Password', });
         this.setState({ secondActionShow: true, });

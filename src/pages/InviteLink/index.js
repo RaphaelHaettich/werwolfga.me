@@ -9,8 +9,10 @@ export default class InviteLink extends Component {
   }
 
   componentWillMount() {
+    // get url params
     const urlParamId = location.search.split('=')[1];
     if (urlParamId) {
+      // set params to localstorage
       localStorage.setItem('urlParamId', urlParamId);
     }
     this.props.history.push('Join');

@@ -21,6 +21,7 @@ import SimpleState from 'react-simple-state';
 
 const simpleState = new SimpleState();
 
+// private route only when authed
 const PrivateRoute = function PrivateRoute({ component: Component, authed, ...rest }) {
   return (
     <Route
@@ -41,6 +42,7 @@ const PrivateRoute = function PrivateRoute({ component: Component, authed, ...re
   );
 };
 
+// public route only when not authed
 const PublicRoute = function PublicRoute({ component: Component, authed, ...rest }) {
   return (
     <Route
@@ -51,6 +53,7 @@ const PublicRoute = function PublicRoute({ component: Component, authed, ...rest
   );
 };
 
+// neutral route does not care if authed or not
 const NeutralRoute = function NeutralRoute({ component: Component, ...rest }) {
   return (
     <Route
@@ -71,21 +74,26 @@ export default class App extends Component {
     };
   }
   componentWillMount() {
+    // get browser lang
     const navLang = navigator.language.split('-')[0];
-    let language = undefined;
+    let language;
+    // check if browser lang = en or de
     if (navLang === 'en' || navLang === 'de') {
       language = navLang;
     }
+    // create global state with language, default english
     simpleState.addListener(
       'lang',
       localStorage.getItem('lang') || language || 'en'
     );
+    // set other global states
     simpleState.addListener('count', { count: 0, });
     simpleState.addListener('cards', { list: [], });
     simpleState.addListener('state', { state: 'draft', });
     simpleState.addListener('gameId', { id: '', });
     simpleState.addListener('loader', true);
 
+    // subscribe to loader, to listen to changes and to show or hide the loader
     simpleState.subscribe('loader', this, (nextState) => {
       this.setState({
         loader: nextState,
@@ -94,6 +102,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    // set state to authed
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ authed: true, loading: false, });
@@ -103,6 +112,7 @@ export default class App extends Component {
     });
   }
   componentWillUnmount() {
+    // remove listeners
     this.removeListener();
     simpleState.removeListener('count');
     simpleState.removeListener('cards');

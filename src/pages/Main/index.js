@@ -17,7 +17,7 @@ export default class Main extends Component {
   componentDidMount() {
     simpleState.evoke('loader', true);
     const userId = base.app().INTERNAL.getUid();
-
+    // show welcome message with user displayname
     const name = new Promise((resolve, reject) => {
       const collection = `users/${userId}`;
       fetch(resolve, reject, collection);

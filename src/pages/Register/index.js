@@ -26,6 +26,7 @@ export default class Register extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    // check if username not empty and register
     if (this.displayName.input.value === '') {
       this.setState({ registerError: 'You forgot the Username', });
       this.dialog.handleOpen();

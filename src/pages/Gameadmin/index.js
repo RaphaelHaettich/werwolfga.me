@@ -84,21 +84,25 @@ export default class Gameadmin extends Component {
   clearVote = () => {
     simpleState.evoke('loader', true);
     const gameId = sessionStorage.lobbyNumber;
+    // remove vote from db
     const removeVoting = new Promise((resolve, reject) => {
       const collection = `activegame/${gameId}/voting/`;
       remove(resolve, reject, collection);
     });
+    // init votes again after removal
     removeVoting.then(() => {
       this.initVote();
     });
   };
 
   getCardInfo = (activeData, lang) => {
+    // get cards in current language from db 
     const getCardInfos = new Promise((resolve, reject) => {
       const collection = `cards/${lang}`;
       fetch(resolve, reject, collection);
     });
     getCardInfos.then((data) => {
+      // create new card object from data
       for (let i = 0; i < activeData.length; i++) {
         const cardId = activeData[i].card;
         const index = data.findIndex(i => i.key === cardId);
@@ -116,6 +120,7 @@ export default class Gameadmin extends Component {
     });
   };
 
+  // remove player from active game
   removePlayer = (data) => {
     simpleState.evoke('loader', true);
     const gameId = sessionStorage.lobbyNumber;
@@ -130,9 +135,11 @@ export default class Gameadmin extends Component {
 
   initVote = () => {
     simpleState.evoke('loader', true);
+    // set view to vote view
     this.setState({ voting: true, });
     const data = this.state.list;
     const votingData = [];
+    // create votingData object with userKey as key and displayname/votes
     for (let i = 0; i < data.length; i++) {
       votingData[data[i].userKey] = {
         displayName: data[i].displayName,
@@ -140,20 +147,24 @@ export default class Gameadmin extends Component {
       };
     }
     const gameId = sessionStorage.lobbyNumber;
+    // post voting data to db
     const postVotingData = new Promise((resolve, reject) => {
       const collection = `activegame/${gameId}/voting/data`;
       post(resolve, reject, votingData, collection);
     });
     postVotingData.then(() => {
+      // listen to votes from db
       this.listen1 = base.listenTo(`activegame/${gameId}/voting/votes`, {
         context: this,
         asArray: true,
         then(votesData) {
+          // get vote data
           const getVoteData = new Promise((resolve, reject) => {
             const collection = `activegame/${gameId}/voting/data/`;
             fetch(resolve, reject, collection, {}, false);
           });
           getVoteData.then((voteData) => {
+            // loop throug votes and set voted for
             for (let i = 0; i < votesData.length; i++) {
               const key = votesData[i].votedForKey;
               if (voteData[key].votedFor) {
