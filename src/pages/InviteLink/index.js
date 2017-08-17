@@ -15,7 +15,7 @@ export default class InviteLink extends Component {
       // set params to localstorage
       localStorage.setItem('urlParamId', urlParamId);
     }
-    this.props.history.push('Join');
+    this.props.history.push('join');
   }
   render() {
     return (
