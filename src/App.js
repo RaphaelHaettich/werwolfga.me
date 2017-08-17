@@ -110,6 +110,8 @@ export default class App extends Component {
     simpleState.removeListener('gameId');
     simpleState.removeListener('loader');
     simpleState.removeListener('lang');
+    // remove global state mounts
+    simpleState.unsubscribe('loader', this);
   }
   render() {
     let loader = null;

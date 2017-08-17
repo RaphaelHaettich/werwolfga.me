@@ -70,6 +70,8 @@ export default class Gameadmin extends Component {
     if (this.listen2) {
       base.removeBinding(this.listen2);
     }
+    // remove global state mounts
+    simpleState.unsubscribe('lang', this);
   }
 
   clearVote = () => {

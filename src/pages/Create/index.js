@@ -124,6 +124,8 @@ class Create extends Component {
     if (this.ref) {
       base.removeBinding(this.ref);
     }
+    // remove global state mounts
+    simpleState.unsubscribe('lang', this);
   }
 
   startGame = () => {

@@ -28,34 +28,50 @@ export default class Game extends Component {
   }
 
   componentDidMount() {
+    // get uid of current user
     const userId = base.app().INTERNAL.getUid();
     simpleState.evoke('loader', true);
+    // check if no game number in globalstate and sessionstorage
     if (
       simpleState.getState('gameId').id === '' &&
       sessionStorage.lobbyNumber === undefined
     ) {
+      // when yes, go to join page
       this.props.history.push('join');
     } else {
-      let gameId = '';
+      // when an id was found 
+      // declare empty var
+      let gameId;
+      // check if simplestate has id
       if (simpleState.getState('gameId').id !== '') {
+        // when yes set gameid to this id
         gameId = simpleState.getState('gameId').id;
+        // when no check if sessionstorage has id
       } else if (sessionStorage.lobbyNumber !== undefined) {
+        // when yes set gameid to this id
         gameId = sessionStorage.lobbyNumber;
       }
+      // get current card from db
       const getCurrentCard = new Promise((resolve, reject) => {
         const collection = `activegame/${gameId}/memberarray/${userId}`;
         fetch(resolve, reject, collection);
       });
       getCurrentCard.then((data) => {
+        // when game was found
         if (data.length > 0) {
+          // set displayname
           this.setState({ displayName: data[1], });
+          // get language
           const lang = simpleState.getState('lang');
+          // get card info
           this.getCardInfo(data, gameId, userId, lang);
+          // get new card info if lang changes
           simpleState.subscribe('lang', this, (nextState) => {
             simpleState.evoke('loader', true);
             this.getCardInfo(data, gameId, userId, nextState);
           });
         } else {
+          // when no game data was found, go to join page
           this.props.history.push('join');
         }
       });
@@ -63,6 +79,7 @@ export default class Game extends Component {
   }
 
   componentWillUnmount() {
+    // remove db mounts
     if (this.listen1) {
       base.removeBinding(this.listen1);
     }
@@ -72,6 +89,8 @@ export default class Game extends Component {
     if (this.listen3) {
       base.removeBinding(this.listen3);
     }
+    // remove global state subscribes
+    simpleState.unsubscribe('lang', this);
   }
 
   listenToVoteData = () => {
