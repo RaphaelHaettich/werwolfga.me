@@ -1,3 +1,4 @@
+// shuffe array
 export default function shuffle(a) {
   for (let i = a.length; i; i--) {
     const j = Math.floor(Math.random() * i);

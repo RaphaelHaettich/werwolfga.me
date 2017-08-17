@@ -1,5 +1,6 @@
 import { base, } from '../config/constants';
 
+// push content to db, adds new db node
 export const push = (resolve, reject, data, collection) => {
   base
     .push(collection, {
@@ -14,6 +15,7 @@ export const push = (resolve, reject, data, collection) => {
     });
 };
 
+// update db endpoint
 export const update = (resolve, reject, data, collection) => {
   base
     .update(collection, {
@@ -28,6 +30,7 @@ export const update = (resolve, reject, data, collection) => {
     });
 };
 
+// post data to specific endpoint
 export const post = (resolve, reject, data, collection) => {
   base
     .post(collection, {
@@ -42,6 +45,7 @@ export const post = (resolve, reject, data, collection) => {
     });
 };
 
+// fetch db endpoint
 export const fetch = (resolve, reject, collection, queryParam, asArray) => {
   let array = true;
   if (asArray !== undefined) {
@@ -64,6 +68,7 @@ export const fetch = (resolve, reject, collection, queryParam, asArray) => {
     });
 };
 
+// remove db endpoint
 export const remove = (resolve, reject, collection) => {
   base
     .remove(collection)

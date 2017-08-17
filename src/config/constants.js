@@ -1,5 +1,6 @@
 import Rebase from 're-base';
 
+// Firebase config
 const connection = Rebase.createClass({
   apiKey: 'AIzaSyA4imvHroiFIbJsjhdmCgBXSLBa0LAQ3bs',
   authDomain: 'werewolvesgame-e65c4.firebaseapp.com',

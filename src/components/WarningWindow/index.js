@@ -30,6 +30,7 @@ export default class WarningWindow extends React.Component {
   };
 
   render() {
+  // show a second action button when prop enabled
     const showActions = this.props.secondActionShow || false;
     const actions = [
       showActions === true

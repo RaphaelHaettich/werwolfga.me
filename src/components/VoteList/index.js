@@ -1,3 +1,10 @@
+/*
+*   Required Props:
+*   voteData: array,
+*   disabled: boolean
+* 
+*/
+
 import React, { Component, } from 'react';
 import Paper from 'material-ui/Paper';
 import Styles from './style.css.js';
