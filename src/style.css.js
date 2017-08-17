@@ -12,6 +12,10 @@ const styles = {
     backgroundColor: '#303030',
     zIndex: 99,
   },
+  container: {
+    maxWidth: '500px',
+    margin: 'auto',
+  },
 };
 
 export default styles;

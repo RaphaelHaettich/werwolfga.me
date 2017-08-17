@@ -18,6 +18,8 @@ const styles = {
     MozUserSelect: 'none',
     WebkitUserSelect: 'none',
     msUserSelect: 'none',
+    padding: '0 10px 10px 10px',
+    cursor: 'default',
   },
 };
 

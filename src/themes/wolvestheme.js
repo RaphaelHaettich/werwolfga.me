@@ -23,7 +23,7 @@ export default {
     accent3Color: pinkA100,
     textColor: fullWhite,
     secondaryTextColor: (0, fade)(fullWhite, 0.7),
-    alternateTextColor: '#303030',
+    alternateTextColor: '#000',
     canvasColor: '#303030',
     borderColor: (0, fade)(fullWhite, 0.3),
     disabledColor: (0, fade)(fullWhite, 0.3),

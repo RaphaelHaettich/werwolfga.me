@@ -137,7 +137,7 @@ export default class App extends Component {
                 labelRightNotAuthed="Login"
                 authed={this.state.authed}
               />
-              <div className="container">
+              <div className="container" style={Styles.container}>
                 <div className="row">
                   {loader}
                   <Switch>
