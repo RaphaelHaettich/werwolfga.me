@@ -134,6 +134,7 @@ export default class App extends Component {
     }
     return this.state.loading === true
       ? <h1>Loading</h1>
+      // INIT Material UI Theme
       : <MuiThemeProvider
         style={{ height: '100%', }}
         muiTheme={getMuiTheme(wolvestheme)}
