@@ -52,6 +52,10 @@ class Navbar extends Component {
     this.props.history.push(this.props.routeRight);
   };
 
+  rightLabelRoute = () => {
+    this.props.history.push('/about');
+  };
+
   // set language to lang 1
   lang1 = () => {
     simpleState.evoke('lang', 'en');
@@ -93,6 +97,11 @@ class Navbar extends Component {
           onTouchTap={this.lang2}
         />
         <Divider />
+        <MenuItem
+          primaryText="About"
+          insetChildren
+          onTouchTap={this.rightLabelRoute}
+        />
         <MenuItem
           primaryText="Sign out"
           insetChildren
