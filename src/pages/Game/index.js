@@ -89,11 +89,19 @@ export default class Game extends Component {
     if (this.listen3) {
       base.removeBinding(this.listen3);
     }
-    // remove global state subscribes
-    simpleState.unsubscribe('lang', this);
+    // find function to check if simpleState has subscription
+    const langHasSubscription = function langHasSubscription(element) {
+      return element.id === 'lang' && element.subscriptions.length > 0;
+    };
+    // find if simple state has subscription
+    if (simpleState.listeners.find(langHasSubscription)) {
+      // remove global state subscribes
+      simpleState.unsubscribe('lang', this);
+    }
   }
 
   listenToVoteData = () => {
+    // listen to db voting data changes
     this.listen1 = base.listenTo(
       `activegame/${sessionStorage.lobbyNumber}/voting/data`,
       {
@@ -108,11 +116,13 @@ export default class Game extends Component {
   };
 
   getCardInfo = (data, gameId, userId, lang) => {
+    // get card info of current language
     const getCardInfos = new Promise((resolve, reject) => {
       const collection = `cards/${lang}/${data[0]}`;
       fetch(resolve, reject, collection);
     });
     getCardInfos.then((data) => {
+      // create new cardobj with received data
       const cardObj = {
         description: data[0],
         name: data[1],
@@ -121,6 +131,7 @@ export default class Game extends Component {
       };
       this.setState({ cards: cardObj, });
       simpleState.evoke('loader', false);
+      // get current user data and listen to changes
       this.listen2 = base.listenTo(
         `activegame/${gameId}/memberarray/${userId}`,
         {
@@ -137,16 +148,20 @@ export default class Game extends Component {
   };
 
   listenToVotes = () => {
+    // get gameid from sessionStorage
     const gameId = sessionStorage.lobbyNumber;
+    // listen to votes 
     this.listen3 = base.listenTo(`activegame/${gameId}/voting/votes`, {
       context: this,
       asArray: true,
       then(votesData) {
+        // get vote data
         const getVoteData = new Promise((resolve, reject) => {
           const collection = `activegame/${gameId}/voting/data/`;
           fetch(resolve, reject, collection, {}, false);
         });
         getVoteData.then((voteData) => {
+          // set voted for displayname and set vote + 1
           for (let i = 0; i < votesData.length; i++) {
             const key = votesData[i].votedForKey;
             if (voteData[key].votedFor) {
@@ -157,6 +172,7 @@ export default class Game extends Component {
             }
             voteData[key].votes += 1;
           }
+          // get object as array
           const objectArr = Object.values(voteData);
           this.setState({ votes: objectArr, });
           simpleState.evoke('loader', false);
@@ -166,6 +182,7 @@ export default class Game extends Component {
   };
 
   gameDone = () => {
+    // if game finised goto main page
     simpleState.evoke('loader', true);
     this.props.history.push('main');
   };
@@ -182,9 +199,13 @@ export default class Game extends Component {
 
   sendVote = () => {
     simpleState.evoke('loader', true);
+    // get current user uid
     const userId = base.app().INTERNAL.getUid();
+    // disable button
     this.setState({ buttonDisabled: true, });
+    // get game id
     const gameId = sessionStorage.lobbyNumber;
+    // post vote to db
     const postVotingData = new Promise((resolve, reject) => {
       const collection = `activegame/${gameId}/voting/votes/${userId}`;
       const splitString = this.checkList.state.votedkey.split('|');
@@ -204,10 +225,12 @@ export default class Game extends Component {
   };
 
   initVote = () => {
+    // set view to vote view
     simpleState.evoke('loader', true);
     this.setState({ voting: true, });
     const gameId = sessionStorage.lobbyNumber;
     const userId = base.app().INTERNAL.getUid();
+    // check if user already voted
     const checkIfVoted = new Promise((resolve, reject) => {
       const collection = `activegame/${gameId}/voting/votes/${userId}`;
       fetch(resolve, reject, collection);
@@ -223,6 +246,7 @@ export default class Game extends Component {
   };
 
   initList = () => {
+    // set view to card view
     simpleState.evoke('loader', true);
     this.setState({ voting: false, });
   };
