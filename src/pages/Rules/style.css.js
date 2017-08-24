@@ -1,9 +1,8 @@
 const styles = {
   button: {
-    position: 'fixed',
+    position: 'relative',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    marginBottom: '30px',
   },
   textCenter: {
     textAlign: 'center',

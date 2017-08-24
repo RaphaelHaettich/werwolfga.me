@@ -8,7 +8,7 @@ const styles = {
     minWidth: '0%',
   },
   card: {
-    marginBottom: '15px',
+    marginBottom: '15px', position: 'relative',
   },
   fab: {
     position: 'absolute',

@@ -1,6 +1,6 @@
 const styles = {
   centeredHorizontal: {
-    position: 'fixed',
+    position: 'relative',
     left: '50%',
     transform: 'translate(-50%, -50%)',
   },

@@ -17,7 +17,7 @@ import Game from './pages/Game';
 import { firebaseAuth, } from './config/constants';
 import Navbar from './components/Navbar';
 import Paper from 'material-ui/Paper';
-import Styles from './style.css.js';
+import Styles from './app.css.js';
 import CircularProgress from 'material-ui/CircularProgress';
 import SimpleState from 'react-simple-state';
 
@@ -141,19 +141,19 @@ export default class App extends Component {
         style={{ height: '100%', }}
         muiTheme={getMuiTheme(wolvestheme)}
       >
-        <Paper>
-          <BrowserRouter>
-            <div>
-              <Navbar
-                title="Werwolf"
-                routeTitle="/"
-                routeRight="/login"
-                labelRightAuthed="Logout"
-                labelRightNotAuthed="Login"
-                authed={this.state.authed}
-              />
-              <div className="container" style={Styles.container}>
-                <div className="row">
+        <BrowserRouter>
+          <div>
+            <Navbar
+              title="Werwolf"
+              routeTitle="/"
+              routeRight="/login"
+              labelRightAuthed="Logout"
+              labelRightNotAuthed="Login"
+              authed={this.state.authed}
+            />
+            <div className="container" style={Styles.container}>
+              <Paper>
+                <div className="row" style={Styles.margin}>
                   {loader}
                   <Switch>
                     <PublicRoute path="/" exact component={Home} />
@@ -210,10 +210,10 @@ export default class App extends Component {
                     <Route render={() => <h3>No Match</h3>} />
                   </Switch>
                 </div>
-              </div>
+              </Paper>
             </div>
-          </BrowserRouter>
-        </Paper>
+          </div>
+        </BrowserRouter>
       </MuiThemeProvider>;
   }
 }

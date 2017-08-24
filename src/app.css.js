@@ -16,6 +16,9 @@ const styles = {
     maxWidth: '500px',
     margin: 'auto',
   },
+  margin: {
+    margin: '8px',
+  },
 };
 
 export default styles;

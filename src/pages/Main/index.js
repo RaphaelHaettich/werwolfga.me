@@ -17,13 +17,16 @@ export default class Main extends Component {
   componentDidMount() {
     simpleState.evoke('loader', true);
     const userId = base.app().INTERNAL.getUid();
+    console.log(userId);
     // show welcome message with user displayname
     const name = new Promise((resolve, reject) => {
       const collection = `users/${userId}`;
+      console.log(collection);
       fetch(resolve, reject, collection);
     });
 
     name.then((data) => {
+      console.log(data);
       this.setState({ displayName: data[0].displayName, });
       simpleState.evoke('loader', false);
     });
