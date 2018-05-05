@@ -15,7 +15,7 @@ class FlipCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isFlipped: false,
+      isFlipped: true,
     };
   }
 
