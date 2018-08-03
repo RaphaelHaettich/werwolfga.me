@@ -37,7 +37,7 @@
     "react": "^15.4.0",
     "react-card-flip": "^0.0.8",
     "react-dev-utils": "^3.0.2",
-    "react-dom": "^15.4.0",
+    "react-dom": "^16.0.1",
     "react-error-overlay": "^1.0.9",
     "react-grid-system": "^2.9.0",
     "react-mui-speeddial-raphael-fork": "^0.0.8",
